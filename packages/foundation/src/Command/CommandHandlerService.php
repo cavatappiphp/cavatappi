@@ -4,6 +4,5 @@ namespace Lasagna\Foundation\DomainModel;
 
 use Lasagna\Foundation\Service;
 
-interface CommandHandlerService extends Service
-{
+interface CommandHandlerService extends Service {
 }

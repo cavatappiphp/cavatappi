@@ -10,18 +10,16 @@ use Attribute;
  * Will check that at least one of the listed properties is not null.
  */
 #[Attribute(Attribute::TARGET_CLASS)]
-readonly class AtLeastOneOf
-{
-    /**
-     * @var string[]
-     */
-    public array $properties;
+readonly class AtLeastOneOf {
+	/**
+	 * @var string[]
+	 */
+	public array $properties;
 
-    /**
-     * @param string ...$properties Class properties to check.
-     */
-    public function __construct(string ...$properties)
-    {
-        $this->properties = $properties;
-    }
+	/**
+	 * @param string ...$properties Class properties to check.
+	 */
+	public function __construct(string ...$properties) {
+		$this->properties = $properties;
+	}
 }

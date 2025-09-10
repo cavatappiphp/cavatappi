@@ -12,20 +12,19 @@ namespace Lasagna\Foundation\Registry;
  *
  * @template I
  */
-interface Registry
-{
-    /**
-     * Get the interface this Registry tracks.
-     *
-     * @return class-string<I>
-     */
-    public static function getInterfaceToRegister(): string;
+interface Registry {
+	/**
+	 * Get the interface this Registry tracks.
+	 *
+	 * @return class-string<I>
+	 */
+	public static function getInterfaceToRegister(): string;
 
-    /**
-     * Accept the configuration for the registry.
-     *
-     * @param  class-string<I>[] $configuration Array of classes to register.
-     * @return void
-     */
-    public function configure(array $configuration): void;
+	/**
+	 * Accept the configuration for the registry.
+	 *
+	 * @param  class-string<I>[] $configuration Array of classes to register.
+	 * @return void
+	 */
+	public function configure(array $configuration): void;
 }

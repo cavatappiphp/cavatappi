@@ -2,7 +2,7 @@
 <ruleset name="Lasagna Standards" namespace="Lasagna\Core">
 	<description>Coding standards for the Lasagna core library.</description>
 
-	<file>./packages/framework/foundation/src</file>
+	<file>./packages/foundation/src</file>
 
 	<exclude-pattern>*/src-test/*</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>

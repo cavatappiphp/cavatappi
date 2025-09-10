@@ -12,37 +12,33 @@ use Lasagna\Foundation\Value\CloneKit;
  * does this class exist? Because Markdown text should be treated differently from generic text, especially in the
  * user interface.
  */
-readonly class Markdown implements Value, Field
-{
-    use CloneKit;
+readonly class Markdown implements Value, Field {
+	use CloneKit;
 
-    /**
-     * Create the field.
-     *
-     * @param string $text Markdown-formatted text.
-     */
-    public function __construct(public string $text)
-    {
-    }
+	/**
+	 * Create the field.
+	 *
+	 * @param string $text Markdown-formatted text.
+	 */
+	public function __construct(public string $text) {
+	}
 
-    /**
-     * Convert the field to a string.
-     *
-     * @return string
-     */
-    public function __toString(): string
-    {
-        return $this->text;
-    }
+	/**
+	 * Convert the field to a string.
+	 *
+	 * @return string
+	 */
+	public function __toString(): string {
+		return $this->text;
+	}
 
-    /**
-     * Create the field from a string.
-     *
-     * @param  string $string Markdown-formatted text.
-     * @return self
-     */
-    public static function fromString(string $string): static
-    {
-        return new self($string);
-    }
+	/**
+	 * Create the field from a string.
+	 *
+	 * @param  string $string Markdown-formatted text.
+	 * @return self
+	 */
+	public static function fromString(string $string): static {
+		return new self($string);
+	}
 }
