@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<ruleset name="Lasagna Standards" namespace="Lasagna\Core">
+	<description>Coding standards for the Lasagna core library.</description>
+
+	<file>./packages/framework/foundation/src</file>
+
+	<exclude-pattern>*/src-test/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+
+	<arg name="extensions" value="php"/>
+	<arg name="tab-width" value="2"/>
+	<arg name="colors"/>
+
+	<ini name="memory_limit" value="64M"/>
+
+	<autoload>./vendor/autoload.php</autoload>
+
+	<!-- Use PSR-12 as our base -->
+	<rule ref="PSR12">
+		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+		<exclude name="Generic.WhiteSpace.ScopeIndent"/>
+		<exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine"/>
+		<exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
+	</rule>
+
+	<!-- Use tabs, please. Please. Seriously. -->
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="indent" value="2"/>
+			<property name="tabIndent" value="true"/>
+			<property name="ignoreIndentationTokens" type="array">
+				<element value="T_COMMENT"/>
+				<element value="T_DOC_COMMENT_OPEN_TAG"/>
+			</property>
+		</properties>
+	</rule>
+
+	<!-- Add Squiz commenting rules -->
+	<rule ref="Squiz.Commenting.FunctionComment">
+		<properties>
+			<property name="minimumVisibility" value="protected" />
+		</properties>
+	</rule>
+	<rule ref="Squiz.Commenting.ClassComment">
+		<exclude name="Squiz.Commenting.ClassComment.TagNotAllowed"/>
+	</rule>
+	<rule ref="Squiz.Commenting.VariableComment"/>
+
+	<!-- Make structures look nicer -->
+	<rule ref="Generic.Classes.OpeningBraceSameLine"/>
+	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
+	<rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
+	<!-- <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/> -->
+
+	<!-- Directly use built-in functions. -->
+	<rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions"/>
+</ruleset>
