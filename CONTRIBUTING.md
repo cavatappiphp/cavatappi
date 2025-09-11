@@ -11,8 +11,13 @@ Pull request templates are coming soon, but the basic idea is
 
 ## About Copyright
 
-We are not currently asking for copyright assignment or any contributor license agreement. We are asking that the code
-be provided under the Apache license (same as the project).
+From [the license](LICENSE.md):
+
+> Unless You explicitly state otherwise, any Contribution intentionally submitted
+> for inclusion in the Work by You to the Licensor shall be under the terms and
+> conditions of this License, without any additional terms or conditions.
+
+We are not currently accepting or requesting any additional terms or contributor license agreements.
 
 On behalf of the Cavatappi PHP project, we sincerely thank you for your contributions.
 

@@ -1,4 +1,6 @@
-# cavatappi
+# Cavatappi PHP Framework
+
+Coming soon...
 
 ## License
 
