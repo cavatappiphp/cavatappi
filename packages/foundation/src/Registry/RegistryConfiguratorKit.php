@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Registry;
+namespace Cavatappi\Foundation\Registry;
 
 /**
  * Functions for adding classes to Registries.

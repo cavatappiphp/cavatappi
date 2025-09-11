@@ -1,9 +1,9 @@
 <?php
 
-namespace Lasagna\Foundation\Factories;
+namespace Cavatappi\Foundation\Factories;
 
+use Cavatappi\Foundation\Value\Http\HttpVerb;
 use JsonSerializable;
-use Lasagna\Foundation\Value\Http\HttpVerb;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\RequestFactoryInterface;

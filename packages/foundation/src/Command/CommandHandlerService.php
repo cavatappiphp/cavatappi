@@ -1,8 +1,8 @@
 <?php
 
-namespace Lasagna\Foundation\DomainModel;
+namespace Cavatappi\Foundation\DomainModel;
 
-use Lasagna\Foundation\Service;
+use Cavatappi\Foundation\Service;
 
 interface CommandHandlerService extends Service {
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Lasagna\Foundation\DomainModel;
+namespace Cavatappi\Foundation\DomainModel;
 
-use Lasagna\Foundation\Value\Messages\Command;
+use Cavatappi\Foundation\Value\Messages\Command;
 
 /**
  * A service that accepts a Command object and routes it to the correct handler.

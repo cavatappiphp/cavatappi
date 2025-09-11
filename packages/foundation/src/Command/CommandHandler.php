@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\DomainModel;
+namespace Cavatappi\Foundation\DomainModel;
 
 use Attribute;
 

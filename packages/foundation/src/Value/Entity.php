@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Value;
+namespace Cavatappi\Foundation\Value;
 
 use Ramsey\Uuid\UuidInterface;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lasagna\Foundation\Value;
+namespace Cavatappi\Foundation\Value;
 
-use Lasagna\Foundation\Exceptions\InvalidValueProperties;
-use Lasagna\Foundation\Validation\Validated;
+use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
+use Cavatappi\Foundation\Validation\Validated;
 use Throwable;
 
 use function is_a;

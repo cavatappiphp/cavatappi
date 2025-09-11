@@ -1,10 +1,10 @@
 <?php
 
-namespace Lasagna\Foundation\DomainModel;
+namespace Cavatappi\Foundation\DomainModel;
 
 use Attribute;
-use Lasagna\Foundation\Reflection\ListType;
-use Lasagna\Foundation\Reflection\MapType;
+use Cavatappi\Foundation\Reflection\ListType;
+use Cavatappi\Foundation\Reflection\MapType;
 
 /**
  * Document the expected response from handling a Command.

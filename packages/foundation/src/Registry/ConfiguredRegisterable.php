@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Registry;
+namespace Cavatappi\Foundation\Registry;
 
 /**
  * A class that can be registered in a registry using a RegisterableConfiguration.

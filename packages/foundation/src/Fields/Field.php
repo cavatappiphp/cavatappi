@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Fields;
+namespace Cavatappi\Foundation\Fields;
 
 use Stringable;
 

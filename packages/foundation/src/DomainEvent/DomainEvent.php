@@ -1,9 +1,9 @@
 <?php
 
-namespace Lasagna\Foundation\DomainModel;
+namespace Cavatappi\Foundation\DomainModel;
 
+use Cavatappi\Foundation\Value\Traits\Entity;
 use DateTimeInterface;
-use Lasagna\Foundation\Value\Traits\Entity;
 use Ramsey\Uuid\UuidInterface;
 
 /**

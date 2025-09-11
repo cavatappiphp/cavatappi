@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Utilities;
+namespace Cavatappi\Foundation\Utilities;
 
 /**
  * Utility functions for working with strings.

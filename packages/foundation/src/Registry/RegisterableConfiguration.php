@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Registry;
+namespace Cavatappi\Foundation\Registry;
 
 /**
  * An object that stores configuration for a ConfiguredRegisterable service.

@@ -1,11 +1,11 @@
 <?php
 
-namespace Lasagna\Foundation\Fields;
+namespace Cavatappi\Foundation\Fields;
 
-use Lasagna\Foundation\Exceptions\InvalidValueProperties;
-use Lasagna\Foundation\Validation\Validated;
-use Lasagna\Foundation\Value;
-use Lasagna\Foundation\Value\CloneKit;
+use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
+use Cavatappi\Foundation\Validation\Validated;
+use Cavatappi\Foundation\Value;
+use Cavatappi\Foundation\Value\CloneKit;
 
 /**
  * Field to store a valid email address.

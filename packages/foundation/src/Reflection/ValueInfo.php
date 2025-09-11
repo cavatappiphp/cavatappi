@@ -1,11 +1,11 @@
 <?php
 
-namespace Lasagna\Foundation\Reflection;
+namespace Cavatappi\Foundation\Reflection;
 
-use Lasagna\Foundation\Fields\Markdown;
-use Lasagna\Foundation\Utilities\StringUtils;
-use Lasagna\Foundation\Value;
-use Lasagna\Foundation\Value\Traits\CloneKit;
+use Cavatappi\Foundation\Fields\Markdown;
+use Cavatappi\Foundation\Utilities\StringUtils;
+use Cavatappi\Foundation\Value;
+use Cavatappi\Foundation\Value\Traits\CloneKit;
 
 /**
  * Provide information about a value type.

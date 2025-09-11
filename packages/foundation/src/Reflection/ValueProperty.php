@@ -1,13 +1,13 @@
 <?php
 
-namespace Lasagna\Foundation\Reflection;
+namespace Cavatappi\Foundation\Reflection;
 
-use Lasagna\Foundation\Exceptions\InvalidValueProperties;
-use Lasagna\Foundation\Utilities\StringUtils;
-use Lasagna\Foundation\Validation\Validated;
-use Lasagna\Foundation\Value;
-use Lasagna\Foundation\Value\CloneKit;
-use Lasagna\Foundation\Value\Fields\Markdown;
+use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
+use Cavatappi\Foundation\Utilities\StringUtils;
+use Cavatappi\Foundation\Validation\Validated;
+use Cavatappi\Foundation\Value;
+use Cavatappi\Foundation\Value\CloneKit;
+use Cavatappi\Foundation\Value\Fields\Markdown;
 
 /**
  * Provides information about a value's properties.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation;
+namespace Cavatappi\Foundation;
 
 /**
  * A read-only object that is internally consistent.

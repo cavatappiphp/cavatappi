@@ -1,8 +1,8 @@
 <?php
 
-namespace Lasagna\Foundation\Reflection;
+namespace Cavatappi\Foundation\Reflection;
 
-use Lasagna\Foundation\Value\ValueProperty;
+use Cavatappi\Foundation\Value\ValueProperty;
 
 interface Reflectable {
 	/**

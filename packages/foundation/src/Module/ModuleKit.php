@@ -1,9 +1,9 @@
 <?php
 
-namespace Lasagna\Foundation\Module;
+namespace Cavatappi\Foundation\Module;
 
-use Lasagna\Foundation\Exceptions\CodePathNotSupported;
-use Lasagna\Foundation\Service;
+use Cavatappi\Foundation\Exceptions\CodePathNotSupported;
+use Cavatappi\Foundation\Service;
 use ReflectionClass;
 use ReflectionNamedType;
 

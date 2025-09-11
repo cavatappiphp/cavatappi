@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Fields;
+namespace Cavatappi\Foundation\Fields;
 
 use Crell\Serde\Attributes\Field as FieldAttribute;
 use Crell\Serde\DeformatterResult;

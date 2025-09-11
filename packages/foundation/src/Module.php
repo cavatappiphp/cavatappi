@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation;
+namespace Cavatappi\Foundation;
 
 /**
  * Class to centralize information about a domain/package.

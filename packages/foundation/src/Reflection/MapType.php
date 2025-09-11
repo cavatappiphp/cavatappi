@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Reflection;
+namespace Cavatappi\Foundation\Reflection;
 
 use Attribute;
 use Crell\Serde\Attributes\DictionaryField;

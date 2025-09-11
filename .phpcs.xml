@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Lasagna Standards" namespace="Lasagna\Core">
-	<description>Coding standards for the Lasagna core library.</description>
+<ruleset name="Cavatappi Standards" namespace="Cavatappi\Core">
+	<description>Coding standards for the Cavatappi core library.</description>
 
 	<file>./packages/foundation/src</file>
 

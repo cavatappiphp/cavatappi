@@ -1,8 +1,8 @@
 <?php
 
-namespace Lasagna\Foundation\Registry;
+namespace Cavatappi\Foundation\Registry;
 
-use Lasagna\Foundation\Exceptions\CodePathNotSupported;
+use Cavatappi\Foundation\Exceptions\CodePathNotSupported;
 
 /**
  * Useful defaults for a Registry.

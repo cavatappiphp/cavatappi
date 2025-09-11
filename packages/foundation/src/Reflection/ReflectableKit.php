@@ -1,10 +1,10 @@
 <?php
 
-namespace Lasagna\Foundation\Reflection;
+namespace Cavatappi\Foundation\Reflection;
 
-use Lasagna\Foundation\Exceptions\CodePathNotSupported;
-use Lasagna\Foundation\Value\Attributes\DisplayName;
-use Lasagna\Foundation\Value\Attributes\Target;
+use Cavatappi\Foundation\Exceptions\CodePathNotSupported;
+use Cavatappi\Foundation\Value\Attributes\DisplayName;
+use Cavatappi\Foundation\Value\Attributes\Target;
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionNamedType;

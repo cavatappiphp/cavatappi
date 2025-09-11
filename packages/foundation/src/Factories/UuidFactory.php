@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Factories;
+namespace Cavatappi\Foundation\Factories;
 
 use DateTimeInterface;
 use Ramsey\Uuid\Uuid;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Lasagna\Foundation\Fields;
+namespace Cavatappi\Foundation\Fields;
 
-use Lasagna\Foundation\Value;
-use Lasagna\Foundation\Value\CloneKit;
+use Cavatappi\Foundation\Value;
+use Cavatappi\Foundation\Value\CloneKit;
 
 /**
  * Represents a block of Markdown text.

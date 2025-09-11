@@ -1,5 +1,5 @@
 {
-	"name": "lasagnaphp/foundation",
+	"name": "cavatappi/foundation",
 	"description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
 	"type": "library",
 	"require": {
@@ -19,12 +19,12 @@
 	"license": "Apache-2.0",
 	"autoload": {
 		"psr-4": {
-			"Lasagna\\Foundation\\": "src/"
+			"Cavatappi\\Foundation\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Lasagna\\Foundation\\Test": "src-test/"
+			"Cavatappi\\Foundation\\Test": "src-test/"
 		}
 	},
 	"authors": [

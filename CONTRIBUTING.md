@@ -14,6 +14,6 @@ Pull request templates are coming soon, but the basic idea is
 We are not currently asking for copyright assignment or any contributor license agreement. We are asking that the code
 be provided under the Apache license (same as the project).
 
-On behalf of the Lasagna PHP project, we sincerely thank you for your contributions.
+On behalf of the Cavatappi PHP project, we sincerely thank you for your contributions.
 
 -- Evan

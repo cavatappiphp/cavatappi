@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Module;
+namespace Cavatappi\Foundation\Module;
 
 use League\ConstructFinder\ConstructFinder;
 use ReflectionClass;

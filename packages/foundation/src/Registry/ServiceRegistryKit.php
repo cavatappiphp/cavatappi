@@ -1,10 +1,10 @@
 <?php
 
-namespace Lasagna\Foundation\Service\Registry;
+namespace Cavatappi\Foundation\Service\Registry;
 
-use Lasagna\Foundation\Exceptions\CodePathNotSupported;
-use Lasagna\Foundation\Exceptions\ServiceNotRegistered;
-use Lasagna\Foundation\Value\Traits\ServiceConfiguration;
+use Cavatappi\Foundation\Exceptions\CodePathNotSupported;
+use Cavatappi\Foundation\Exceptions\ServiceNotRegistered;
+use Cavatappi\Foundation\Value\Traits\ServiceConfiguration;
 use Psr\Container\ContainerInterface;
 
 trait RegistryKit {

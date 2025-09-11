@@ -1,6 +1,6 @@
 <?php
 
-namespace Lasagna\Foundation\Reflection;
+namespace Cavatappi\Foundation\Reflection;
 
 use Crell\Serde\ValueType;
 

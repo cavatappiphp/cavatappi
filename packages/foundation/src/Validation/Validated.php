@@ -1,8 +1,8 @@
 <?php
 
-namespace Lasagna\Foundation\Validation;
+namespace Cavatappi\Foundation\Validation;
 
-use Lasagna\Foundation\Exceptions\InvalidValueProperties;
+use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
 
 interface Validated {
 	/**
