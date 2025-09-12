@@ -2,7 +2,7 @@
 
 Coming soon...
 
-## [Make a to-do list](https://www.youtube.com/watch?v=AGxM9EShmeI)e
+## [Make a to-do list](https://www.youtube.com/watch?v=AGxM9EShmeI)
 
 - [x] Get the name on the internet and on Github.
 - [ ] Copy over the code from [Smolblog](https://github.com/smolblog/smolblog) (and find-replace the name)
