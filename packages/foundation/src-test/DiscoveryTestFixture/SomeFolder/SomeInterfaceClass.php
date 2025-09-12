@@ -1,5 +1,5 @@
 <?php
 
-namespace Smolblog\Foundation\Test\DiscoveryTestFixture\SomeFolder;
+namespace Cavatappi\Foundation\Test\DiscoveryTestFixture\SomeFolder;
 
 final class SomeInterfaceClass implements SomeInterface {}

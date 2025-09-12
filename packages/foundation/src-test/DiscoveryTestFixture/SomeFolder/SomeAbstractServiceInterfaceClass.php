@@ -1,5 +1,5 @@
 <?php
 
-namespace Smolblog\Foundation\Test\DiscoveryTestFixture\SomeFolder;
+namespace Cavatappi\Foundation\Test\DiscoveryTestFixture\SomeFolder;
 
 abstract class SomeAbstractServiceInterfaceClass implements SomeServiceInterface {};

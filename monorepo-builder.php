@@ -29,7 +29,7 @@ return static function (MBConfig $mbConfig): void {
 			"test-coverage" => [
 				"@putenv XDEBUG_MODE=coverage",
 				"phpunit --testsuite unit",
-				"Smolblog\\Test\\CoverageReport::report"
+				"Cavatappi\\Test\\CoverageReport::report"
 			],
 			"lint" => "./vendor/squizlabs/php_codesniffer/bin/phpcs",
 			"lintfix" => "./vendor/squizlabs/php_codesniffer/bin/phpcbf",

@@ -1,6 +1,6 @@
 <?php
 
-namespace Smolblog\Foundation\Service\Event;
+namespace Cavatappi\Foundation\Service\Event;
 
 use Attribute;
 use Crell\Tukio\ListenerPriority;

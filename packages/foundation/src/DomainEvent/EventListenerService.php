@@ -1,8 +1,8 @@
 <?php
 
-namespace Smolblog\Foundation\Service\Event;
+namespace Cavatappi\Foundation\Service\Event;
 
-use Smolblog\Foundation\Service;
+use Cavatappi\Foundation\Service;
 
 /**
  * A service that listens for and reacts to Events.

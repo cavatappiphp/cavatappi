@@ -1,0 +1,35 @@
+<?php
+
+namespace Cavatappi\Test\BasicApp;
+
+use Cavatappi\Foundation\Service\Job\JobManager;
+use Cavatappi\Foundation\Value\Jobs\Job;
+use Psr\Container\ContainerInterface;
+
+final class TestJobManager implements JobManager {
+	/**
+	 * Basic job queue.
+	 *
+	 * @var array
+	 */
+	private array $queue = [];
+
+	public function __construct(private ContainerInterface $container) {
+	}
+
+	public function enqueue(Job $job): void {
+		$this->queue[] = $job->serializeValue();
+	}
+
+	public function run(): void {
+		$jobData = \array_shift($this->queue);
+		if (isset($jobData)) {
+			$job = Job::deserializeValue($jobData);
+			\call_user_func(
+				[$this->container->get($job->service), $job->method],
+				...$job->getParameters()
+			);
+			$this->run();
+		}
+	}
+}

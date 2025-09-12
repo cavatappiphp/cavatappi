@@ -2,6 +2,15 @@
 
 Coming soon...
 
+## [Make a to-do list](https://www.youtube.com/watch?v=AGxM9EShmeI)e
+
+- [x] Get the name on the internet and on Github.
+- [ ] Copy over the code from [Smolblog](https://github.com/smolblog/smolblog) (and find-replace the name)
+- [ ] Update the test suite
+- [ ] Write the documentation
+- [ ] Lay out the roadmap
+- [ ] Publish the website
+
 ## License
 
 Copyright 2025 Evan Hildreth and contributors

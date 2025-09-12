@@ -1,9 +1,9 @@
 <?php
 
-namespace Smolblog\Foundation\Value\Jobs;
+namespace Cavatappi\Foundation\Value\Jobs;
 
+use Cavatappi\Foundation\Value\Messages\DomainEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Smolblog\Foundation\Value\Messages\DomainEvent;
 
 /**
  * A job that dispatches a DomainEvent.

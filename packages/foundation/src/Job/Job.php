@@ -1,10 +1,10 @@
 <?php
 
-namespace Smolblog\Foundation\Value\Jobs;
+namespace Cavatappi\Foundation\Value\Jobs;
 
-use Smolblog\Foundation\Value;
-use Smolblog\Foundation\Value\Traits\SerializableSupertypeKit;
-use Smolblog\Foundation\Value\Traits\SerializableValue;
+use Cavatappi\Foundation\Value;
+use Cavatappi\Foundation\Value\Traits\SerializableSupertypeKit;
+use Cavatappi\Foundation\Value\Traits\SerializableValue;
 
 /**
  * A Job represents a task that should be performed asynchronously.

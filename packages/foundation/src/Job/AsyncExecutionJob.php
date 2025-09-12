@@ -1,9 +1,9 @@
 <?php
 
-namespace Smolblog\Foundation\Value\Jobs;
+namespace Cavatappi\Foundation\Value\Jobs;
 
-use Smolblog\Foundation\Service\Command\CommandBus;
-use Smolblog\Foundation\Value\Messages\Command;
+use Cavatappi\Foundation\Service\Command\CommandBus;
+use Cavatappi\Foundation\Value\Messages\Command;
 
 /**
  * A job that executes a Command.

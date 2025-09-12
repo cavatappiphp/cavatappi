@@ -1,9 +1,9 @@
 <?php
 
-namespace Smolblog\Foundation\Test\DiscoveryTestFixture;
+namespace Cavatappi\Foundation\Test\DiscoveryTestFixture;
 
-use Smolblog\Foundation\Service;
-use Smolblog\Foundation\Service\Command\CommandBus;
+use Cavatappi\Foundation\Service;
+use Cavatappi\Foundation\Service\Command\CommandBus;
 
 final class SameDirectoryService implements Service {
 	public function __construct(private CommandBus $commandBus)

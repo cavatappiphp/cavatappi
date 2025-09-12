@@ -1,9 +1,9 @@
 <?php
 
-namespace Smolblog\Foundation\Value\Jobs;
+namespace Cavatappi\Foundation\Value\Jobs;
 
-use Smolblog\Foundation\Value\Traits\ArrayType;
-use Smolblog\Foundation\Value\Traits\SerializableSupertypeBackupKit;
+use Cavatappi\Foundation\Value\Traits\ArrayType;
+use Cavatappi\Foundation\Value\Traits\SerializableSupertypeBackupKit;
 
 /**
  * A basic Job that has a service, method, and props. Unknown Job classes will deserialize to this.

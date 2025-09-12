@@ -1,10 +1,10 @@
 <?php
 
-namespace Smolblog\Foundation\Test\DiscoveryTestFixture\Others;
+namespace Cavatappi\Foundation\Test\DiscoveryTestFixture\Others;
 
-use Smolblog\Foundation\Service;
-use Smolblog\Foundation\Test\DiscoveryTestFixture\SameDirectoryService;
-use Smolblog\Foundation\Test\DiscoveryTestFixture\SomeFolder\{SomeAbstractServiceInterfaceClass, SomeInterface};
+use Cavatappi\Foundation\Service;
+use Cavatappi\Foundation\Test\DiscoveryTestFixture\SameDirectoryService;
+use Cavatappi\Foundation\Test\DiscoveryTestFixture\SomeFolder\{SomeAbstractServiceInterfaceClass, SomeInterface};
 
 final class ServiceClassWithDependencies implements Service {
 	public function __construct(

@@ -1,9 +1,9 @@
 <?php
 
-namespace Smolblog\Foundation\Service\Job;
+namespace Cavatappi\Foundation\Service\Job;
 
-use Smolblog\Foundation\Service;
-use Smolblog\Foundation\Value\Jobs\Job;
+use Cavatappi\Foundation\Service;
+use Cavatappi\Foundation\Value\Jobs\Job;
 
 /**
  * Service to add the given Job to a queue and
