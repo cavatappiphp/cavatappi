@@ -24,15 +24,18 @@
         "php": "^8.4",
         "psr/container": "^2.0",
         "psr/event-dispatcher": "^1.0",
-        "crell/tukio": "^1.6",
+        "crell/tukio": "^2.0",
         "psr/log": "^3.0",
-        "cavatappi/foundation": "^0.6",
+        "cavatappi/foundation": "^0.1",
         "phpseclib/phpseclib": "^3.0",
         "psr/http-server-handler": "^1.0",
         "psr/http-server-middleware": "^1.0"
     },
     "require-dev": {
-        "cavatappi/test-utils": "^0.6"
+        "cavatappi/test-utils": "^0.1"
+    },
+    "provide": {
+        "psr/container-implementation": "^2.0"
     },
     "scripts": {
         "test": "phpunit",

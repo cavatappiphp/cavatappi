@@ -1,6 +1,6 @@
 <?php
 
-namespace Cavatappi\Foundation\DomainModel;
+namespace Cavatappi\Foundation\Command;
 
 use Attribute;
 use Cavatappi\Foundation\Reflection\ListType;

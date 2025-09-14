@@ -2,7 +2,7 @@
 
 namespace Cavatappi\Test\Kits;
 
-use Cavatappi\Foundation\Value\Messages\DomainEvent;
+use Cavatappi\Foundation\DomainEvent\DomainEvent;
 use Cavatappi\Test\Constraints\DomainEventChecker;
 use PHPUnit\Framework\Constraint\Constraint;
 

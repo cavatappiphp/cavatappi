@@ -2,7 +2,7 @@
 <ruleset name="Cavatappi Standards" namespace="Cavatappi\Core">
 	<description>Coding standards for the Cavatappi core library.</description>
 
-	<file>./packages/foundation/src</file>
+	<file>./packages/*/src</file>
 
 	<exclude-pattern>*/src-test/*</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>
@@ -24,6 +24,7 @@
 	</rule>
 
 	<!-- Use tabs, please. Please. Seriously. -->
+	<!-- https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/ -->
 	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
 	<rule ref="Generic.WhiteSpace.ScopeIndent">
 		<properties>
@@ -51,7 +52,6 @@
 	<rule ref="Generic.Classes.OpeningBraceSameLine"/>
 	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
 	<rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
-	<!-- <rule ref="SlevomatCodingStandard.Namespaces.DisallowGroupUse"/> -->
 
 	<!-- Directly use built-in functions. -->
 	<rule ref="SlevomatCodingStandard.Namespaces.FullyQualifiedGlobalFunctions"/>

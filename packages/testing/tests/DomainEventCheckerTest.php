@@ -2,10 +2,32 @@
 
 namespace Cavatappi\Test;
 
-use Cavatappi\Foundation\Value\Messages\DomainEvent;
+use Cavatappi\Foundation\DomainEvent\DomainEvent;
+use Cavatappi\Foundation\DomainEvent\DomainEventKit;
+use Cavatappi\Foundation\Factories\UuidFactory;
 use Cavatappi\Test\Constraints\DomainEventChecker;
+use DateTimeImmutable;
+use DateTimeInterface;
+use Ramsey\Uuid\UuidInterface;
 
-final readonly class TestDomainEvent extends DomainEvent {}
+final class TestDomainEvent implements DomainEvent {
+	use DomainEventKit;
+	public readonly UuidInterface $id;
+	public readonly DateTimeInterface $timestamp;
+
+	public function __construct(
+		public readonly UuidInterface $userId,
+		public readonly UuidInterface $entityId,
+		public readonly UuidInterface $aggregateId,
+		public readonly UuidInterface $processId,
+		?UuidInterface $id = null,
+		?DateTimeInterface $timestamp = null,
+	)
+	{
+		$this->id = $id ?? UuidFactory::date();
+		$this->timestamp = $timestamp ?? new DateTimeImmutable();
+	}
+}
 
 final class DomainEventCheckerTest extends TestCase {
 	public function testItChecksEventsExcludingIdAndTimestamp() {

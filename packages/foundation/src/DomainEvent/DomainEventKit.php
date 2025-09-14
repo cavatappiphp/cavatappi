@@ -1,6 +1,6 @@
 <?php
 
-namespace Cavatappi\Foundation\DomainModel;
+namespace Cavatappi\Foundation\DomainEvent;
 
 /**
  * Useful defaults for DomainEvents.

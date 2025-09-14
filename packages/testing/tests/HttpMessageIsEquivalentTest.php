@@ -2,23 +2,22 @@
 
 namespace Cavatappi\Test;
 
+use Cavatappi\Foundation\Factories\HttpMessageFactory;
+use Cavatappi\Foundation\Utilities\HttpVerb;
 use InvalidArgumentException;
-use Cavatappi\Foundation\Value\Http\HttpRequest;
 use Cavatappi\Test\TestCase;
-use Cavatappi\Foundation\Value\Http\HttpResponse;
-use Cavatappi\Foundation\Value\Http\HttpVerb;
 use Cavatappi\Test\Kits\HttpMessageComparisonTestKit;
 
 final class HttpMessageIsEquivalentTest extends TestCase {
 	use HttpMessageComparisonTestKit;
 
 	public function testEquivalentHttpMessagesPass() {
-		$messageOne = new HttpResponse(
+		$messageOne = HttpMessageFactory::response(
 			code: 451,
 			headers: ['Link' => '<https://spqr.example.org/legislatione>; rel="blocked-by"'],
 			body: ['code' => '451', 'blockedBy' => 'Copyright, LLC'],
 		);
-		$messageTwo = new HttpResponse(
+		$messageTwo = HttpMessageFactory::response(
 			code: 451,
 			headers: ['Link' => '<https://spqr.example.org/legislatione>; rel="blocked-by"'],
 			body: ['code' => '451', 'blockedBy' => 'Copyright, LLC'],
@@ -28,12 +27,12 @@ final class HttpMessageIsEquivalentTest extends TestCase {
 	}
 
 	public function testDifferentHttpMessagesFail() {
-		$messageOne = new HttpResponse(
+		$messageOne = HttpMessageFactory::response(
 			code: 451,
 			headers: ['Link' => '<https://spqr.example.org/legislatione>; rel="blocked-by"'],
 			body: ['code' => '451', 'blockedBy' => 'Copyright, LLC'],
 		);
-		$messageTwo = new HttpRequest(verb: HttpVerb::GET, url: 'https://smol.blog/');
+		$messageTwo = HttpMessageFactory::request(verb: HttpVerb::GET, url: 'https://smol.blog/');
 
 		$this->assertThat($messageTwo, $this->logicalNot($this->httpMessageEqualTo($messageOne)));
 	}
@@ -41,7 +40,7 @@ final class HttpMessageIsEquivalentTest extends TestCase {
 	public function testNotPassingAnHttpMessagetWillThrowException() {
 		$this->expectException(InvalidArgumentException::class);
 
-		$messageOne = new HttpResponse(
+		$messageOne = HttpMessageFactory::response(
 			code: 451,
 			headers: ['Link' => '<https://spqr.example.org/legislatione>; rel="blocked-by"'],
 			body: ['code' => '451', 'blockedBy' => 'Copyright, LLC'],

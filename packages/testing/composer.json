@@ -15,8 +15,7 @@
         }
     },
     "require": {
-        "squizlabs/php_codesniffer": "^3.8",
-        "phpunit/phpunit": "^11",
+        "phpunit/phpunit": "^12",
         "cavatappi/infrastructure": "^0.6"
     },
     "scripts": {

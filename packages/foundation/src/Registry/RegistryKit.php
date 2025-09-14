@@ -20,7 +20,7 @@ trait RegistryKit {
 	/**
 	 * Store the configurations.
 	 *
-	 * @var array<string, class-string<RegisterableConfiguration>>
+	 * @var array<string, RegisterableConfiguration>
 	 */
 	private $configs = [];
 
@@ -73,5 +73,15 @@ trait RegistryKit {
 			$this->configs[$config->key] = $config;
 			$this->library[$config->key] = $class;
 		}
+	}
+
+	/**
+	 * Get the configuration for the service indicated by the given key.
+	 *
+	 * @param  string $key Key for the service configuration.
+	 * @return RegisterableConfiguration|null Configuration; null if it does not exist.
+	 */
+	public function getConfig(string $key): ?RegisterableConfiguration {
+		return $this->configs[$key] ?? null;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Cavatappi\Foundation\Service\Event;
+namespace Cavatappi\Foundation\DomainEvent;
 
 use Attribute;
 use Crell\Tukio\ListenerPriority;

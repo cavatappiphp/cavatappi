@@ -1,8 +1,8 @@
 <?php
 
-namespace Cavatappi\Foundation\DomainModel;
+namespace Cavatappi\Foundation\DomainEvent;
 
-use Cavatappi\Foundation\Value\Traits\Entity;
+use Cavatappi\Foundation\Value\Entity;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 

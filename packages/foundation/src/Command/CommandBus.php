@@ -1,8 +1,6 @@
 <?php
 
-namespace Cavatappi\Foundation\DomainModel;
-
-use Cavatappi\Foundation\Value\Messages\Command;
+namespace Cavatappi\Foundation\Command;
 
 /**
  * A service that accepts a Command object and routes it to the correct handler.
@@ -14,7 +12,7 @@ interface CommandBus {
 	 * This method should first route the Command through any appropriate middleware before finally calling the
 	 * correct handler for the Command.
 	 *
-	 * @param  Command $command Command to execute.
+	 * @param Command $command Command to execute.
 	 * @return mixed Optional result of the execution.
 	 */
 	public function execute(Command $command): mixed;

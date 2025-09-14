@@ -1,26 +1,12 @@
 <?php
 
-namespace Cavatappi\Foundation\Service\Registry;
+namespace Cavatappi\Foundation\Registry;
 
-use Cavatappi\Foundation\Exceptions\CodePathNotSupported;
 use Cavatappi\Foundation\Exceptions\ServiceNotRegistered;
-use Cavatappi\Foundation\Value\Traits\ServiceConfiguration;
 use Psr\Container\ContainerInterface;
 
-trait RegistryKit {
-	/**
-	 * Store the object factories.
-	 *
-	 * @var array
-	 */
-	private $library = [];
-
-	/**
-	 * Store the service configurations.
-	 *
-	 * @var array
-	 */
-	private $configs = [];
+trait ServiceRegistryKit {
+	use RegistryKit;
 
 	/**
 	 * Dependency injection container to retrieve the objects from.
@@ -28,57 +14,6 @@ trait RegistryKit {
 	 * @var ContainerInterface
 	 */
 	private ContainerInterface $container;
-
-	/**
-	 * Configure the Registry
-	 *
-	 * @throws CodePathNotSupported If the Registry's interface is not Registerable.
-	 *
-	 * @param  array $configuration List of classes to register.
-	 * @return void
-	 */
-	public function configure(array $configuration): void {
-		$interface = self::getInterfaceToRegister();
-		if (\is_a($interface, ConfiguredRegisterable::class, allow_string: true)) {
-			$this->configureWithObjects($configuration);
-			return;
-		}
-		if (\is_a($interface, Registerable::class, allow_string: true)) {
-			$this->configureWithKeys($configuration);
-			return;
-		}
-
-		throw new CodePathNotSupported(
-			message: "$interface must extend Registerable or ConfiguredRegisterable to use RegistryKit.",
-			location: 'RegistryKit::configure via ' . self::class,
-		);
-	}
-
-	/**
-	 * Configure the Registry for a Registerable interface.
-	 *
-	 * @param  array $configuration List of classes to register.
-	 * @return void
-	 */
-	private function configureWithKeys(array $configuration): void {
-		foreach ($configuration as $class) {
-			$this->library[$class::getKey()] = $class;
-		}
-	}
-
-	/**
-	 * Configure the Registry for a ConfiguredRegisterable interface.
-	 *
-	 * @param  array $configuration List of classes to register.
-	 * @return void
-	 */
-	private function configureWithObjects(array $configuration): void {
-		foreach ($configuration as $class) {
-			$config = $class::getConfiguration();
-			$this->configs[$config->getKey()] = $config;
-			$this->library[$config->getKey()] = $class;
-		}
-	}
 
 	/**
 	 * Check if this Registry has a class registered to the given key.
@@ -105,15 +40,5 @@ trait RegistryKit {
 			throw new ServiceNotRegistered(service: $key, registry: static::class);
 		}
 		return $this->container->get($this->library[$key]);
-	}
-
-	/**
-	 * Get the configuration for the service indicated by the given key.
-	 *
-	 * @param  string $key Key for the service configuration.
-	 * @return ServiceConfiguration|null Configuration; null if it does not exist.
-	 */
-	public function getConfig(string $key): ?ServiceConfiguration {
-		return $this->configs[$key] ?? null;
 	}
 }
