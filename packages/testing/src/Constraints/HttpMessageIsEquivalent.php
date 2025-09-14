@@ -14,10 +14,10 @@ class HttpMessageIsEquivalent extends Constraint {
 	}
 
 	public function toString(): string {
- return 'two HTTP messages are equivalent';
+		return 'two HTTP messages are equivalent';
 	}
 	protected function failureDescription($other): string {
- return $this->toString();
+		return $this->toString();
 	}
 
 	private function makeArray(RequestInterface|ResponseInterface $message): array {

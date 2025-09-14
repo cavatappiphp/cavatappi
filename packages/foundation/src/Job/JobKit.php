@@ -13,25 +13,31 @@ use Cavatappi\Foundation\Value;
  * Extend this class and add any needed information. Jobs will likely be serialized to facilitate cross-thread or
  * cross-server communication.
  */
-interface Job extends Value {
+trait JobKit {
 	/**
 	 * Service to instantiate.
 	 *
 	 * @var class-string $service
 	 */
-	public string $service { get; }
+	public readonly string $service;
 
 	/**
 	 * Method on $service to call.
 	 *
 	 * @var string
 	 */
-	public string $method { get; }
+	public readonly string $method;
 
 	/**
 	 * Get the parameters to be passed to $service->$method.
 	 *
+	 * Default implementation is any properties on the object excluding $service and $method.
+	 *
 	 * @return array
 	 */
-	public function getParameters(): array;
+	public function getParameters(): array {
+		$base = \get_object_vars($this);
+		unset($base['service'], $base['method']);
+		return $base;
+	}
 }

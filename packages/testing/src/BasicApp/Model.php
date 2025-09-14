@@ -2,9 +2,10 @@
 
 namespace Cavatappi\Test\BasicApp;
 
-use Cavatappi\Foundation\DomainModel;
-use Cavatappi\Foundation\Service\Command\CommandBus;
-use Cavatappi\Foundation\Service\Job\JobManager;
+use Cavatappi\Foundation\Command\CommandBus;
+use Cavatappi\Foundation\Job\JobManager;
+use Cavatappi\Foundation\Module;
+use Cavatappi\Foundation\Module\ModuleKit;
 use Cavatappi\Infrastructure\Registries\CommandHandlerRegistry;
 use Cavatappi\Infrastructure\Registries\EventListenerRegistry;
 use Cavatappi\Test\BasicApp\TestJobManager;
@@ -15,18 +16,24 @@ use Psr\EventDispatcher\ListenerProviderInterface;
 /**
  * Basic infrastructure used by tests.
  */
-class Model extends DomainModel {
-	public const AUTO_SERVICES = [
-		CommandHandlerRegistry::class,
-		EventListenerRegistry::class,
-		TestJobManager::class,
-	];
+class Model implements Module {
+	use ModuleKit;
 
-	public const SERVICES = [
-		ListenerProviderInterface::class => EventListenerRegistry::class,
-		EventDispatcherInterface::class => Dispatcher::class,
-		CommandBus::class => CommandHandlerRegistry::class,
-		Dispatcher::class => [ListenerProviderInterface::class],
-		JobManager::class => TestJobManager::class,
-	];
+	private static function listClasses(): array {
+		return [
+			CommandHandlerRegistry::class,
+			EventListenerRegistry::class,
+			TestJobManager::class,
+		];
+	}
+
+	private static function serviceMapOverrides(): array {
+		return [
+			ListenerProviderInterface::class => EventListenerRegistry::class,
+			EventDispatcherInterface::class => Dispatcher::class,
+			CommandBus::class => CommandHandlerRegistry::class,
+			Dispatcher::class => [ListenerProviderInterface::class],
+			JobManager::class => TestJobManager::class,
+		];
+	}
 }

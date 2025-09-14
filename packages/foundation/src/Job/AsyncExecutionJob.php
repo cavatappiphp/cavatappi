@@ -1,23 +1,42 @@
 <?php
 
-namespace Cavatappi\Foundation\Value\Jobs;
+namespace Cavatappi\Foundation\Job;
 
-use Cavatappi\Foundation\Service\Command\CommandBus;
-use Cavatappi\Foundation\Value\Messages\Command;
+use Cavatappi\Foundation\Command\Command;
+use Cavatappi\Foundation\Command\CommandBus;
 
 /**
  * A job that executes a Command.
  */
-readonly class AsyncExecutionJob extends Job {
+class AsyncExecutionJob implements Job {
 	/**
-	 * Create a job that executes a Command.
+	 * Service to instantiate.
+	 *
+	 * @var class-string $service
+	 */
+	public string $service { get => CommandBus::class; }
+
+	/**
+	 * Method on $service to call.
+	 *
+	 * @var string
+	 */
+	public string $method { get => 'execute'; }
+
+	/**
+	 * Create a job that executes a command.
 	 *
 	 * @param Command $command Event to dispatch.
 	 */
-	public function __construct(public Command $command) {
-		parent::__construct(
-			service: CommandBus::class,
-			method: 'execute',
-		);
+	public function __construct(public readonly Command $command) {
+	}
+
+	/**
+	 * Get the parameters to be passed to $service->$method.
+	 *
+	 * @return array
+	 */
+	public function getParameters(): array {
+		return ['command' => $this->command];
 	}
 }

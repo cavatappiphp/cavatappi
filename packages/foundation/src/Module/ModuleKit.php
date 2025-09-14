@@ -76,8 +76,8 @@ trait ModuleKit {
 	/**
 	 * Get the Services defined in this DomainModel and their dependencies.
 	 *
-	 * @param  <class-string, array<string, class-string|callable>|string|callable> $overrides Classes
-	 *                                                                                         to exclude from the automapping and any additions to the dependency map.
+	 * @param  <class-string, array<string, class-string|callable>|string|callable> $overrides
+	 *   Classes to exclude from the automapping and any additions to the dependency map.
 	 * @return array<class-string, array<string, class-string|callable>|string|callable>
 	 */
 	private static function mapServices(array $overrides = []): array {

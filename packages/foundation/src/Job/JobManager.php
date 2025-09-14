@@ -1,9 +1,9 @@
 <?php
 
-namespace Cavatappi\Foundation\Service\Job;
+namespace Cavatappi\Foundation\Job;
 
+use Cavatappi\Foundation\Job\Job;
 use Cavatappi\Foundation\Service;
-use Cavatappi\Foundation\Value\Jobs\Job;
 
 /**
  * Service to add the given Job to a queue and

@@ -5,21 +5,26 @@ namespace Cavatappi\Test;
 use Cavatappi\Foundation\DomainEvent\DomainEvent;
 use Cavatappi\Foundation\DomainEvent\DomainEventKit;
 use Cavatappi\Foundation\Factories\UuidFactory;
+use Cavatappi\Foundation\Value\Clonable;
+use Cavatappi\Foundation\Value\CloneKit;
 use Cavatappi\Test\Constraints\DomainEventChecker;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 
-final class TestDomainEvent implements DomainEvent {
-	use DomainEventKit;
+final class TestDomainEvent implements DomainEvent, Clonable {
+	use CloneKit;
+
 	public readonly UuidInterface $id;
 	public readonly DateTimeInterface $timestamp;
+
+	public string $type { get => static::class; }
 
 	public function __construct(
 		public readonly UuidInterface $userId,
 		public readonly UuidInterface $entityId,
 		public readonly UuidInterface $aggregateId,
-		public readonly UuidInterface $processId,
+		public readonly ?UuidInterface $processId = null,
 		?UuidInterface $id = null,
 		?DateTimeInterface $timestamp = null,
 	)

@@ -2,18 +2,29 @@
 
 namespace Cavatappi\Test\BasicApp;
 
-use Cavatappi\Foundation\Service\Command\CommandBus;
-use Cavatappi\Foundation\Value\Messages\Command;
-use Cavatappi\Foundation\Value\Messages\DomainEvent;
+use Cavatappi\Foundation\Command\Command;
+use Cavatappi\Foundation\Command\CommandBus;
 use Cavatappi\Infrastructure\AppKit;
 use Cavatappi\Infrastructure\Registries\ServiceRegistry;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
+/**
+ * A basic Cavatappi App to use for testing a module.
+ */
 class App {
 	use AppKit;
 
+	/**
+	 * Dependency injection container.
+	 *
+	 * @var ServiceRegistry
+	 */
 	public readonly ServiceRegistry $container;
 
+	/**
+	 * @param class-string<Module>[]     $models   Module class names to load.
+	 * @param array<class-string, array> $services Any individual services to load in addition to the models.
+	 */
 	public function __construct(array $models, array $services) {
 		$map = [
 			...$this->buildDependencyMap([Model::class, ...$models]),
@@ -26,24 +37,32 @@ class App {
 		);
 	}
 
+	/**
+	 * Execute the given command and run any resulting jobs.
+	 *
+	 * @param Command $command Command to execute.
+	 * @return mixed
+	 */
 	public function execute(Command $command): mixed {
-		// Serialize and deserialize the Command to ensure that it will successfully translate.
+		// TODO: Serialize and deserialize the Command to ensure that it will successfully translate.
 		// Future systems may send Commands to other services.
-		$serializedCommand = $command->serializeValue();
-		$retval = $this->container->get(CommandBus::class)->execute(Command::deserializeValue($serializedCommand));
+		$retval = $this->container->get(CommandBus::class)->execute($command);
 		$this->container->get(TestJobManager::class)->run();
 		return $retval;
 	}
 
-	public function dispatch(mixed $event): mixed {
-		$processedEvent = $event;
-		if (\is_a($event, DomainEvent::class)) {
-			// Serialize and deserialize the DomainEvent to ensure that it will successfully translate.
-			// Future systems may send DomainEvents to other services.
-			$processedEvent = DomainEvent::deserializeValue($event->serializeValue());
-		}
 
-		$retval = $this->container->get(EventDispatcherInterface::class)->dispatch($processedEvent);
+	/**
+	 * Dispatch the given event and run any resulting jobs.
+	 *
+	 * @param mixed $event Event to dispatch.
+	 * @return mixed
+	 */
+	public function dispatch(mixed $event): mixed {
+		// TODO: Serialize and deserialize the DomainEvent to ensure that it will successfully translate.
+		// Future systems may send DomainEvents to other services.
+
+		$retval = $this->container->get(EventDispatcherInterface::class)->dispatch($event);
 		$this->container->get(TestJobManager::class)->run();
 		return $retval;
 	}

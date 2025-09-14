@@ -2,73 +2,94 @@
 
 namespace Cavatappi\Test\Constraints;
 
-use Cavatappi\Foundation\Value\Fields\Identifier;
-use Cavatappi\Foundation\Value\Messages\DomainEvent;
+use Cavatappi\Foundation\DomainEvent\DomainEvent;
+use Cavatappi\Foundation\Factories\UuidFactory;
+use Cavatappi\Foundation\Value\Clonable;
+use DateTimeImmutable;
 use InvalidArgumentException;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Util\Exporter;
+use Ramsey\Uuid\UuidInterface;
 use SebastianBergmann\Comparator\ComparisonFailure;
 
+/**
+ * Compare two DomainEvents while ignoring ID and timestamp.
+ */
 class DomainEventChecker extends Constraint {
+	/**
+	 * @param array<DomainEvent&Clonable> $expectedEvents Events to check against.
+	 * @param boolean                     $checkProcess   True if the events should be checked for the same processId.
+	 */
 	public function __construct(private array $expectedEvents, private bool $checkProcess = false) {
 	}
 
-	private ?DomainEvent $expected = null;
-	private ?Identifier $processId = null;
+	/**
+	 * The current expected event.
+	 *
+	 * @var DomainEvent&Clonable
+	 */
+	private DomainEvent & Clonable $expected;
+
+	/**
+	 * Expected processId.
+	 *
+	 * @var UuidInterface|null
+	 */
+	private ?UuidInterface $processId = null;
 
 	public function toString(): string {
- return 'two Events are equivalent';
+		return 'two Events are equivalent';
 	}
+
 	protected function failureDescription($other): string {
- return $this->toString();
+		return $this->toString();
 	}
 
 	protected function matches(mixed $other): bool {
-		$this->expected = \array_shift($this->expectedEvents);
-
-		if (!\is_a($other, DomainEvent::class)) {
-			throw new InvalidArgumentException('Object is not an Event.');
+		$maybeExpected = \array_shift($this->expectedEvents);
+		if (!isset($maybeExpected) || !\is_a($maybeExpected, DomainEvent::class) || !\is_a($maybeExpected, Clonable::class)) {
+			throw new InvalidArgumentException('Expected value is not a Clonable DomainEvent.');
 		}
+		$this->expected = $maybeExpected;
 
-		$expectedData = $this->expected?->serializeValue() ?? [];
-		unset($expectedData['id']);
-		unset($expectedData['timestamp']);
-
-		$actualData = $other->serializeValue();
-		unset($actualData['id']);
-		unset($actualData['timestamp']);
+		if (!\is_a($other, DomainEvent::class) || !\is_a($other, Clonable::class)) {
+			throw new InvalidArgumentException('Object is not a Clonable DomainEvent.');
+		}
 
 		if ($this->checkProcess) {
 			$this->processId ??= $other->processId;
-			$expectedData['processId'] = $this->processId?->toString() ?? '#ERR#';
 		}
 
-		return $expectedData == $actualData;
+		$expectedComparison = $this->despecializeEvent($this->expected);
+		$actualComparison = $this->despecializeEvent($other);
+		if (isset($this->processId)) {
+			$expectedComparison = $this->expected->with(processId: $this->processId);
+		}
+
+		return $expectedComparison == $actualComparison;
 	}
 
 	protected function fail(mixed $other, string $description, ?ComparisonFailure $comparisonFailure = null): never {
 		if ($comparisonFailure === null) {
-			$expectedData = $this->expected?->serializeValue() ?? [];
-			unset($expectedData['id']);
-			unset($expectedData['timestamp']);
-
-			$actualData = $other->serializeValue();
-			unset($actualData['id']);
-			unset($actualData['timestamp']);
-
-			if ($this->checkProcess) {
-				$expectedData['processId'] = $this->processId?->toString() ?? '#ERR#';
+			$expectedComparison = $this->despecializeEvent($this->expected);
+			$actualComparison = $this->despecializeEvent($other);
+			if (isset($this->processId)) {
+				$expectedComparison = $this->expected->with(processId: $this->processId);
 			}
 
 			$comparisonFailure = new ComparisonFailure(
 				$this->expected,
 				$other,
-				Exporter::export($expectedData),
-				Exporter::export($actualData),
+				Exporter::export($expectedComparison),
+				Exporter::export($actualComparison),
 				isset($this->expected) ? 'Failed asserting that two Events are equivalent.' : 'Event was not expected.'
 			);
 		}
 
 		parent::fail($other, $description, $comparisonFailure);
+	}
+
+	private function despecializeEvent(DomainEvent & Clonable $event): DomainEvent & Clonable {
+		return $event->with(id: UuidFactory::nil(), timestamp: new DateTimeImmutable('@0'));
 	}
 }

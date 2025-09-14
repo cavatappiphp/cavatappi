@@ -1,23 +1,42 @@
 <?php
 
-namespace Cavatappi\Foundation\Value\Jobs;
+namespace Cavatappi\Foundation\Job;
 
-use Cavatappi\Foundation\Value\Messages\DomainEvent;
+use Cavatappi\Foundation\DomainEvent\DomainEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
  * A job that dispatches a DomainEvent.
  */
-readonly class AsyncDispatchJob extends Job {
+class AsyncDispatchJob implements Job {
+	/**
+	 * Service to instantiate.
+	 *
+	 * @var class-string $service
+	 */
+	public string $service { get => EventDispatcherInterface::class; }
+
+	/**
+	 * Method on $service to call.
+	 *
+	 * @var string
+	 */
+	public string $method { get => 'dispatch'; }
+
 	/**
 	 * Create a job that dispatches an event.
 	 *
 	 * @param DomainEvent $event Event to dispatch.
 	 */
-	public function __construct(public DomainEvent $event) {
-		parent::__construct(
-			service: EventDispatcherInterface::class,
-			method: 'dispatch',
-		);
+	public function __construct(public readonly DomainEvent $event) {
+	}
+
+	/**
+	 * Get the parameters to be passed to $service->$method.
+	 *
+	 * @return array
+	 */
+	public function getParameters(): array {
+		return ['event' => $this->event];
 	}
 }
