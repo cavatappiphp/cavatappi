@@ -63,7 +63,7 @@ class DomainEventChecker extends Constraint {
 		$expectedComparison = $this->despecializeEvent($this->expected);
 		$actualComparison = $this->despecializeEvent($other);
 		if (isset($this->processId)) {
-			$expectedComparison = $this->expected->with(processId: $this->processId);
+			$expectedComparison = $expectedComparison->with(processId: $this->processId);
 		}
 
 		return $expectedComparison == $actualComparison;
@@ -74,7 +74,7 @@ class DomainEventChecker extends Constraint {
 			$expectedComparison = $this->despecializeEvent($this->expected);
 			$actualComparison = $this->despecializeEvent($other);
 			if (isset($this->processId)) {
-				$expectedComparison = $this->expected->with(processId: $this->processId);
+				$expectedComparison = $expectedComparison->with(processId: $this->processId);
 			}
 
 			$comparisonFailure = new ComparisonFailure(

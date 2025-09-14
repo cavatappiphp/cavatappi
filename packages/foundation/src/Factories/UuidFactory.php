@@ -105,6 +105,6 @@ class UuidFactory {
 	 * @return UuidInterface
 	 */
 	public static function nil(): UuidInterface {
-		return self::factory()->fromString('00000000-0000-0000-0000-000000000000');
+		return self::factory()->fromString(Uuid::NIL);
 	}
 }

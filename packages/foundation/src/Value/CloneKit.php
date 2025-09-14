@@ -4,6 +4,7 @@ namespace Cavatappi\Foundation\Value;
 
 use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
 use Cavatappi\Foundation\Validation\Validated;
+use ReflectionClass;
 use Throwable;
 
 use function is_a;
@@ -22,6 +23,14 @@ trait CloneKit {
 		// Calling get_object_vars from outside context so that we only get public properties.
 		// see https://stackoverflow.com/questions/13124072/ for source.
 		$base = \get_object_vars(...)->__invoke($this);
+
+		$reflection = new ReflectionClass($this);
+		$base = [];
+
+		foreach ($reflection->getConstructor()?->getParameters() ?? [] as $constructorArg) {
+			$argName = $constructorArg->getName();
+			$base[$argName] = $this->$argName;
+		}
 
 		try {
 			// @phpstan-ignore-next-line
