@@ -1,13 +1,9 @@
 {
-    "name": "smolblog/test-utils",
-    "description": "Test utilities for Smolblog projects",
+    "name": "cavatappi/testing",
+    "description": "Test utilities for Cavatappi projects",
     "type": "library",
     "license": "Apache-2.0",
     "authors": [
-        {
-            "name": "Smolblog",
-            "email": "dev@smolblog.org"
-        },
         {
             "name": "Evan Hildreth",
             "email": "me@eph.me"
@@ -21,7 +17,7 @@
     "require": {
         "squizlabs/php_codesniffer": "^3.8",
         "phpunit/phpunit": "^11",
-        "smolblog/framework-infrastructure": "^0.6"
+        "cavatappi/infrastructure": "^0.6"
     },
     "scripts": {
         "test": "phpunit",

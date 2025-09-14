@@ -2,6 +2,7 @@
     "name": "cavatappi/cavatappi",
     "description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
     "type": "project",
+    "version": "0.1",
     "require": {
         "crell/tukio": "^2.0",
         "psr/container": "^2.0",
@@ -30,8 +31,7 @@
         }
     ],
     "scripts": {
-        "test": "phpunit --testdox --no-coverage",
-        "test-fast": "phpunit --testsuite unit --no-coverage",
+        "test": "phpunit --testsuite unit --no-coverage",
         "test-coverage": [
             "@putenv XDEBUG_MODE=coverage",
             "phpunit --testsuite unit",

@@ -1,5 +1,5 @@
 {
-    "name": "smolblog/framework-infrastructure",
+    "name": "cavatappi/infrastructure",
     "description": "Framework built around Domain Driven Design and Event Sourcing",
     "type": "library",
     "license": "Apache-2.0",
@@ -16,7 +16,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Cavatappi\\Infrastructure\\Test\\": "test-utils/"
+            "Cavatappi\\Infrastructure\\Test\\": "src-test/"
         }
     },
     "minimum-stability": "stable",
@@ -26,13 +26,13 @@
         "psr/event-dispatcher": "^1.0",
         "crell/tukio": "^1.6",
         "psr/log": "^3.0",
-        "smolblog/framework-foundation": "^0.6",
+        "cavatappi/foundation": "^0.6",
         "phpseclib/phpseclib": "^3.0",
         "psr/http-server-handler": "^1.0",
         "psr/http-server-middleware": "^1.0"
     },
     "require-dev": {
-        "smolblog/test-utils": "^0.6"
+        "cavatappi/test-utils": "^0.6"
     },
     "scripts": {
         "test": "phpunit",
