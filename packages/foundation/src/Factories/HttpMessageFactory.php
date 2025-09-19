@@ -105,18 +105,17 @@ class HttpMessageFactory {
 	/**
 	 * Create a PSR-7 HTTP Request.
 	 *
-	 * @param  HttpVerb                           $verb    HTTP method to use.
-	 * @param  string|UriInterface                $url     URI to retrieve.
-	 * @param  array                              $headers Any headers to add to the request.
-	 * @param  string|array|JsonSerializable|null $body    Body of the request. Arrays and objects will be
-	 *                                                     serialized to JSON.
+	 * @param  HttpVerb            $verb    HTTP method to use.
+	 * @param  string|UriInterface $url     URI to retrieve.
+	 * @param  array               $headers Any headers to add to the request.
+	 * @param  mixed               $body    Body of the request. Arrays and objects will be serialized to JSON.
 	 * @return RequestInterface
 	 */
 	public static function request(
 		HttpVerb $verb,
 		string|UriInterface $url,
 		array $headers = [],
-		string|array|JsonSerializable|null $body = null,
+		mixed $body = null,
 	): RequestInterface {
 		self::$internalRequest ??= self::default();
 		$newRequest = self::$internalRequest->createRequest($verb->value, $url);
@@ -133,15 +132,15 @@ class HttpMessageFactory {
 	/**
 	 * Create a PSR-7 HTTP Response.
 	 *
-	 * @param  integer                            $code    HTTP code for the response. Default 200 (OK).
-	 * @param  array                              $headers Headers of the response.
-	 * @param  string|array|JsonSerializable|null $body    Response body in string or object format.
-	 * @return RequestInterface
+	 * @param  integer $code    HTTP code for the response. Default 200 (OK).
+	 * @param  array   $headers Headers of the response.
+	 * @param  mixed   $body    Response body in string or object format.
+	 * @return ResponseInterface
 	 */
 	public static function response(
 		int $code = 200,
 		array $headers = [],
-		string|array|JsonSerializable|null $body = null,
+		mixed $body = null,
 	): ResponseInterface {
 		self::$internalResponse ??= self::default();
 		$newResponse = self::$internalResponse->createResponse($code);
@@ -170,13 +169,13 @@ class HttpMessageFactory {
 	 * Add the body to the given message.
 	 *
 	 * @template M
-	 * @param    M                                  $message
-	 * @param    string|array|JsonSerializable|null $body
+	 * @param    M     $message
+	 * @param    mixed $body
 	 * @return   M
 	 */
 	private static function addBody(
 		MessageInterface $message,
-		string|array|JsonSerializable|null $body
+		mixed $body
 	): MessageInterface {
 		if (empty($body)) {
 			return $message;

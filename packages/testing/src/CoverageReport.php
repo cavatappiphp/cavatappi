@@ -8,13 +8,14 @@ use SebastianBergmann\CodeCoverage\Node\File;
 
 class CoverageReport {
 	public static function report() {
-		$report = require __DIR__ . '/../../../../coverage.php';
+		$report = require __DIR__ . '/../../../coverage.php';
 		echo "Running coverage report...\n\n";
 
 		$tests = [
 			[
 				'type' => 'line',
-				'score' => $report->getReport()->numberOfExecutedLines() / $report->getReport()->numberOfExecutableLines(),
+				'score' =>
+					$report->getReport()->numberOfExecutedLines() / $report->getReport()->numberOfExecutableLines(),
 				'fileFilter' => fn($file) => ($file->numberOfExecutableLines() - $file->numberOfExecutedLines()) > 0
 			],
 		];
