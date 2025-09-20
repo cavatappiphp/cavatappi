@@ -4,11 +4,19 @@ namespace Cavatappi\Foundation\Factories;
 
 use Cavatappi\Foundation\Utilities\HttpVerb;
 use Cavatappi\Test\TestCase;
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UriInterface;
 
 final class HttpMessageFactoryTest extends TestCase {
 	public function testItCreatesPsr7RequestObjects() {
-		$request = HttpMessageFactory::request(verb: HttpVerb::GET, url: 'https://smol.blog/hello');
+		$request = HttpMessageFactory::request(
+			verb: HttpVerb::GET,
+			url: 'https://smol.blog/hello',
+			headers: ['Accept' => 'application/json']
+		);
 
 		$this->assertEquals('/hello', $request->getRequestTarget());
 		$this->assertEquals('GET', $request->getMethod());
@@ -77,5 +85,28 @@ final class HttpMessageFactoryTest extends TestCase {
 		$response = HttpMessageFactory::response(body: $body);
 
 		$this->assertJsonStringEqualsJsonString($bodyJson, $response->getBody()->getContents());
+	}
+
+	public function testItCreatesAndAcceptsPsr7UriObjects() {
+		$actual = HttpMessageFactory::uri('https://smol.blog/');
+		$this->assertInstanceOf(UriInterface::class, $actual);
+
+		$this->assertInstanceOf(RequestInterface::class, HttpMessageFactory::request(HttpVerb::GET, $actual));
+	}
+
+	public function testReplacement() {
+		$mockExpected = new Psr17Factory()->createRequest('HEAD', 'https://eph.me/');
+		$mock = $this->createMock(Psr17Factory::class);
+		$mock->expects($this->once())->method('createRequest')->willReturn($mockExpected);
+
+		HttpMessageFactory::setSource($mock);
+
+		$mockActual = HttpMessageFactory::request(HttpVerb::OPTIONS, 'https://smol.blog/post/123');
+		$this->assertEquals($mockExpected, $mockActual);
+
+		HttpMessageFactory::setSource(null);
+
+		$actual = HttpMessageFactory::request(HttpVerb::OPTIONS, 'https://smol.blog/post/123');
+		$this->assertEquals('https://smol.blog/post/123', $actual->getUri()->__toString());
 	}
 }
