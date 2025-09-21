@@ -1,6 +1,6 @@
 <?php
 
-namespace Cavatappi\Foundation\Jobs;
+namespace Cavatappi\Foundation\Job;
 
 use Cavatappi\Foundation\Command\Command;
 use Cavatappi\Foundation\Command\CommandBus;

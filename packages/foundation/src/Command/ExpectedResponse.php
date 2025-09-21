@@ -12,6 +12,8 @@ use Cavatappi\Foundation\Reflection\MapType;
  * Sometimes the result of a Command is used by the calling code. This documents what the expected type is (either a
  * builtin type, fully-qualified class name, or a MapType/ListType) along with an optional name and description (used in
  * generating a REST endpoint).
+ *
+ * @codeCoverageIgnore
  */
 #[Attribute(Attribute::TARGET_CLASS)]
 class ExpectedResponse {

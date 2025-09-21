@@ -2,7 +2,7 @@
 
 namespace Cavatappi\Foundation\Job;
 
-use Cavatappi\Foundation\Value;
+use Cavatappi\Foundation\Value\ValueKit;
 
 /**
  * A Job represents a task that should be performed asynchronously.
@@ -14,6 +14,8 @@ use Cavatappi\Foundation\Value;
  * cross-server communication.
  */
 trait JobKit {
+	use ValueKit;
+
 	/**
 	 * Service to instantiate.
 	 *

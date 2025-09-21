@@ -13,6 +13,8 @@ use Crell\Tukio\ListenerPriority;
  * event listeners with no side effects, such as database projections or file generators.
  *
  * For listeners that execute commands or call external services, use EventListener instead.
+ *
+ * @codeCoverageIgnore
  */
 #[Attribute(Attribute::TARGET_FUNCTION | Attribute::TARGET_METHOD)]
 class ProjectionListener extends ListenerPriority {

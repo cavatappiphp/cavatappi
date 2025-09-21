@@ -13,9 +13,13 @@ class RegistryUtils {
 	 * @return array<class-string, class-string[]> List of Registries and their registered classes.
 	 */
 	public static function makeRegistryConfigs(array $discoveredClasses): array {
-		return \array_map(
-			fn($reg) => self::getImplementingClassesForRegistry($discoveredClasses, $reg),
-			\array_keys(\array_filter($discoveredClasses, fn($imp) => \in_array(Registry::class, $imp))),
+		$registryList = \array_keys(\array_filter($discoveredClasses, fn($imp) => \in_array(Registry::class, $imp)));
+		return \array_combine(
+			$registryList,
+			\array_map(
+				fn($reg) => self::getImplementingClassesForRegistry($discoveredClasses, $reg),
+				$registryList,
+			)
 		);
 	}
 
