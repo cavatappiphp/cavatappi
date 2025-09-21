@@ -51,6 +51,7 @@
 	},
 	"scripts": {
 		"test": "phpunit --testsuite unit --no-coverage",
+		"testdox": "phpunit --testsuite unit --no-coverage --testdox",
 		"test-coverage": [
 			"@putenv XDEBUG_MODE=coverage",
 			"phpunit --testsuite unit",

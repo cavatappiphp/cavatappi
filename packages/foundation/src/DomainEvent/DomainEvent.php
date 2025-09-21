@@ -2,7 +2,6 @@
 
 namespace Cavatappi\Foundation\DomainEvent;
 
-use Cavatappi\Foundation\Value\Entity;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 

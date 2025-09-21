@@ -5,7 +5,7 @@ namespace Cavatappi\Foundation\Fields;
 use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
 use Cavatappi\Foundation\Validation\Validated;
 use Cavatappi\Foundation\Value;
-use Cavatappi\Foundation\Value\CloneKit;
+use Cavatappi\Foundation\Value\ValueKit;
 
 /**
  * Field to store a valid email address.
@@ -13,12 +13,13 @@ use Cavatappi\Foundation\Value\CloneKit;
  * Not stored in any special format, just validated on creation.
  */
 readonly class Email implements Value, Field, Validated {
-	use CloneKit;
+	use ValueKit;
 
 	/**
 	 * @param string $email Email address to save.
 	 */
 	public function __construct(public string $email) {
+		$this->validate();
 	}
 
 	/**

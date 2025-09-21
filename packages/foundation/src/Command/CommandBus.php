@@ -2,10 +2,12 @@
 
 namespace Cavatappi\Foundation\Command;
 
+use Cavatappi\Foundation\Service;
+
 /**
  * A service that accepts a Command object and routes it to the correct handler.
  */
-interface CommandBus {
+interface CommandBus extends Service {
 	/**
 	 * Execute the given command.
 	 *

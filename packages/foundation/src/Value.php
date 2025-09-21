@@ -16,4 +16,21 @@ interface Value {
 	 * @return boolean True if the other object is equal to this object
 	 */
 	public function equals(mixed $other): bool;
+
+	/**
+	 * Get information about the class' properties.
+	 *
+	 * @return ValueProperty[]
+	 */
+	public static function reflect(): array;
+
+	/**
+	 * Create a copy of the object with the given properties replacing existing ones.
+	 *
+	 * @throws InvalidValueProperties When the object cannot be copied.
+	 *
+	 * @param  mixed ...$props Fields to change for the new object.
+	 * @return static
+	 */
+	public function with(mixed ...$props): static;
 }

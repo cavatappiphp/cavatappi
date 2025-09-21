@@ -1,6 +1,6 @@
 <?php
 
-namespace Cavatappi\Foundation\Value;
+namespace Cavatappi\Foundation\DomainEvent;
 
 use Ramsey\Uuid\UuidInterface;
 

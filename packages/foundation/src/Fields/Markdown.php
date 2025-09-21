@@ -4,6 +4,7 @@ namespace Cavatappi\Foundation\Fields;
 
 use Cavatappi\Foundation\Value;
 use Cavatappi\Foundation\Value\CloneKit;
+use Cavatappi\Foundation\Value\ValueKit;
 
 /**
  * Represents a block of Markdown text.
@@ -13,7 +14,7 @@ use Cavatappi\Foundation\Value\CloneKit;
  * user interface.
  */
 readonly class Markdown implements Value, Field {
-	use CloneKit;
+	use ValueKit;
 
 	/**
 	 * Create the field.

@@ -4,11 +4,14 @@ namespace Cavatappi\Foundation\Job;
 
 use Cavatappi\Foundation\Command\Command;
 use Cavatappi\Foundation\Command\CommandBus;
+use Cavatappi\Foundation\Value\ValueKit;
 
 /**
  * A job that executes a Command.
  */
 class AsyncExecutionJob implements Job {
+	use ValueKit;
+
 	/**
 	 * Service to instantiate.
 	 *

@@ -3,12 +3,15 @@
 namespace Cavatappi\Foundation\Job;
 
 use Cavatappi\Foundation\DomainEvent\DomainEvent;
+use Cavatappi\Foundation\Value\ValueKit;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
  * A job that dispatches a DomainEvent.
  */
 class AsyncDispatchJob implements Job {
+	use ValueKit;
+
 	/**
 	 * Service to instantiate.
 	 *

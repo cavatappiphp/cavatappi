@@ -5,12 +5,12 @@ namespace Cavatappi\Foundation\Factories;
 use Cavatappi\Foundation\Utilities\HttpVerb;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\MessageInterface;
-use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestFactoryInterface as RequestFactory;
 use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseFactoryInterface as ResponseFactory;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamFactoryInterface;
-use Psr\Http\Message\UriFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface as StreamFactory;
+use Psr\Http\Message\UriFactoryInterface as UriFactory;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -24,22 +24,16 @@ class HttpMessageFactory {
 	 *
 	 * PSR-17 has different interfaces for each thing. Nyholm puts them all in one. And that's what we're doing.
 	 *
-	 * @var RequestFactoryInterface & ResponseFactoryInterface & StreamFactoryInterface & UriFactoryInterface
+	 * @var RequestFactory & ResponseFactory & StreamFactory & UriFactory
 	 */
-	private static null | (RequestFactoryInterface &
-		ResponseFactoryInterface &
-		StreamFactoryInterface &
-		UriFactoryInterface) $internalFactory;
+	private static null | (RequestFactory & ResponseFactory & StreamFactory & UriFactory) $internalFactory;
 
 	/**
 	 * Get the internal PSR-17 factory.
 	 *
-	 * @return void
+	 * @return RequestFactory&ResponseFactory&StreamFactory&UriFactory
 	 */
-	private static function factory(): RequestFactoryInterface &
-		ResponseFactoryInterface &
-		StreamFactoryInterface &
-		UriFactoryInterface {
+	private static function factory(): RequestFactory & ResponseFactory & StreamFactory & UriFactory {
 		self::$internalFactory ??= new Psr17Factory();
 		return self::$internalFactory;
 	}
@@ -47,14 +41,12 @@ class HttpMessageFactory {
 	/**
 	 * Replace the instance of the factory.
 	 *
-	 * @param null|(RequestFactoryInterface&ResponseFactoryInterface&StreamFactoryInterface&UriFactoryInterface) $newSource A
-	 * 	new factory to use.
+	 * @param null|(RequestFactory&ResponseFactory&StreamFactory&UriFactory) $newSource A new factory to use.
 	 * @return void
 	 */
-	public static function setSource(null | (RequestFactoryInterface &
-		ResponseFactoryInterface &
-		StreamFactoryInterface &
-		UriFactoryInterface) $newSource) {
+	public static function setSource(
+		null | (RequestFactory & ResponseFactory & StreamFactory & UriFactory) $newSource
+	) {
 		self::$internalFactory = $newSource;
 	}
 

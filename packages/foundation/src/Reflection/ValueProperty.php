@@ -3,11 +3,11 @@
 namespace Cavatappi\Foundation\Reflection;
 
 use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
+use Cavatappi\Foundation\Fields\Markdown;
 use Cavatappi\Foundation\Utilities\StringUtils;
 use Cavatappi\Foundation\Validation\Validated;
 use Cavatappi\Foundation\Value;
-use Cavatappi\Foundation\Value\CloneKit;
-use Cavatappi\Foundation\Value\Fields\Markdown;
+use Cavatappi\Foundation\Value\ValueKit;
 
 /**
  * Provides information about a value's properties.
@@ -15,7 +15,7 @@ use Cavatappi\Foundation\Value\Fields\Markdown;
  * This can be used for any number of reasons: serialization, form building, documentation generation, etc.
  */
 readonly class ValueProperty implements Value, Validated {
-	use CloneKit;
+	use ValueKit;
 
 	/**
 	 * Human-readable display name.
@@ -49,6 +49,7 @@ readonly class ValueProperty implements Value, Validated {
 		public bool $optional = true,
 	) {
 		$this->displayName = $displayName ?? StringUtils::camelToTitle($this->name);
+		$this->validate();
 	}
 
 	/**
@@ -57,9 +58,9 @@ readonly class ValueProperty implements Value, Validated {
 	 * @return void
 	 */
 	public function validate(): void {
-		if (($this->type === 'array' || $this->type === 'map') && !isset($items)) {
+		if (($this->type === 'list' || $this->type === 'map') && !isset($this->items)) {
 			throw new InvalidValueProperties(
-				message: 'Type `array` must include an `items` property.',
+				message: 'Type `list` or `map` must include an `items` property.',
 				field: 'items',
 			);
 		}

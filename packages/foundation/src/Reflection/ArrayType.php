@@ -9,7 +9,7 @@ use Crell\Serde\ValueType;
  */
 interface ArrayType {
 	/**
-	 * @var class-string|ValueType
+	 * @var class-string|ValueType|null
 	 */
-	public string|ValueType $arrayType { get; }
+	public string|ValueType|null $arrayType { get; }
 }

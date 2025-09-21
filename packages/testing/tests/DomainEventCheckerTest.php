@@ -7,13 +7,14 @@ use Cavatappi\Foundation\DomainEvent\DomainEventKit;
 use Cavatappi\Foundation\Factories\UuidFactory;
 use Cavatappi\Foundation\Value\Clonable;
 use Cavatappi\Foundation\Value\CloneKit;
+use Cavatappi\Foundation\Value\ValueKit;
 use Cavatappi\Test\Constraints\DomainEventChecker;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 
-final class TestDomainEvent implements DomainEvent, Clonable {
-	use CloneKit;
+final class TestDomainEvent implements DomainEvent {
+	use ValueKit;
 
 	public readonly UuidInterface $id;
 	public readonly DateTimeInterface $timestamp;

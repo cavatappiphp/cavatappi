@@ -4,7 +4,6 @@ namespace Cavatappi\Test\Constraints;
 
 use Cavatappi\Foundation\DomainEvent\DomainEvent;
 use Cavatappi\Foundation\Factories\UuidFactory;
-use Cavatappi\Foundation\Value\Clonable;
 use DateTimeImmutable;
 use InvalidArgumentException;
 use PHPUnit\Framework\Constraint\Constraint;
@@ -17,8 +16,8 @@ use SebastianBergmann\Comparator\ComparisonFailure;
  */
 class DomainEventChecker extends Constraint {
 	/**
-	 * @param array<DomainEvent&Clonable> $expectedEvents Events to check against.
-	 * @param boolean                     $checkProcess   True if the events should be checked for the same processId.
+	 * @param array<DomainEvent> $expectedEvents Events to check against.
+	 * @param boolean            $checkProcess   True if the events should be checked for the same processId.
 	 */
 	public function __construct(private array $expectedEvents, private bool $checkProcess = false) {
 	}
@@ -26,9 +25,9 @@ class DomainEventChecker extends Constraint {
 	/**
 	 * The current expected event.
 	 *
-	 * @var DomainEvent&Clonable
+	 * @var DomainEvent
 	 */
-	private DomainEvent & Clonable $expected;
+	private DomainEvent $expected;
 
 	/**
 	 * Expected processId.
@@ -47,13 +46,13 @@ class DomainEventChecker extends Constraint {
 
 	protected function matches(mixed $other): bool {
 		$maybeExpected = \array_shift($this->expectedEvents);
-		if (!isset($maybeExpected) || !\is_a($maybeExpected, DomainEvent::class) || !\is_a($maybeExpected, Clonable::class)) {
-			throw new InvalidArgumentException('Expected value is not a Clonable DomainEvent.');
+		if (!isset($maybeExpected) || !\is_a($maybeExpected, DomainEvent::class)) {
+			throw new InvalidArgumentException('Expected value is not a DomainEvent.');
 		}
 		$this->expected = $maybeExpected;
 
-		if (!\is_a($other, DomainEvent::class) || !\is_a($other, Clonable::class)) {
-			throw new InvalidArgumentException('Object is not a Clonable DomainEvent.');
+		if (!\is_a($other, DomainEvent::class)) {
+			throw new InvalidArgumentException('Object is not a DomainEvent.');
 		}
 
 		if ($this->checkProcess) {
@@ -89,7 +88,7 @@ class DomainEventChecker extends Constraint {
 		parent::fail($other, $description, $comparisonFailure);
 	}
 
-	private function despecializeEvent(DomainEvent & Clonable $event): DomainEvent & Clonable {
+	private function despecializeEvent(DomainEvent $event): DomainEvent {
 		return $event->with(id: UuidFactory::nil(), timestamp: new DateTimeImmutable('@0'));
 	}
 }
