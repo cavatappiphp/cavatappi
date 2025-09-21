@@ -18,7 +18,7 @@ final class StringUtils {
 	 */
 	public static function camelToTitle(string $camelCase): string {
 		// Via https://stackoverflow.com/a/42665007.
-		// TODO: replace with pipe operator in PHP 8.5
+		// TODO PHP 8.5 replace with pipe operator
 		return \trim(\ucwords(\implode(' ', \preg_split('/(?=[A-Z])/', $camelCase) ?: [])));
 	}
 

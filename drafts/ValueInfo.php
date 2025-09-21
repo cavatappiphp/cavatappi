@@ -1,17 +1,22 @@
 <?php
 
+/**
+ * Early draft of a ValueInfo class to hold class-level information about a value type. If/when reflection is built
+ * out farther, this would be needed.
+ */
+
 namespace Cavatappi\Foundation\Reflection;
 
 use Cavatappi\Foundation\Fields\Markdown;
 use Cavatappi\Foundation\Utilities\StringUtils;
 use Cavatappi\Foundation\Value;
-use Cavatappi\Foundation\Value\Traits\CloneKit;
+use Cavatappi\Foundation\Value\ValueKit;
 
 /**
  * Provide information about a value type.
  */
 class ValueInfo implements Value {
-	use CloneKit;
+	use ValueKit;
 
 	/**
 	 * Type of the class, usually a fully-qualified class name.

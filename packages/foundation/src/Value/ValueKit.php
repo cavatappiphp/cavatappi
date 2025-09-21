@@ -43,13 +43,6 @@ trait ValueKit {
 				continue;
 			}
 
-			if (\is_a($val, JsonSerializable::class)) {
-				if (\json_encode($val) != \json_encode($other->$prop)) {
-					return false;
-				}
-				continue;
-			}
-
 			if ($val != $other->$prop) {
 				return false;
 			}
@@ -77,9 +70,11 @@ trait ValueKit {
 		try {
 			// @phpstan-ignore-next-line
 			$new = new static(...\array_merge($base, $props));
-			if (\is_a($new, Validated::class)) {
-				$new->validate();
-			}
+
+			// TODO PHP 8.5 Manually call $new->validate after cloning
+			// if (\is_a($new, Validated::class)) {
+			// 	$new->validate();
+			// }
 
 			return $new;
 		} catch (Throwable $e) {
@@ -169,6 +164,8 @@ trait ValueKit {
 			$params['displayName'] = $displayName->name;
 		}
 
+		// @codeCoverageIgnoreStart
+		// This exception is very useful during framework development but difficult to trigger in tests.
 		try {
 			return new ValueProperty(...$params);
 		} catch (InvalidValueProperties $e) {
@@ -177,5 +174,6 @@ trait ValueKit {
 				previous: $e
 			);
 		}
+		// @codeCoverageIgnoreEnd
 	}
 }
