@@ -7,7 +7,7 @@ use Crell\Serde\ValueType;
 /**
  * @internal Use ListType or MapType attributes.
  */
-class ArrayTypeUtils {
+final class ArrayTypeUtils {
 	/**
 	 * Check a type string and convert to a ValueType if necessary.
 	 *
