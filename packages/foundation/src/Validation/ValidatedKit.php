@@ -6,6 +6,12 @@ use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
 use ReflectionAttribute;
 use ReflectionClass;
 
+/**
+ * Add some standard validation based on attributes.
+ *
+ * TODO: Make this extendable. This ties into a whole story of "how do we enable customization (and therefore
+ * dependencies) in the largely static Value ecosystem?"
+ */
 trait ValidatedKit {
 	/**
 	 * Validate the object and throw an exception if conditions are not met.
