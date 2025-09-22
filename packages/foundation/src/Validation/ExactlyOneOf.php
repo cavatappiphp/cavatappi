@@ -10,7 +10,7 @@ use Attribute;
  * Will check that ONLY one of the listed properties is not null.
  */
 #[Attribute(Attribute::TARGET_CLASS)]
-readonly class OnlyOneOf {
+readonly class ExactlyOneOf {
 	/**
 	 * @var string[]
 	 */

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Probably useful, just don't want to write the corresponding validation code for it just yet.
+ */
+
 namespace Cavatappi\Foundation\Validation;
 
 use Attribute;
