@@ -1,4 +1,4 @@
-# Smolblog Infrastructure
+# Cavatappi Infrastructure
 
 Tools for defining a domain model.
 

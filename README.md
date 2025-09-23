@@ -6,10 +6,11 @@ Coming soon...
 
 - [x] Get the name on the internet and on Github.
 - [x] Copy over the code from [Smolblog](https://github.com/smolblog/smolblog) (and find-replace the name)
-- [ ] Update the test suite
+- [x] Update the test suite
 - [ ] Write the documentation
 - [ ] Lay out the roadmap
 - [ ] Publish the website
+- [ ] Publish the packages to Packagist
 
 ## License
 
