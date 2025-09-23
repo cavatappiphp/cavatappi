@@ -2,12 +2,11 @@
 
 namespace Cavatappi\Infrastructure\Registries;
 
+use Cavatappi\Foundation\DomainEvent\EventListener;
+use Cavatappi\Foundation\DomainEvent\EventListenerService;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Cavatappi\Foundation\Service\Event\EventListener;
-use Cavatappi\Foundation\Service\Event\EventListenerService;
-use Cavatappi\Infrastructure\Model;
+use Cavatappi\Infrastructure\DefaultModule;
 use Cavatappi\Test\AppTest;
-use Cavatappi\Test\TestCase;
 
 class EventTracer {
 	public array $trace = [];
@@ -40,7 +39,7 @@ final class EventListenerTwo implements EventListenerService {
 }
 
 final class EventListenerRegistryTest extends AppTest {
-	const INCLUDED_MODELS = [Model::class];
+	const INCLUDED_MODELS = [DefaultModule::class];
 
 	protected function createMockServices(): array
 	{

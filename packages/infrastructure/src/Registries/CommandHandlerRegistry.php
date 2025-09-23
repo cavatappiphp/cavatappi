@@ -2,12 +2,12 @@
 
 namespace Cavatappi\Infrastructure\Registries;
 
+use Cavatappi\Foundation\Command\Command;
+use Cavatappi\Foundation\Command\CommandBus;
+use Cavatappi\Foundation\Command\CommandHandler;
+use Cavatappi\Foundation\Command\CommandHandlerService;
 use Cavatappi\Foundation\Exceptions\CodePathNotSupported;
-use Cavatappi\Foundation\Service\Command\CommandBus;
-use Cavatappi\Foundation\Service\Command\CommandHandler;
-use Cavatappi\Foundation\Service\Command\CommandHandlerService;
-use Cavatappi\Foundation\Service\Registry\Registry;
-use Cavatappi\Foundation\Value\Messages\Command;
+use Cavatappi\Foundation\Registry\Registry;
 use Exception;
 use Psr\Container\ContainerInterface;
 use ReflectionAttribute;

@@ -2,6 +2,14 @@
 
 namespace Cavatappi\Infrastructure;
 
+use Cavatappi\Foundation\Command\Command;
+use Cavatappi\Foundation\Command\CommandBus;
+use Cavatappi\Foundation\Command\CommandHandler;
+use Cavatappi\Foundation\Command\CommandHandlerService;
+use Cavatappi\Foundation\Module;
+use Cavatappi\Foundation\Module\ModuleKit;
+use Cavatappi\Foundation\Registry\RegistryUtils;
+use Cavatappi\Foundation\Value\ValueKit;
 use Crell\Tukio\Dispatcher;
 use Crell\Tukio\OrderedListenerProvider;
 use Psr\Container\ContainerInterface;
@@ -9,24 +17,20 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
-use Cavatappi\Foundation\DomainModel;
-use Cavatappi\Foundation\Service\Command\CommandBus;
-use Cavatappi\Foundation\Service\Command\CommandHandler;
-use Cavatappi\Foundation\Service\Command\CommandHandlerService;
-use Cavatappi\Infrastructure\KeypairGenerator;
-use Cavatappi\Foundation\Value\Messages\Command;
 use Cavatappi\Infrastructure\Registries\CommandHandlerRegistry;
-use Cavatappi\Infrastructure\Registries\RegistryHelper;
+use Cavatappi\Infrastructure\Registries\ServiceRegistry;
 use Cavatappi\Test\TestCase;
 
 final class AppKitTestSampleImplementation {
 	use AppKit {
+		buildDiscoveredClassList as public;
 		buildContainerFromModels as public;
 		buildDependencyMap as public;
 	}
 }
 
-readonly class AppKitTestExampleCommand extends Command {
+readonly class AppKitTestExampleCommand implements Command {
+	use ValueKit;
 	public function __construct(public string $name) {}
 }
 
@@ -45,13 +49,19 @@ final class AppKitTest extends TestCase {
 	}
 
 	public function testDependencyMap() {
-		$testModel = new class() extends DomainModel {
-			const AUTO_SERVICES = [KeypairGenerator::class, OrderedListenerProvider::class];
-			const SERVICES = [ListenerProviderInterface::class => OrderedListenerProvider::class];
+		$testModel = new class() implements Module {
+			use ModuleKit;
+			private static function listClasses(): array { return []; }
+			private static function serviceMapOverrides(): array {
+				return [
+					OrderedListenerProvider::class => ['container' => ContainerInterface::class],
+					ListenerProviderInterface::class => OrderedListenerProvider::class,
+				];
+			}
 		};
 
 		$models = [
-			Model::class,
+			DefaultModule::class,
 			get_class($testModel),
 		];
 
@@ -66,29 +76,31 @@ final class AppKitTest extends TestCase {
 				ListenerProviderInterface::class,
 				LoggerInterface::class,
 			],
-			KeypairGenerator::class => [],
 			OrderedListenerProvider::class => ['container' => ContainerInterface::class],
 			ListenerProviderInterface::class => OrderedListenerProvider::class,
+			ServiceRegistry::class => [],
 		];
 
 		$this->assertEquals($expected, $this->testApp->buildDependencyMap($models));
 	}
 
 	public function testContainerSetup() {
-		$testModel = new class() extends DomainModel {
-			const AUTO_SERVICES = [AppKitTestExampleCommandHandler::class];
+		$testModel = new class() implements Module {
+			use ModuleKit;
+			private static function listClasses(): array { return [AppKitTestExampleCommandHandler::class]; }
+			private static function serviceMapOverrides(): array { return []; }
 		};
 
-		$testMap = $this->testApp->buildDependencyMap([
-			Model::class,
+		$testMap = $this->testApp->buildDiscoveredClassList([
+			DefaultModule::class,
 			get_class($testModel),
 		]);
-		$testConfigs = RegistryHelper::getRegistryConfigs(array_keys($testMap));
+		$testConfigs = RegistryUtils::makeRegistryConfigs($testMap);
 
 		$this->assertEquals([AppKitTestExampleCommandHandler::class], $testConfigs[CommandHandlerRegistry::class]);
 
 		$container = $this->testApp->buildContainerFromModels([
-			Model::class,
+			DefaultModule::class,
 			get_class($testModel),
 		]);
 		$id = $this->randomId()->toString();

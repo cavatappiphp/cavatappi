@@ -2,14 +2,16 @@
 
 namespace Cavatappi\Infrastructure\Registries;
 
+use Cavatappi\Foundation\Command\Command;
+use Cavatappi\Foundation\Command\CommandBus;
+use Cavatappi\Foundation\Command\CommandHandler;
+use Cavatappi\Foundation\Command\CommandHandlerService;
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use Cavatappi\Foundation\Exceptions\CodePathNotSupported;
-use Cavatappi\Foundation\Service\Command\CommandBus;
-use Cavatappi\Foundation\Service\Command\CommandHandler;
-use Cavatappi\Foundation\Service\Command\CommandHandlerService;
-use Cavatappi\Foundation\Value\Messages\Command;
-use Cavatappi\Infrastructure\Model;
+use Cavatappi\Foundation\Value\ValueKit;
+use Cavatappi\Infrastructure\DefaultModule;
+use Cavatappi\Infrastructure\Module;
 use Cavatappi\Test\AppTest;
 use Cavatappi\Test\TestCase;
 
@@ -23,23 +25,28 @@ interface MockCommandHandler {
 	public function commandFourOrFiveHandled($cmd);
 }
 
-final readonly class CommandOne extends Command {
+final readonly class CommandOne implements Command {
+	use ValueKit;
 	public function __construct(public string $word, public int $num) {}
 }
 
-final readonly class CommandTwo extends Command {
+final readonly class CommandTwo implements Command {
+	use ValueKit;
 	public function __construct(public string $word, public int $num) {}
 }
 
-final readonly class CommandThree extends Command {
+final readonly class CommandThree implements Command {
+	use ValueKit;
 	public function __construct(public string $word, public int $num) {}
 }
 
-final readonly class CommandFour extends Command {
+final readonly class CommandFour implements Command {
+	use ValueKit;
 	public function __construct(public string $word, public int $num) {}
 }
 
-final readonly class CommandFive extends Command {
+final readonly class CommandFive implements Command {
+	use ValueKit;
 	public function __construct(public string $word, public int $num) {}
 }
 
@@ -60,7 +67,7 @@ final class CommandHandlerTwo implements CommandHandlerService {
 }
 
 final class CommandHandlerRegistryTest extends AppTest {
-	const INCLUDED_MODELS = [Model::class];
+	const INCLUDED_MODELS = [DefaultModule::class];
 
 	private MockCommandHandler & MockObject $mockHandler;
 
@@ -100,7 +107,7 @@ final class CommandHandlerRegistryTest extends AppTest {
 	public function testItThrowsAnExceptionIfNoHandlerExists() {
 		$this->expectException(Exception::class);
 
-		$this->app->container->get(CommandBus::class)->execute(new readonly class() extends Command {});
+		$this->app->container->get(CommandBus::class)->execute(new class() implements Command { use ValueKit; });
 	}
 
 	public function testAHandlerMustHaveARequiredParameter() {

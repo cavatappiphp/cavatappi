@@ -4,6 +4,7 @@ namespace Cavatappi\Test\BasicApp;
 
 use Cavatappi\Foundation\Command\Command;
 use Cavatappi\Foundation\Command\CommandBus;
+use Cavatappi\Foundation\Module\ModuleUtils;
 use Cavatappi\Infrastructure\AppKit;
 use Cavatappi\Infrastructure\Registries\ServiceRegistry;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -26,6 +27,10 @@ class App {
 	 * @param array<class-string, array> $services Any individual services to load in addition to the models.
 	 */
 	public function __construct(array $models, array $services) {
+		$classes = [
+			...$this->buildDiscoveredClassList([Model::class, ...$models]),
+			...ModuleUtils::analyzeClasses(\array_keys($services)),
+		];
 		$map = [
 			...$this->buildDependencyMap([Model::class, ...$models]),
 			...$services,
@@ -33,7 +38,7 @@ class App {
 
 		$this->container = new ServiceRegistry(
 			configuration: $map,
-			supplements: $this->buildSupplementsForRegistries(\array_keys($map)),
+			supplements: $this->buildSupplementsForRegistries($classes),
 		);
 	}
 

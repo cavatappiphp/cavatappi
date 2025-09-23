@@ -2,8 +2,9 @@
 
 namespace Cavatappi\Infrastructure\Registries;
 
-use Cavatappi\Foundation\Service\Event\EventListenerService;
-use Cavatappi\Foundation\Service\Registry\Registry;
+use Cavatappi\Foundation\DomainEvent\EventListenerService;
+use Cavatappi\Foundation\Registry\Registry;
+use Cavatappi\Foundation\Service;
 use Crell\Tukio\OrderedListenerProvider;
 use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\ListenerProviderInterface;
@@ -15,7 +16,7 @@ use Psr\EventDispatcher\ListenerProviderInterface;
  * inheritance and interfaces into account when deciding which listeners will respond to which object. For example,
  * a listener that will respond to an Event object will respond to all messages that inherit from Event.
  */
-class EventListenerRegistry implements ListenerProviderInterface, Registry {
+class EventListenerRegistry implements ListenerProviderInterface, Registry, Service {
 	/**
 	 * This registry registers Listener classes.
 	 *
