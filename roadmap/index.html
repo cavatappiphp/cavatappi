@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://docs.cavatappi.dev/start/">
+        <link rel="canonical" href="https://docs.cavatappi.dev/roadmap/">
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Tutorial - Cavatappi PHP Framework</title>
+        <title>Roadmap - Cavatappi PHP Framework</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -38,10 +38,10 @@
                                 <a href="../about/" class="nav-link">About</a>
                             </li>
                             <li class="nav-item">
-                                <a href="./" class="nav-link active" aria-current="page">Tutorial</a>
+                                <a href="../packages/" class="nav-link">Packages</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../packages/" class="nav-link">Packages</a>
+                                <a href="./" class="nav-link active" aria-current="page">Roadmap</a>
                             </li>
                         </ul>
 
@@ -52,17 +52,17 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../about/" class="nav-link">
+                                <a rel="prev" href="../packages/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../packages/" class="nav-link">
+                                <a rel="next" class="nav-link disabled">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/cavatappiphp/cavatappi/edit/main/docs/start.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                                <a href="https://github.com/cavatappiphp/cavatappi/edit/main/docs/roadmap.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
                             </li>
                             <li class="nav-item dropdown">
                               <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
@@ -112,8 +112,20 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#getting-started" class="nav-link">Getting Started</a>
+            <li class="nav-item" data-bs-level="1"><a href="#roadmap" class="nav-link">Roadmap</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#current" class="nav-link">Current</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#version-1" class="nav-link">Version 1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#further-enhancements" class="nav-link">Further Enhancements</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -121,8 +133,78 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="getting-started">Getting Started</h1>
-<p>Tutorial coming soon. Like, really soon.</p></div>
+<h1 id="roadmap">Roadmap</h1>
+<p>Everything is subject to change. Even this. <em>Especially</em> this.</p>
+<h2 id="current">Current</h2>
+<p>This is what's in the framework now</p>
+<h3 id="dependency-injection">Dependency Injection</h3>
+<ul>
+<li>Using a <a href="https://oddevan.com/2023/08/31/a-stupidly-simple.html">stupidly simple container</a>.</li>
+<li>Register Services automatically.</li>
+<li>Set up concrete implementations of interfaces and abstract classes.</li>
+</ul>
+<h3 id="registries">Registries</h3>
+<ul>
+<li>Surfacing a class to the system is as simple as <code>implements Interface</code>.</li>
+<li>Register different adapters, add services to the dependency injection container, or other uses.</li>
+</ul>
+<h3 id="commands-and-events">Commands and Events</h3>
+<ul>
+<li>Using a custom-built Command Bus and <a href="https://github.com/crell/tukio">Tukio</a> for event dispatching.</li>
+<li>Define a domain model with Commands as input and Events as output.</li>
+<li>Auto-register Command handlers and Event listeners.</li>
+<li>Sets up event sourcing for data persistence.</li>
+</ul>
+<h2 id="version-1">Version 1</h2>
+<p>This is what I would consider the needed feature set before calling the framework ready for general use.</p>
+<h3 id="api">API</h3>
+<ul>
+<li>Set up a registry and configuration for an Endpoint class so that endpoints can be auto-registered.</li>
+<li>Use reflection tools to generate an <a href="https://learn.openapis.org">OpenAPI</a> (or similar) spec.</li>
+<li>Integrate with (or provide adapter to) something like <a href="https://www.slimframework.com">Slim</a> to handle routing.</li>
+</ul>
+<h3 id="markdown">Markdown</h3>
+<ul>
+<li>Registry system for <a href="https://daringfireball.net/projects/markdown/">Markdown</a> customizations.</li>
+</ul>
+<h3 id="data-persistence">Data Persistence</h3>
+<ul>
+<li>Make it as easy to do <a href="https://en.wikipedia.org/wiki/Domain-driven_design#Event_sourcing">event sourcing</a> as most frameworks make <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a>.</li>
+<li>Registry for database tables.</li>
+<li>Integrate with <a href="https://www.doctrine-project.org/projects/doctrine-dbal/en/4.3/reference/introduction.html#introduction">Doctrine DBAL</a>.</li>
+</ul>
+<h3 id="authentication">Authentication</h3>
+<ul>
+<li>Integrate with some library (what's the PHP equivalent to <a href="https://omniauth.github.io/omniauth/">Omniauth</a>?)</li>
+<li>Create extendable User entity</li>
+<li>Some kind of OAuth or JWT scheme to secure APIs</li>
+<li>Make this effortless. Like, really effortless. Like works-out-of-the-box effortless.</li>
+</ul>
+<h2 id="further-enhancements">Further Enhancements</h2>
+<p>The lofty ideas of things beyond version 1.</p>
+<h3 id="ui-framework">UI Framework</h3>
+<ul>
+<li>Build encapsulated UI components in PHP</li>
+<li>Use other design systems as a base and layer customizations on top</li>
+<li>Use reflection to make a form builder.</li>
+<li>Or just make a form builder.</li>
+<li>Seriously, can I have a form builder?</li>
+</ul>
+<h3 id="static-site-generation">Static Site Generation</h3>
+<ul>
+<li>Have a way to generate HTML pages and save them to disk.</li>
+<li>Useful for making landing pages or outputting a single-page app</li>
+</ul>
+<h3 id="build-system">Build System</h3>
+<ul>
+<li>Generate hard-coded configurations and setups for Registries and other high-use classes.</li>
+<li>Optimize the system when it's in a stable place (staging/production) without compromising development speed.</li>
+<li>Allow other systems to hook in for generating documentation, web pages, etc.</li>
+</ul>
+<h3 id="smolblog"><a href="https://smolblog.com/">Smolblog</a></h3>
+<ul>
+<li>That is why this whole thing started.</li>
+</ul></div>
             </div>
         </div>
 
