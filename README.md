@@ -8,7 +8,7 @@ Coming soon...
 - [x] Copy over the code from [Smolblog](https://github.com/smolblog/smolblog) (and find-replace the name)
 - [x] Update the test suite
 - [ ] Write the documentation
-- [ ] Lay out the roadmap
+- [x] Lay out the roadmap
 - [ ] Publish the website
 - [ ] Publish the packages to Packagist
 

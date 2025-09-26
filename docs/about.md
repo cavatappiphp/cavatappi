@@ -74,3 +74,20 @@ their way in, like:
 - **Reflection**: Use PHP's type system and annotations to build a meta-picture of classes that can be used to inform
   application behavior.
 - **Domain-driven Design**: Isolate core application logic from general application concerns.
+
+## Downstream Libraries
+
+Despite the foolishness of this endeavor, Cavatappi does build off several existing PHP libraries:
+
+- [Tukio][tukio] and [Serde][serde] by Larry Garfield
+- [ramsey/uuid][uuid] by Ben Ramsey
+- [Construct Finder][cf] by The League of Extraordinary Packages
+- [nyholm/psr7][psr7] by Tobias Nyholm and Martijn van der Ven
+- [PHPUnit][phpunit] by Sebastian Bergmann
+
+[tukio]: https://github.com/crell/tukio
+[serde]: https://github.com/crell/serde
+[uuid]: https://uuid.ramsey.dev/
+[cf]: https://github.com/thephpleague/construct-finder
+[psr7]: https://github.com/Nyholm/psr7/tree/master
+[phpunit]: https://docs.phpunit.de/en/12.3/
