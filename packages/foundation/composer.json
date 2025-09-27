@@ -1,39 +1,39 @@
 {
-	"name": "cavatappi/foundation",
-	"description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
-	"type": "library",
-	"require": {
-		"crell/tukio": "^2.0",
-		"psr/container": "^2.0",
-		"psr/event-dispatcher": "^1.0",
-		"psr/http-client": "^1.0",
-		"ramsey/uuid": "^4.9",
-		"league/construct-finder": "^1.5",
-		"nyholm/psr7": "^1.8"
-	},
-	"require-dev": {
-		"cavatappi/test-utils": "^0.1"
-	},
-	"license": "Apache-2.0",
-	"autoload": {
-		"psr-4": {
-			"Cavatappi\\Foundation\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Cavatappi\\Foundation\\Test\\": "src-test/"
-		}
-	},
-	"authors": [
-		{
-			"name": "Evan Hildreth",
-			"email": "me@eph.me"
-		}
-	],
-	"config": {
-		"allow-plugins": {
-			"dealerdirect/phpcodesniffer-composer-installer": true
-		}
-	}
+    "name": "cavatappi/foundation",
+    "description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
+    "type": "library",
+    "require": {
+        "crell/tukio": "^2.0",
+        "psr/container": "^2.0",
+        "psr/event-dispatcher": "^1.0",
+        "psr/http-client": "^1.0",
+        "ramsey/uuid": "^4.9",
+        "league/construct-finder": "^1.5",
+        "nyholm/psr7": "^1.8"
+    },
+    "require-dev": {
+        "cavatappi/testing": "^0.1"
+    },
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "Cavatappi\\Foundation\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cavatappi\\Foundation\\Test\\": "src-test/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Evan Hildreth",
+            "email": "me@eph.me"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
 }

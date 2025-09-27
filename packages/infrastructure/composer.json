@@ -32,7 +32,7 @@
         "psr/http-server-middleware": "^1.0"
     },
     "require-dev": {
-        "cavatappi/test-utils": "^0.1"
+        "cavatappi/testing": "^0.1"
     },
     "provide": {
         "psr/container-implementation": "^2.0"

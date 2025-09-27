@@ -1,70 +1,73 @@
 {
-	"name": "cavatappi/cavatappi",
-	"description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
-	"license": "Apache-2.0",
-	"type": "project",
-	"authors": [
-		{
-			"name": "Evan Hildreth",
-			"email": "me@eph.me"
-		}
-	],
-	"require": {
-		"crell/tukio": "^2.0",
-		"league/construct-finder": "^1.5",
-		"nyholm/psr7": "^1.8",
-		"php": "^8.4",
-		"phpseclib/phpseclib": "^3.0",
-		"phpunit/phpunit": "^12",
-		"psr/container": "*",
-		"psr/event-dispatcher": "^1.0",
-		"psr/http-client": "^1.0",
-		"psr/http-server-handler": "^1.0",
-		"psr/http-server-middleware": "^1.0",
-		"psr/log": "^3.0",
-		"ramsey/uuid": "^4.9",
-		"crell/serde": "^1.5"
-	},
-	"require-dev": {
-		"slevomat/coding-standard": "^8.22",
-		"squizlabs/php_codesniffer": "^3.13",
-		"symplify/monorepo-builder": "^11.2"
-	},
-	"autoload": {
-		"psr-4": {
-			"Cavatappi\\Cavatappi\\": "src/",
-			"Cavatappi\\Foundation\\": "packages/foundation/src/",
-			"Cavatappi\\Infrastructure\\": "packages/infrastructure/src/",
-			"Cavatappi\\Test\\": "packages/testing/src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Cavatappi\\Foundation\\Test\\": "packages/foundation/src-test/",
-			"Cavatappi\\Infrastructure\\Test\\": "packages/infrastructure/src-test/"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"dealerdirect/phpcodesniffer-composer-installer": true
-		}
-	},
-	"scripts": {
-		"test": "phpunit --testsuite unit --no-coverage",
-		"testdox": "phpunit --testsuite unit --no-coverage --testdox",
-		"test-coverage": [
-			"@putenv XDEBUG_MODE=coverage",
-			"phpunit --testsuite unit",
-			"Cavatappi\\Test\\CoverageReport::report"
-		],
-		"lint": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
-		"lintfix": "./vendor/squizlabs/php_codesniffer/bin/phpcbf",
-		"monorepo": "./vendor/bin/monorepo-builder"
-	},
-	"replace": {
-		"cavatappi/foundation": "self.version",
-		"cavatappi/infrastructure": "self.version",
-		"cavatappi/testing": "self.version"
-	},
-	"version": "0.1"
+    "name": "cavatappi/cavatappi",
+    "description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Evan Hildreth",
+            "email": "me@eph.me"
+        }
+    ],
+    "type": "project",
+    "require": {
+        "crell/serde": "^1.5",
+        "crell/tukio": "^2.0",
+        "league/construct-finder": "^1.5",
+        "nyholm/psr7": "^1.8",
+        "php": "^8.4",
+        "phpseclib/phpseclib": "^3.0",
+        "phpunit/phpunit": "^12",
+        "psr/container": "^2.0",
+        "psr/event-dispatcher": "^1.0",
+        "psr/http-client": "^1.0",
+        "psr/http-server-handler": "^1.0",
+        "psr/http-server-middleware": "^1.0",
+        "psr/log": "^3.0",
+        "ramsey/uuid": "^4.9"
+    },
+    "require-dev": {
+        "slevomat/coding-standard": "^8.22",
+        "squizlabs/php_codesniffer": "^3.13",
+        "symplify/monorepo-builder": "^11.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cavatappi\\Cavatappi\\": "src/",
+            "Cavatappi\\Foundation\\": "packages/foundation/src/",
+            "Cavatappi\\Infrastructure\\": "packages/infrastructure/src/",
+            "Cavatappi\\Test\\": "packages/testing/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cavatappi\\Foundation\\Test\\": "packages/foundation/src-test/",
+            "Cavatappi\\Infrastructure\\Test\\": "packages/infrastructure/src-test/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit --testsuite unit --no-coverage",
+        "testdox": "phpunit --testsuite unit --no-coverage --testdox",
+        "test-coverage": [
+            "@putenv XDEBUG_MODE=coverage",
+            "phpunit --testsuite unit",
+            "Cavatappi\\Test\\CoverageReport::report"
+        ],
+        "lint": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
+        "lintfix": "./vendor/squizlabs/php_codesniffer/bin/phpcbf",
+        "monorepo": "./vendor/bin/monorepo-builder"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "replace": {
+        "cavatappi/foundation": "0.1.0",
+        "cavatappi/infrastructure": "0.1.0",
+        "cavatappi/testing": "0.1.0"
+    },
+    "provide": {
+        "psr/container-implementation": "^2.0"
+    },
+    "version": "0.1"
 }

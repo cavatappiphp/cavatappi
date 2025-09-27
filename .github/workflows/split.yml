@@ -1,0 +1,42 @@
+name: 'Packages Split'
+
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.SPLIT_PAT }}
+
+jobs:
+  packages_split:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        # define package to repository map
+        package:
+          - local_path: 'foundation'
+            split_repository: 'foundation'
+          - local_path: 'infrastructure'
+            split_repository: 'infrastructure'
+          - local_path: 'testing'
+            split_repository: 'testing'
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: "danharrin/monorepo-split-github-action@v2.3.0"
+        with:
+          tag: ${{ github.ref_name }}
+
+          # ↓ split packages directory
+          package_directory: 'packages/${{ matrix.package.local_path }}'
+
+          # ↓ into smolblog repository
+          repository_organization: 'cavatappiphp'
+          repository_name: '${{ matrix.package.split_repository }}'
+
+          # ↓ the user signed under the split commit
+          user_name: "Pastabot (Github Action)"
+          user_email: "bot@cavatappi.dev"
