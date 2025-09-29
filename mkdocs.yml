@@ -3,6 +3,10 @@ nav:
   - About: about.md
   - Packages: packages/index.md
   - Roadmap: roadmap.md
+  - Walkthrough:
+    - Intro: walkthrough/index.md
+    - Setup: walkthrough/01-setup.md
+    - Values: walkthrough/02-values.md
 theme:
   name: mkdocs
   color_mode: auto
@@ -10,4 +14,7 @@ theme:
 site_url: https://docs.cavatappi.dev
 repo_url: https://github.com/cavatappiphp/cavatappi/
 edit_uri: edit/main/docs/
-copyright: Cavatappi PHP Framework &copy; <a href="https://oddevan.com/">Evan Hildreth</a> and contributors
+copyright: >
+  Cavatappi PHP Framework &copy; <a href="https://oddevan.com/">Evan Hildreth</a> and contributors. Content licensed
+  under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Code samples marked for the public domain
+  via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.
