@@ -2,30 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.cavatappi.dev/</loc>
-         <lastmod>2025-09-26</lastmod>
+         <lastmod>2025-09-29</lastmod>
     </url>
     <url>
          <loc>https://docs.cavatappi.dev/about/</loc>
-         <lastmod>2025-09-26</lastmod>
+         <lastmod>2025-09-29</lastmod>
     </url>
     <url>
          <loc>https://docs.cavatappi.dev/roadmap/</loc>
-         <lastmod>2025-09-26</lastmod>
+         <lastmod>2025-09-29</lastmod>
     </url>
     <url>
          <loc>https://docs.cavatappi.dev/packages/</loc>
-         <lastmod>2025-09-26</lastmod>
+         <lastmod>2025-09-29</lastmod>
     </url>
     <url>
          <loc>https://docs.cavatappi.dev/packages/foundation/</loc>
-         <lastmod>2025-09-26</lastmod>
+         <lastmod>2025-09-29</lastmod>
     </url>
     <url>
          <loc>https://docs.cavatappi.dev/packages/infrastructure/</loc>
-         <lastmod>2025-09-26</lastmod>
+         <lastmod>2025-09-29</lastmod>
     </url>
     <url>
          <loc>https://docs.cavatappi.dev/packages/testing/</loc>
-         <lastmod>2025-09-26</lastmod>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.cavatappi.dev/walkthrough/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.cavatappi.dev/walkthrough/01-setup/</loc>
+         <lastmod>2025-09-29</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.cavatappi.dev/walkthrough/02-values/</loc>
+         <lastmod>2025-09-29</lastmod>
     </url>
 </urlset>

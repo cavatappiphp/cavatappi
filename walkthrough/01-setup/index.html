@@ -6,9 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         
-        <link rel="canonical" href="https://docs.cavatappi.dev/packages/testing/">
+        <link rel="canonical" href="https://docs.cavatappi.dev/walkthrough/01-setup/">
         <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Cavatappi Test Utilities - Cavatappi PHP Framework</title>
+        <title>Setup - Cavatappi PHP Framework</title>
         <link href="../../css/bootstrap.min.css" rel="stylesheet">
         <link href="../../css/fontawesome.min.css" rel="stylesheet">
         <link href="../../css/brands.min.css" rel="stylesheet">
@@ -38,25 +38,25 @@
                                 <a href="../../about/" class="nav-link">About</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../" class="nav-link">Packages</a>
+                                <a href="../../packages/" class="nav-link">Packages</a>
                             </li>
                             <li class="nav-item">
                                 <a href="../../roadmap/" class="nav-link">Roadmap</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Walkthrough</a>
+                                <a href="#" class="nav-link dropdown-toggle active" aria-current="page" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Walkthrough</a>
                                 <ul class="dropdown-menu">
                                     
 <li>
-    <a href="../../walkthrough/" class="dropdown-item">Intro</a>
+    <a href="../" class="dropdown-item">Intro</a>
 </li>
                                     
 <li>
-    <a href="../../walkthrough/01-setup/" class="dropdown-item">Setup</a>
+    <a href="./" class="dropdown-item active" aria-current="page">Setup</a>
 </li>
                                     
 <li>
-    <a href="../../walkthrough/02-values/" class="dropdown-item">Values</a>
+    <a href="../02-values/" class="dropdown-item">Values</a>
 </li>
                                 </ul>
                             </li>
@@ -69,7 +69,17 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a href="https://github.com/cavatappiphp/cavatappi/edit/main/docs/packages/testing.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                                <a rel="prev" href="../" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../02-values/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/cavatappiphp/cavatappi/edit/main/docs/walkthrough/01-setup.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
                             </li>
                             <li class="nav-item dropdown">
                               <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
@@ -119,9 +129,13 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#cavatappi-test-utilities" class="nav-link">Cavatappi Test Utilities</a>
+            <li class="nav-item" data-bs-level="1"><a href="#setup" class="nav-link">Setup</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-bs-level="2"><a href="#installation" class="nav-link">Installation</a>
+            <li class="nav-item" data-bs-level="2"><a href="#step-1-composer-init" class="nav-link">Step 1: composer init</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-2-standards-and-practices" class="nav-link">Step 2: Standards and Practices</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -132,11 +146,113 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="cavatappi-test-utilities">Cavatappi Test Utilities</h1>
-<p>Make tests suck less. Because you need to write them. Yes, you.</p>
-<h2 id="installation">Installation</h2>
-<pre><code class="language-shell">composer require --dev cavatappi/testing
-</code></pre></div>
+<h1 id="setup">Setup</h1>
+<p>This is mostly setting up <a href="https://getcomposer.org">Composer</a> with the Cavatappi packages and some extra tricks I like
+to have.</p>
+<h2 id="step-1-composer-init">Step 1: <code>composer init</code></h2>
+<p>Yeah, I'm basic. I've already got Composer installed via <a href="https://brew.sh">Homebrew</a>, so I'll run its built-in
+step-by-step initializer:</p>
+<pre><code class="language-shell">brew install composer
+composer init
+</code></pre>
+<p>I'm only going to use the Foundation package for now while things get set up. And while Cavatappi itself uses the
+<a href="https://www.apache.org/licenses/LICENSE-2.0">ASF license</a>, I'm going to restrict <em>this</em> project's code to the
+<a href="https://www.gnu.org/licenses/agpl-3.0.html">GNU Affero GPL license</a>.</p>
+<p>(That being said, <strong>all code samples in the documentation are
+<a href="https://creativecommons.org/publicdomain/zero/1.0/">public domain via CC0</a></strong>, so reuse and modify anything you see here
+for whatever purpose you want!)</p>
+<p>At the end, I'll have a <code>composer.json</code> file that looks something like this:</p>
+<pre><code class="language-json">{
+    &quot;name&quot;: &quot;oddevan/pilltimer&quot;,
+    &quot;description&quot;: &quot;Backend for the web version of PillTimer&quot;,
+    &quot;type&quot;: &quot;project&quot;,
+    &quot;require&quot;: {
+        &quot;cavatappi/foundation&quot;: &quot;^0.1.0&quot;
+    },
+    &quot;license&quot;: &quot;AGPL-3.0&quot;,
+    &quot;autoload&quot;: {
+        &quot;psr-4&quot;: {
+            &quot;oddEvan\\PillTimer\\&quot;: &quot;src/&quot;
+        }
+    },
+    &quot;authors&quot;: [
+        {
+            &quot;name&quot;: &quot;Evan Hildreth&quot;,
+            &quot;email&quot;: &quot;me@eph.me&quot;
+        }
+    ]
+}
+</code></pre>
+<p>Normally in a Composer project we would need to include the autoloader, but we're not there yet. And we won't be for
+some time.</p>
+<h2 id="step-2-standards-and-practices">Step 2: Standards and Practices</h2>
+<p>I like having some reasonable coding standards in place, if only because it means I can auto-format my code. Because
+this is a personal project and not necessarily intended for other developers to build off of, I'm mostly going to limit
+the included standards to code formatting and forgo the more documentation-heavy ones.</p>
+<p>I use [PHP_CodeSniffer] mostly because that's what dominates the WordPress ecosystem and therefore what I learned first.</p>
+<pre><code class="language-shell">composer require --dev squizlabs/php_codesniffer
+</code></pre>
+<p>And then add a <code>.phpcs.xml</code> config file that looks like this (suspiciously similar to Cavatappi's):</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;ruleset name=&quot;PillTimer Standards&quot; namespace=&quot;oddEvan\PillTimer&quot;&gt;
+    &lt;description&gt;Coding standards for PillTimer.&lt;/description&gt;
+
+    &lt;file&gt;./src&lt;/file&gt;
+
+    &lt;exclude-pattern&gt;*/src-test/*&lt;/exclude-pattern&gt;
+    &lt;exclude-pattern&gt;*/tests/*&lt;/exclude-pattern&gt;
+
+    &lt;arg name=&quot;extensions&quot; value=&quot;php&quot;/&gt;
+    &lt;arg name=&quot;tab-width&quot; value=&quot;2&quot;/&gt;
+    &lt;arg name=&quot;colors&quot;/&gt;
+    &lt;arg value=&quot;s&quot;/&gt;
+
+    &lt;ini name=&quot;memory_limit&quot; value=&quot;64M&quot;/&gt;
+
+    &lt;autoload&gt;./vendor/autoload.php&lt;/autoload&gt;
+
+    &lt;!-- Use PSR-12 as our base --&gt;
+    &lt;rule ref=&quot;PSR12&quot;&gt;
+        &lt;exclude name=&quot;Generic.WhiteSpace.DisallowTabIndent&quot;/&gt;
+        &lt;exclude name=&quot;Generic.WhiteSpace.ScopeIndent&quot;/&gt;
+        &lt;exclude name=&quot;PSR2.Classes.ClassDeclaration.OpenBraceNewLine&quot;/&gt;
+        &lt;exclude name=&quot;PSR2.Methods.FunctionCallSignature.Indent&quot;/&gt;
+        &lt;exclude name=&quot;Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine&quot;/&gt;
+        &lt;exclude name=&quot;Squiz.Functions.MultiLineFunctionDeclaration.Indent&quot;/&gt;
+    &lt;/rule&gt;
+    &lt;rule ref=&quot;PSR2.Methods.FunctionCallSignature.Indent&quot;&gt;
+        &lt;properties&gt;
+            &lt;property name=&quot;indent&quot; value=&quot;2&quot;/&gt;
+        &lt;/properties&gt;
+    &lt;/rule&gt;
+
+    &lt;!-- Use tabs, please. Please. Seriously. --&gt;
+    &lt;!-- https://alexandersandberg.com/articles/default-to-tabs-instead-of-spaces-for-an-accessible-first-environment/ --&gt;
+    &lt;rule ref=&quot;Generic.WhiteSpace.DisallowSpaceIndent&quot;/&gt;
+    &lt;rule ref=&quot;Generic.WhiteSpace.ScopeIndent&quot;&gt;
+        &lt;properties&gt;
+            &lt;property name=&quot;indent&quot; value=&quot;2&quot;/&gt;
+            &lt;property name=&quot;tabIndent&quot; value=&quot;true&quot;/&gt;
+            &lt;property name=&quot;ignoreIndentationTokens&quot; type=&quot;array&quot;&gt;
+                &lt;element value=&quot;T_COMMENT&quot;/&gt;
+                &lt;element value=&quot;T_DOC_COMMENT_OPEN_TAG&quot;/&gt;
+            &lt;/property&gt;
+        &lt;/properties&gt;
+    &lt;/rule&gt;
+
+    &lt;!-- Make structures look nicer --&gt;
+    &lt;rule ref=&quot;Generic.Classes.OpeningBraceSameLine&quot;/&gt;
+    &lt;rule ref=&quot;Generic.Functions.OpeningFunctionBraceKernighanRitchie&quot;/&gt;
+&lt;/ruleset&gt;
+</code></pre>
+<p>That's enough to tie into my code editor, but I like having some command line shortcuts, especially when it comes to
+auto-formatting. I'll add this to my <code>composer.json</code> file:</p>
+<pre><code class="language-json">    &quot;scripts&quot;: {
+        &quot;lint&quot;: &quot;./vendor/squizlabs/php_codesniffer/bin/phpcs&quot;,
+        &quot;lintfix&quot;: &quot;./vendor/squizlabs/php_codesniffer/bin/phpcbf&quot;
+    }
+</code></pre>
+<p>OK, enough messing around. On to the next step: <a href="../02-values/">defining our data model</a>!</p></div>
             </div>
         </div>
 
