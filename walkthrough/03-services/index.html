@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        <link rel="canonical" href="https://docs.cavatappi.dev/walkthrough/03-services/">
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Services - Cavatappi PHP Framework</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" disabled>
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Cavatappi PHP Framework</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="../../about/" class="nav-link">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../packages/" class="nav-link">Packages</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../roadmap/" class="nav-link">Roadmap</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"  aria-expanded="false">Walkthrough</a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="../" class="dropdown-item">Intro</a>
+</li>
+                                    
+<li>
+    <a href="../01-setup/" class="dropdown-item">Setup</a>
+</li>
+                                    
+<li>
+    <a href="../02-values/" class="dropdown-item">Values</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/cavatappiphp/cavatappi/edit/main/docs/walkthrough/03-services.md" class="nav-link"><i class="fa-brands fa-github"></i> Edit on GitHub</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <button id="theme-menu" aria-expanded="false" data-bs-toggle="dropdown" data-bs-display="static" aria-label="Toggle theme" class="nav-link dropdown-toggle">
+                                <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                <span class="d-lg-none ms-2">Toggle theme</span>
+                              </button>
+                              <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                                    <i class="fa-solid fa-sun fa-fw"></i>
+                                    <span class="ms-2">Light</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                                    <i class="fa-solid fa-moon fa-fw"></i>
+                                    <span class="ms-2">Dark</span>
+                                    <i class="fa-solid fa-check ms-auto d-none"></i>
+                                  </button>
+                                </li>
+                                <li>
+                                  <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto" aria-pressed="true">
+                                    <i class="fa-solid fa-circle-half-stroke fa-fw"></i>
+                                    <span class="ms-2">Auto</span>
+                                    <i class="fa-solid fa-check ms-auto"></i>
+                                  </button>
+                                </li>
+                              </ul>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <script src="../../js/darkmode.js"></script>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#services" class="nav-link">Services</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#step-0-figure-out-what-we-need" class="nav-link">Step 0: Figure out what we need</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-1-repo-interfaces" class="nav-link">Step 1: Repo Interfaces</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-2-management-services" class="nav-link">Step 2: Management Services</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#step-3-ephemeral-data" class="nav-link">Step 3: Ephemeral Data</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#wrapup" class="nav-link">Wrapup</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="services">Services</h1>
+<p>We've got lots of data, now let's <em>do</em> something with it!</p>
+<h2 id="step-0-figure-out-what-we-need">Step 0: Figure out what we need</h2>
+<p>Sorry, but that's <em>always</em> step zero. In this case, let's go back to our list of actions:</p>
+<ol>
+<li>User creates a medicine with dosage information.</li>
+<li>User updates a medicine with new information.</li>
+<li>User records a dose, and the app updates the next dose.</li>
+<li>User removes a dose that was incorrectly entered.</li>
+<li>User archives a medicine they are no longer taking.</li>
+<li>User removes a medicine they no longer need data for.</li>
+<li>User un-archives a medicine they are taking again.</li>
+</ol>
+<p>I'm seeing a few potential <strong>Service</strong> objects here. Let's lay them out:</p>
+<ol>
+<li>Medicine Management (create/update/delete/archive)</li>
+<li>Medicine Repository (data storage)</li>
+<li>Dose Management (create/delete)</li>
+<li>Dose Repository (data storage)</li>
+<li>Next Dose Calculation</li>
+</ol>
+<p>Now, are 1-4 strictly single-responsibility? No. But making a separate service for every create, update, and delete
+operation feels <em>exceedingly</em> tedious. We can map <strong>Command</strong> objects to individual methods in the service, so one
+service can handle multiple commands.</p>
+<p>The repositories are separate so that we can separate our domain logic from our data storage. In our domain model,
+each one will just be an <code>interface</code>. We'll get to the actual database storage... later.</p>
+<p>Finally, our service for next dose calculation is its own thing for a couple of reasons. One, it's a significantly
+different pattern from the others. Two, instead of handling commands, it's going to react to <strong>Event</strong> objects.
+Whenever an event happens that could change when the next dose of medicine is, this service will recalculate the next
+dose and send its own event to mark the change.</p>
+<h2 id="step-1-repo-interfaces">Step 1: Repo Interfaces</h2>
+<p>Since the other services will depend on the repository interfaces, we'll define them first:</p>
+<pre><code class="language-php">use oddEvan\PillTimer\Entities\Medicine;
+use Ramsey\Uuid\UuidInterface;
+
+interface MedicineRepo {
+    public function has(UuidInterface $medicineId): bool;
+    public function get(UuidInterface $medicineId): ?Medicine;
+    public function setNextDose(UuidInterface $medicineId, DateTimeInterface $timestamp): void;
+}
+</code></pre>
+<p>I like to use <code>has</code> and <code>get</code> to mirror <a href="https://www.php-fig.org/psr/psr-11/">PSR-11</a>, but that's a personal choice.
+There's also a <code>setNextDose</code> method for reasons we'll get into in a bit.</p>
+<p>Dose needs a slightly different method:</p>
+<pre><code class="language-php">interface DoseRepo {
+    /** @return Dose[] */
+    public function dosesForMedicineInLastDay(UuidInterface $medicineId): array;
+}
+</code></pre>
+<p>Calculating the next dose is only going to need doses from the last 24 hours, so that's what this method is limited to.</p>
+<p>Now that we have these interfaces, we can type-hint against them in our services.</p>
+<h2 id="step-2-management-services">Step 2: Management Services</h2>
+<p>These are all pretty similar (and something I'm hoping to provide some shortcuts for in the future), so here's the idea:</p>
+<pre><code class="language-php">use Cavatappi\Foundation\Command\{CommandHandler, CommandHandlerService};
+use Cavatappi\Foundation\Exceptions\{ActionNotAuthorized, InvalidValueProperties};
+use Cavatappi\Foundation\Factories\UuidFactory;
+use oddEvan\PillTimer\Commands\AddMedicine;
+use oddEvan\PillTimer\Events\MedicineAdded;
+use Psr\EventDispatcher\EventDispatcherInterface;
+
+class MedicineService implements CommandHandlerService {
+    public function __construct(
+        private MedicineRepo $repo,
+        private EventDispatcherInterface $eventBus
+    ) {
+    }
+
+    #[CommandHandler]
+    public function addMedicine(AddMedicine $cmd): void {
+        if ($this-&gt;repo-&gt;has($cmd-&gt;medicine-&gt;id)) {
+            throw new InvalidValueProperties(&quot;A medicine with the ID {$cmd-&gt;medicine-&gt;id} already exists&quot;);
+        }
+        if (!$cmd-&gt;userId-&gt;equals($cmd-&gt;medicine-&gt;userId)) {
+            throw new ActionNotAuthorized('You cannot create a Medicine for someone else.');
+        }
+
+        $this-&gt;eventBus-&gt;dispatch(new MedicineAdded(
+            medicine: $cmd-&gt;medicine,
+            userId: $cmd-&gt;userId,
+        ));
+    }
+}
+</code></pre>
+<p>First off, we declare dependencies in the constructor: the <code>MedicineRepo</code> we defined earlier along with an
+<code>EventDispatcherInterface</code> from <a href="http://www.php-fig.org/psr/psr-14/">PSR-14</a>, which we use to dispatch the event.</p>
+<p>As an example of a <code>CommandHandler</code>, we have one for the <code>AddMedicine</code> command. Remember, the only preconditions for
+a command object are</p>
+<ol>
+<li>It is a valid object according to its conditions, and</li>
+<li>If it is an <code>Authenticated</code> command, the <code>userId</code> property represents the user issuing the command.</li>
+</ol>
+<p>Everything else is domain-specific. So for PillTimer, we check:</p>
+<ol>
+<li>Is the ID already in use? This is a create method, so there shouldn't already be a Mediicne with this ID.</li>
+<li>Is the user authorized? For now, we're only checking if the user is creating a medicine for themselves. In the future
+   we may call out to a separate service for more fine-grained permissions.</li>
+</ol>
+<p>If all the conditions are met, we should save the Medicine. To do that, we dispatch the <code>MedicineAdded</code> event and add
+the appropriate information.</p>
+<p>With that, the domain model's work is done, right? Eh, not quite.</p>
+<h2 id="step-3-ephemeral-data">Step 3: Ephemeral Data</h2>
+<p>The idea behind an event-sourced system is to store the events with their necessary data; everything else is ephemeral.
+For PillTimer, that includes the time of the next dose. It's not something explicitly entered by the user, it's
+calculated using:</p>
+<ol>
+<li>The doses in the last 24 hours,</li>
+<li>The time allowed between doses, and</li>
+<li>The number of allowed doses per 24 hours.</li>
+</ol>
+<p>That's why, instead of having a "Next Dose Time Set" event, we have a method on the <code>MedicineRepo</code> to add the
+information to the Medicine object. Other methods could include keeping the information in a separate repository or
+calculating it on-the-fly every time it's needed. This method feels the most straightforward to me, at least right now.</p>
+<p>So how do we calculate this when we need to? We listen for any events that might change the next dose time and run our
+code then. There are two ways we could do this:</p>
+<ol>
+<li>List all the events to listen for in our service, or</li>
+<li>Declare an interface for all appropriate events to implement.</li>
+</ol>
+<p>I personally think that either method is valid, especially on a small app like this for an event intended to be used
+by its own domain model. The second feels like less typing, so I'm going to go with that one.</p>
+<p>First, we declare a new interface:</p>
+<pre><code class="language-php">interface ChangesNextDoseTime {
+    public function doseTime(): ?DateTimeInterface;
+}
+</code></pre>
+<p>We could have made it completely empty, but this will make the code simpler in our service without compromising the
+Events themselves.</p>
+<p>Next, we add the new interface to our existing events and implement the new method. For <code>DoseAdded</code>, it's simple:</p>
+<pre><code class="language-php">class DoseAdded implements DomainEvent, ChangesNextDoseTime {
+    // ...
+    public function doseTime(): ?DateTimeInterface {
+        return $this-&gt;dose-&gt;timestamp;
+    }
+}
+</code></pre>
+<p>We would do the same for a <code>DoseDeleted</code> event (which is good to know since normally we wouldn't include info from the
+entity on an event deleting it).</p>
+<p>For <code>MedicineAdded</code>, though, we forgo the interface entirely. A new medicine won't have any doses, so it won't have a
+time for a next dose. <code>MedicineUpdated</code>, though, will, since it could change the timing:</p>
+<pre><code class="language-php">class MedicineUpdated implements DomainEvent, ChangesNextDoseTime {
+    // ...
+    public function doseTime(): ?DateTimeInterface {
+        return null;
+    }
+}
+</code></pre>
+<p>Since there's no new dosage information, we return <code>null</code>.</p>
+<p>Once we've gotten all our events updated, we can create the new service:</p>
+<pre><code class="language-php">use Cavatappi\Foundation\DomainEvent\EventListenerService;
+use Cavatappi\Foundation\DomainEvent\ProjectionListener;
+use DateTimeImmutable;
+use oddEvan\PillTimer\Events\ChangesNextDoseTime;
+
+class NextDoseService implements EventListenerService {
+    public function __construct(
+        private MedicineRepo $medicineRepo,
+        private DoseRepo $doseRepo
+    ) {
+    }
+
+    public const TWENTY_FOUR_HOURS = 24 * 60 * 60;
+
+    #[ProjectionListener]
+    public function recalculate(ChangesNextDoseTime $event) {
+        $doseTime = $event-&gt;doseTime()?-&gt;getTimestamp() ?? null;
+        if (isset($doseTime) &amp;&amp; time() - $doseTime &gt; self::TWENTY_FOUR_HOURS) {
+            // A dose older than the last 24 hours was changed; we can safely ignore it.
+            return;
+        }
+
+        $medicine = $this-&gt;medicineRepo-&gt;get($event-&gt;aggregateId);
+        $doses = $this-&gt;doseRepo-&gt;dosesForMedicineInLastDay($event-&gt;aggregateId);
+        usort($doses, fn($doseA, $doseB) =&gt; $doseA-&gt;timestamp-&gt;getTimestamp() - $doseB-&gt;timestamp-&gt;getTimestamp());
+
+        if (empty($doses)) {
+            // No existing doses; we can safely ignore the event.
+            return;
+        }
+
+        $this-&gt;medicineRepo-&gt;setNextDose(
+            medicineId: $event-&gt;aggregateId,
+            timestamp: self::calculate($doses, $medicine-&gt;hourlyInterval, $medicine-&gt;dailyLimit),
+        );
+    }
+
+    private static function calculate(array $doses, ?int $interval, ?int $limit): DateTimeImmutable {
+        // idk; stuff?
+        return new DateTimeImmutable();
+    }
+}
+</code></pre>
+<p>(Yes, that's a placeholder.)</p>
+<p>There are two types of event listener attributes: <code>EventListener</code> and <code>ProjectionListener</code>. Both will be called when
+the given type-hinted event is dispatched. To save the whole event-sourcing conversation for later, we'll just say that
+a Projection-style listener shouldn't have side effects like calling other services, issuing commands, or the like.
+Since this is only calculating derived data, it's a Projection.</p>
+<h2 id="wrapup">Wrapup</h2>
+<p>So that's a look at how Service classes work in Cavatappi. We're looking at incoming Commands, outgoing Events, and
+even consuming some of those downstream events.</p>
+<p>And all this means our system is now ready to test! Aren't you excited?</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+                <p>Cavatappi PHP Framework &copy; <a href="https://oddevan.com/">Evan Hildreth</a> and contributors. Content licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Code samples marked for the public domain via <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.</p>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

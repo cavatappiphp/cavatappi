@@ -129,7 +129,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-bs-level="1"><a href="#_1" class="nav-link"></a>
+            <li class="nav-item" data-bs-level="1"><a href="#values" class="nav-link">Values</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-bs-level="2"><a href="#step-0-figure-out-what-we-need" class="nav-link">Step 0: Figure out what we need</a>
               <ul class="nav flex-column">
@@ -154,7 +154,7 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="_1"></h1>
+<h1 id="values">Values</h1>
 <p>Let's set up some initial Value objects to represent the data we need.</p>
 <h2 id="step-0-figure-out-what-we-need">Step 0: Figure out what we need</h2>
 <p>A little bit of planning goes a long way. So let me think out loud about what this app will do. I find it easiest to
@@ -238,6 +238,7 @@ That's why instead of a superclass, we have an <code>interface</code> and a <cod
         public ?int $dailyLimit = null,
         public bool $alert = false,
         public bool $archived = false,
+        public ?DateTimeInterface $nextDose = null,
     ) {
         $this-&gt;id = $id ?? UuidFactory::random();
         $this-&gt;validate();
