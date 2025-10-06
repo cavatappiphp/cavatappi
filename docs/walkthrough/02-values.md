@@ -1,4 +1,4 @@
-# 
+# Values
 
 Let's set up some initial Value objects to represent the data we need.
 
@@ -91,6 +91,7 @@ readonly class Medicine implements Value, Entity, Validated {
 		public ?int $dailyLimit = null,
 		public bool $alert = false,
 		public bool $archived = false,
+		public ?DateTimeInterface $nextDose = null,
 	) {
 		$this->id = $id ?? UuidFactory::random();
 		$this->validate();
