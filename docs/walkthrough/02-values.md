@@ -184,6 +184,8 @@ use oddEvan\PillTimer\Entities\Medicine;
 use Ramsey\Uuid\UuidInterface;
 
 class MedicineAdded implements DomainEvent {
+	use ValueKit;
+
 	public readonly UuidInterface $id;
 	public readonly DateTimeInterface $timestamp;
 
@@ -232,6 +234,8 @@ readonly class AddDose implements Command, Authenticated {
 
 ```php
 class DoseAdded implements DomainEvent {
+	use ValueKit;
+
 	public readonly UuidInterface $id;
 	public readonly DateTimeInterface $timestamp;
 
