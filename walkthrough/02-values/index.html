@@ -58,6 +58,14 @@
 <li>
     <a href="./" class="dropdown-item active" aria-current="page">Values</a>
 </li>
+                                    
+<li>
+    <a href="../03-services/" class="dropdown-item">Services</a>
+</li>
+                                    
+<li>
+    <a href="../04-tests/" class="dropdown-item">Tests</a>
+</li>
                                 </ul>
                             </li>
                         </ul>
@@ -74,7 +82,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../03-services/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -314,6 +322,8 @@ use oddEvan\PillTimer\Entities\Medicine;
 use Ramsey\Uuid\UuidInterface;
 
 class MedicineAdded implements DomainEvent {
+    use ValueKit;
+
     public readonly UuidInterface $id;
     public readonly DateTimeInterface $timestamp;
 
@@ -356,6 +366,8 @@ sequential order.</p>
 }
 </code></pre>
 <pre><code class="language-php">class DoseAdded implements DomainEvent {
+    use ValueKit;
+
     public readonly UuidInterface $id;
     public readonly DateTimeInterface $timestamp;
 
