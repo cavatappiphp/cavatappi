@@ -62,9 +62,9 @@
         }
     },
     "replace": {
-        "cavatappi/foundation": "0.1.0",
-        "cavatappi/infrastructure": "0.1.0",
-        "cavatappi/testing": "0.1.0"
+        "cavatappi/foundation": "0.1.1",
+        "cavatappi/infrastructure": "0.1.1",
+        "cavatappi/testing": "0.1.1"
     },
     "provide": {
         "psr/container-implementation": "^2.0"
