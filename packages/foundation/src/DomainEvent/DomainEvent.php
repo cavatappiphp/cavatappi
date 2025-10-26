@@ -2,6 +2,7 @@
 
 namespace Cavatappi\Foundation\DomainEvent;
 
+use Cavatappi\Foundation\Value;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
 
@@ -11,7 +12,7 @@ use Ramsey\Uuid\UuidInterface;
  * The intent is to serialize and persist the event itself as the canonical store for the application. If this doesn't
  * match your use case, this interface is not recommended.
  */
-interface DomainEvent extends Entity {
+interface DomainEvent extends Entity, Value {
 	/**
 	 * Date and time that this Event occurred.
 	 *
