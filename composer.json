@@ -2,15 +2,15 @@
     "name": "cavatappi/cavatappi",
     "description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
     "license": "Apache-2.0",
+    "type": "project",
+    "version": "0.1",
     "authors": [
         {
             "name": "Evan Hildreth",
             "email": "me@eph.me"
         }
     ],
-    "type": "project",
     "require": {
-        "crell/serde": "^1.5",
         "crell/tukio": "^2.0",
         "league/construct-finder": "^1.5",
         "nyholm/psr7": "^1.8",
@@ -23,25 +23,42 @@
         "psr/http-server-handler": "^1.0",
         "psr/http-server-middleware": "^1.0",
         "psr/log": "^3.0",
-        "ramsey/uuid": "^4.9"
+        "ramsey/uuid": "^4.9",
+        "crell/serde": "^1.5"
     },
     "require-dev": {
         "slevomat/coding-standard": "^8.22",
         "squizlabs/php_codesniffer": "^4.0",
         "symplify/monorepo-builder": "^11.2"
     },
+    "replace": {
+        "cavatappi/foundation": "0.1.1",
+        "cavatappi/infrastructure": "0.1.1",
+        "cavatappi/serialization": "self.version",
+        "cavatappi/testing": "0.1.1"
+    },
+    "provide": {
+        "psr/container-implementation": "^2.0"
+    },
     "autoload": {
         "psr-4": {
             "Cavatappi\\Cavatappi\\": "src/",
             "Cavatappi\\Foundation\\": "packages/foundation/src/",
             "Cavatappi\\Infrastructure\\": "packages/infrastructure/src/",
+            "Cavatappi\\Serialization\\": "packages/serialization/src/",
             "Cavatappi\\Test\\": "packages/testing/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Cavatappi\\Foundation\\Test\\": "packages/foundation/src-test/",
-            "Cavatappi\\Infrastructure\\Test\\": "packages/infrastructure/src-test/"
+            "Cavatappi\\Infrastructure\\Test\\": "packages/infrastructure/src-test/",
+            "Cavatappi\\Serialization\\Test\\": "packages/serialization/src-test/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "scripts": {
@@ -55,19 +72,5 @@
         "lint": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
         "lintfix": "./vendor/squizlabs/php_codesniffer/bin/phpcbf",
         "monorepo": "./vendor/bin/monorepo-builder"
-    },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
-    },
-    "replace": {
-        "cavatappi/foundation": "0.1.1",
-        "cavatappi/infrastructure": "0.1.1",
-        "cavatappi/testing": "0.1.1"
-    },
-    "provide": {
-        "psr/container-implementation": "^2.0"
-    },
-    "version": "0.1"
+    }
 }

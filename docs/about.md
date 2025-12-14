@@ -75,7 +75,7 @@ their way in, like:
   application behavior.
 - **Domain-driven Design**: Isolate core application logic from general application concerns.
 
-## Downstream Libraries
+## Upstream Libraries
 
 Despite the foolishness of this endeavor, Cavatappi does build off several existing PHP libraries:
 
