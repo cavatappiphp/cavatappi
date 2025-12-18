@@ -16,7 +16,7 @@ trait DomainEventKit {
 	public readonly UuidInterface $id;
 	public readonly DateTimeInterface $timestamp;
 
-	private function setTimeAndId(?UuidInterface $id, ?DateTimeInterface $timestamp): void {
+	private function setIdAndTime(?UuidInterface $id, ?DateTimeInterface $timestamp): void {
 		$this->timestamp = $timestamp ?? new DateTimeImmutable();
 		$this->id = $id ?? UuidFactory::date($this->timestamp);
 	}
