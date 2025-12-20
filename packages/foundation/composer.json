@@ -3,6 +3,7 @@
     "description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
     "type": "library",
     "require": {
+        "crell/serde": "^1.5",
         "crell/tukio": "^2.0",
         "psr/container": "^2.0",
         "psr/event-dispatcher": "^1.0",
