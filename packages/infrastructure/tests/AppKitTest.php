@@ -19,6 +19,7 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Cavatappi\Infrastructure\Registries\CommandHandlerRegistry;
 use Cavatappi\Infrastructure\Registries\ServiceRegistry;
+use Cavatappi\Infrastructure\Serialization\SerializationService;
 use Cavatappi\Test\TestCase;
 
 final class AppKitTestSampleImplementation {
@@ -79,6 +80,7 @@ final class AppKitTest extends TestCase {
 			OrderedListenerProvider::class => ['container' => ContainerInterface::class],
 			ListenerProviderInterface::class => OrderedListenerProvider::class,
 			ServiceRegistry::class => [],
+			SerializationService::class => [],
 		];
 
 		$this->assertEquals($expected, $this->testApp->buildDependencyMap($models));

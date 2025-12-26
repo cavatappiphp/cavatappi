@@ -1,7 +1,8 @@
 <?php
 
-namespace Cavatappi\Foundation\Fields;
+namespace Cavatappi\Infrastructure\Serialization;
 
+use Cavatappi\Foundation\Fields\Field;
 use Crell\Serde\Attributes\Field as FieldAttribute;
 use Crell\Serde\DeformatterResult;
 use Crell\Serde\Deserializer;

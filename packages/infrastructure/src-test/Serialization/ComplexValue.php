@@ -1,6 +1,6 @@
 <?php
 
-namespace Cavatappi\Foundation\Test\Serialization;
+namespace Cavatappi\Infrastructure\Test\Serialization;
 
 use Cavatappi\Foundation\Reflection\ListType;
 use Cavatappi\Foundation\Reflection\MapType;
@@ -18,6 +18,5 @@ final readonly class ComplexValue implements Value {
 		public FieldValue $field,
 	)
 	{
-		throw new \Exception('Not implemented');
 	}
 }

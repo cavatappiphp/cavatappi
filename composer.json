@@ -24,7 +24,8 @@
         "psr/http-server-middleware": "^1.0",
         "psr/log": "^3.0",
         "ramsey/uuid": "^4.9",
-        "crell/serde": "^1.5"
+        "crell/serde": "^1.5",
+        "symfony/yaml": "^8.0"
     },
     "require-dev": {
         "slevomat/coding-standard": "^8.22",

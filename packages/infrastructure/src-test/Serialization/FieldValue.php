@@ -1,6 +1,6 @@
 <?php
 
-namespace Cavatappi\Foundation\Test\Serialization;
+namespace Cavatappi\Infrastructure\Test\Serialization;
 
 use Cavatappi\Foundation\Fields\Field;
 use Cavatappi\Foundation\Value;

@@ -26,6 +26,8 @@ class DefaultModule implements Module {
 			Registries\CommandHandlerRegistry::class,
 			Registries\EventListenerRegistry::class,
 			Registries\ServiceRegistry::class,
+			Serialization\FieldHandler::class,
+			Serialization\SerializationService::class,
 		];
 	}
 
