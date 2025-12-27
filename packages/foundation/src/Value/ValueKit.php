@@ -48,6 +48,17 @@ trait ValueKit {
 	}
 
 	/**
+	 * An alias to `equals()` that is type-hinted to `self` so that it can be used with PHPUnit. Probably should not be
+	 * used outside of tests.
+	 *
+	 * @param self $other Object to compare to.
+	 * @return boolean
+	 */
+	public function objectEquals(self $other): bool {
+		return $this->equals($other);
+	}
+
+	/**
 	 * Create a copy of the object with the given properties replacing existing ones.
 	 *
 	 * @throws InvalidValueProperties When the object cannot be copied.

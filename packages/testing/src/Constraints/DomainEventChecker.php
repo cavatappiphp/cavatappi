@@ -65,7 +65,7 @@ class DomainEventChecker extends Constraint {
 			$expectedComparison = $expectedComparison->with(processId: $this->processId);
 		}
 
-		return $expectedComparison == $actualComparison;
+		return $expectedComparison->equals($actualComparison);
 	}
 
 	protected function fail(mixed $other, string $description, ?ComparisonFailure $comparisonFailure = null): never {
