@@ -35,7 +35,6 @@
     "replace": {
         "cavatappi/foundation": "0.1.1",
         "cavatappi/infrastructure": "0.1.1",
-        "cavatappi/serialization": "self.version",
         "cavatappi/testing": "0.1.1"
     },
     "provide": {
@@ -46,7 +45,6 @@
             "Cavatappi\\Cavatappi\\": "src/",
             "Cavatappi\\Foundation\\": "packages/foundation/src/",
             "Cavatappi\\Infrastructure\\": "packages/infrastructure/src/",
-            "Cavatappi\\Serialization\\": "packages/serialization/src/",
             "Cavatappi\\Test\\": "packages/testing/src/"
         }
     },
