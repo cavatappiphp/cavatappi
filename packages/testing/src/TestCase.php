@@ -3,9 +3,13 @@
 namespace Cavatappi\Test;
 
 use Cavatappi\Foundation\Factories\UuidFactory;
+use Cavatappi\Foundation\Value;
 use Cavatappi\Test\Constraints\UuidChecker;
+use PHPUnit\Framework\Constraint\Constraint;
+use PHPUnit\Framework\Constraint\ObjectEquals;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 use Ramsey\Uuid\UuidInterface;
+use stdClass;
 
 class TestCase extends PHPUnitTestCase {
 	protected mixed $subject;
@@ -20,5 +24,13 @@ class TestCase extends PHPUnitTestCase {
 
 	public static function assertUuidEquals(UuidInterface $expected, UuidInterface $actual): void {
 		self::assertThat($actual, self::uuidEquals($expected));
+	}
+
+	public static function valueObjectEquals(Value $expected): Constraint {
+		return new ObjectEquals($expected, 'objectEquals');
+	}
+
+	public static function assertValueObjectEquals(Value $expected, ?object $actual): void {
+		self::assertObjectEquals($expected, $actual ?? new stdClass(), 'objectEquals');
 	}
 }

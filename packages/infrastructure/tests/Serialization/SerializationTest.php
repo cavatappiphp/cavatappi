@@ -2,6 +2,7 @@
 
 namespace Cavatappi\Infrastructure\Serialization;
 
+use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
 use Cavatappi\Foundation\Factories\HttpMessageFactory;
 use Cavatappi\Foundation\Factories\UuidFactory;
 use Cavatappi\Foundation\Value;
@@ -10,6 +11,7 @@ use Cavatappi\Infrastructure\Test\Serialization\ComplexValue;
 use Cavatappi\Infrastructure\Test\Serialization\ExternalFields;
 use Cavatappi\Infrastructure\Test\Serialization\FieldValue;
 use Cavatappi\Infrastructure\Test\Serialization\SimpleValue;
+use Cavatappi\Infrastructure\Test\Serialization\ValidatedValue;
 use Cavatappi\Test\AppTest;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -120,18 +122,33 @@ YAML,
 	#[DataProvider('objects')]
 	#[TestDox('It will deserialize $_dataName from a PHP array')]
 	public function testFromArray(Value $object, array $array, string $json, string $yaml) {
-		self::assertEquals($object, $this->app->container->get(SerializationService::class)->fromArray($array, as: get_class($object)));
+		self::assertValueObjectEquals($object, $this->app->container->get(SerializationService::class)->fromArray($array, as: get_class($object)));
 	}
 
 	#[DataProvider('objects')]
 	#[TestDox('It will deserialize $_dataName from a JSON string')]
 	public function testFromJson(Value $object, array $array, string $json, string $yaml) {
-		self::assertEquals($object, $this->app->container->get(SerializationService::class)->fromJson($json, as: get_class($object)));
+		self::assertValueObjectEquals($object, $this->app->container->get(SerializationService::class)->fromJson($json, as: get_class($object)));
 	}
 
 	#[DataProvider('objects')]
 	#[TestDox('It will deserialize $_dataName from a YAML string')]
 	public function testFromYaml(Value $object, array $array, string $json, string $yaml) {
-		self::assertEquals($object, $this->app->container->get(SerializationService::class)->fromYaml($yaml, as: get_class($object)));
+		self::assertValueObjectEquals($object, $this->app->container->get(SerializationService::class)->fromYaml($yaml, as: get_class($object)));
+	}
+
+	public function testItValidatesAfterDeserialization() {
+		$this->expectException(InvalidValueProperties::class);
+
+		$invalid = [
+			'atLeastOne' => 'one',
+			'atLeastTwo' => null,
+			'atLeastThree' => null,
+			'onlyOne' => 'one',
+			'onlyTwo' => 'two',
+			'onlyThree' => null,
+		];
+
+		$actual = $this->app->container->get(SerializationService::class)->fromArray($invalid, as: ValidatedValue::class);
 	}
 }
