@@ -3,7 +3,6 @@
 namespace Cavatappi\Infrastructure\Serialization;
 
 use Cavatappi\Foundation\Factories\HttpMessageFactory;
-use Cavatappi\Foundation\Factories\UuidFactory;
 use Crell\Serde\Attributes\Field;
 use Crell\Serde\DeformatterResult;
 use Crell\Serde\Deserializer;
@@ -12,7 +11,7 @@ use Crell\Serde\Serializer;
 use Psr\Http\Message\UriInterface;
 
 /**
- * Attempt at handling UUID objects in Serde.
+ * Attempt at handling PSR-7 URI objects in Serde.
  */
 class Psr7UriHandler implements Exporter, Importer {
 	/**

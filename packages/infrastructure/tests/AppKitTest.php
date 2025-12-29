@@ -20,6 +20,7 @@ use Psr\Log\NullLogger;
 use Cavatappi\Infrastructure\Registries\CommandHandlerRegistry;
 use Cavatappi\Infrastructure\Registries\ServiceRegistry;
 use Cavatappi\Infrastructure\Serialization\SerializationService;
+use Cavatappi\Infrastructure\Serialization\TypeRegistryRegistry;
 use Cavatappi\Test\TestCase;
 
 final class AppKitTestSampleImplementation {
@@ -52,7 +53,13 @@ final class AppKitTest extends TestCase {
 	public function testDependencyMap() {
 		$testModel = new class() implements Module {
 			use ModuleKit;
-			private static function listClasses(): array { return []; }
+			private static function listClasses(): array { return [
+				Registries\CommandHandlerRegistry::class,
+				Registries\EventListenerRegistry::class,
+				Registries\ServiceRegistry::class,
+				Serialization\FieldHandler::class,
+				Serialization\SerializationService::class,
+			]; }
 			private static function serviceMapOverrides(): array {
 				return [
 					OrderedListenerProvider::class => ['container' => ContainerInterface::class],
@@ -62,25 +69,18 @@ final class AppKitTest extends TestCase {
 		};
 
 		$models = [
-			DefaultModule::class,
 			get_class($testModel),
 		];
 
 		$expected = [
 			Registries\CommandHandlerRegistry::class => ['container' => ContainerInterface::class],
 			Registries\EventListenerRegistry::class => ['container' => ContainerInterface::class],
-			LoggerInterface::class => NullLogger::class,
-			EventDispatcherInterface::class => Dispatcher::class,
-			CommandBus::class => Registries\CommandHandlerRegistry::class,
-			NullLogger::class => [],
-			Dispatcher::class => [
-				ListenerProviderInterface::class,
-				LoggerInterface::class,
-			],
+
 			OrderedListenerProvider::class => ['container' => ContainerInterface::class],
 			ListenerProviderInterface::class => OrderedListenerProvider::class,
-			ServiceRegistry::class => [],
-			SerializationService::class => [],
+			SerializationService::class => [
+				'typeRegistries' => TypeRegistryRegistry::class,
+			],
 		];
 
 		$this->assertEquals($expected, $this->testApp->buildDependencyMap($models));

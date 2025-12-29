@@ -10,15 +10,19 @@ use Cavatappi\Infrastructure\DefaultModule;
 use Cavatappi\Infrastructure\Test\Serialization\ComplexValue;
 use Cavatappi\Infrastructure\Test\Serialization\ExternalFields;
 use Cavatappi\Infrastructure\Test\Serialization\FieldValue;
+use Cavatappi\Infrastructure\Test\Serialization\HasSupertype;
 use Cavatappi\Infrastructure\Test\Serialization\SimpleValue;
+use Cavatappi\Infrastructure\Test\Serialization\SupertypeOne;
+use Cavatappi\Infrastructure\Test\Serialization\SupertypeTwo;
 use Cavatappi\Infrastructure\Test\Serialization\ValidatedValue;
+use Cavatappi\Infrastructure\Test\TestModule;
 use Cavatappi\Test\AppTest;
 use DateTimeImmutable;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 
 final class SerializationTest extends AppTest {
-	const INCLUDED_MODELS = [DefaultModule::class];
+	const INCLUDED_MODELS = [DefaultModule::class, TestModule::class];
 
 	public static function objects() {
 		return [
@@ -97,7 +101,77 @@ YAML,
 				date: '2025-12-25T12:34:56.789+00:00'
 
 				YAML
-			]
+			],
+			'an object with an interface typehint (with SupertypeOne)' => [
+				'object' => new HasSupertype(
+					name: 'test one',
+					super: new SupertypeOne(
+						oneValue: 'alpha',
+						superValue: 'beta',
+					),
+				),
+				'array' => [
+					'name' => 'test one',
+					'super' => [
+						'type' => 'one',
+						'oneValue' => 'alpha',
+						'superValue' => 'beta',
+					],
+				],
+				'json' => <<<'JSON'
+				{
+					"name": "test one",
+					"super": {
+						"type": "one",
+						"oneValue": "alpha",
+						"superValue": "beta"
+					}
+				}
+				JSON,
+				'yaml' => <<<'YAML'
+name: 'test one'
+super:
+    type: one
+    oneValue: alpha
+    superValue: beta
+
+YAML,
+			],
+			'an object with an interface typehint (with SupertypeTwo)' => [
+				'object' => new HasSupertype(
+					name: 'test two',
+					super: new SupertypeTwo(
+						twoValue: 'gamma',
+						superValue: 'theta',
+					),
+				),
+				'array' => [
+					'name' => 'test two',
+					'super' => [
+						'type' => 'two',
+						'twoValue' => 'gamma',
+						'superValue' => 'theta',
+					],
+				],
+				'json' => <<<'JSON'
+				{
+					"name": "test two",
+					"super": {
+						"type": "two",
+						"twoValue": "gamma",
+						"superValue": "theta"
+					}
+				}
+				JSON,
+				'yaml' => <<<'YAML'
+name: 'test two'
+super:
+    type: two
+    twoValue: gamma
+    superValue: theta
+
+YAML,
+			],
 		];
 	}
 

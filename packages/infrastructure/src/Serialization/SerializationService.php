@@ -11,13 +11,16 @@ use Crell\Serde\SerdeCommon;
 class SerializationService implements Service {
 	private Serde $internal;
 
-	public function __construct()
+	public function __construct(private TypeRegistryRegistry $typeRegistries)
 	{
-		$this->internal = new SerdeCommon(handlers: [
-			new FieldHandler(),
-			new Psr7UriHandler(),
-			new UuidHandler(),
-		]);
+		$this->internal = new SerdeCommon(
+			handlers: [
+				new FieldHandler(),
+				new Psr7UriHandler(),
+				new UuidHandler(),
+			],
+			typeMaps: $this->typeRegistries->getSerdeTypeMap(),
+		);
 	}
 
 	public function toArray(Value $object): array {
