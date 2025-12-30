@@ -8,6 +8,7 @@ use Cavatappi\Test\TestCase;
 use Psr\Container\ContainerInterface;
 use Cavatappi\Foundation\Exceptions\CodePathNotSupported;
 use Cavatappi\Foundation\Exceptions\ServiceNotRegistered;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
 interface TestServiceRegisterable extends Registerable {}
 interface TestServiceConfigurable extends ConfiguredRegisterable {}
@@ -21,6 +22,7 @@ class TestServiceRegistry implements Registry {
 	public function _test_getLibrary(): array { return $this->library; }
 }
 
+#[AllowMockObjectsWithoutExpectations]
 final class ServiceRegistryKitTest extends TestCase {
 	private array $basicServices;
 	private array $configuredServices;

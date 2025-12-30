@@ -14,6 +14,7 @@ use Cavatappi\Infrastructure\DefaultModule;
 use Cavatappi\Infrastructure\Module;
 use Cavatappi\Test\AppTest;
 use Cavatappi\Test\TestCase;
+use PHPUnit\Framework\Attributes\AllowMockObjectsWithoutExpectations;
 
 /**
  * Use this to create a mock that we can use to see what has been called.
@@ -66,6 +67,7 @@ final class CommandHandlerTwo implements CommandHandlerService {
 	public function doCommandsFourOrFive(CommandFour|CommandFive $cmd) { return $this->mock->commandFourOrFiveHandled($cmd); }
 }
 
+#[AllowMockObjectsWithoutExpectations]
 final class CommandHandlerRegistryTest extends AppTest {
 	const INCLUDED_MODELS = [DefaultModule::class];
 
