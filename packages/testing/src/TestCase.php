@@ -5,6 +5,7 @@ namespace Cavatappi\Test;
 use Cavatappi\Foundation\Factories\UuidFactory;
 use Cavatappi\Foundation\Value;
 use Cavatappi\Test\Constraints\UuidChecker;
+use Cavatappi\Test\Constraints\ValueObjectChecker;
 use PHPUnit\Framework\Constraint\Constraint;
 use PHPUnit\Framework\Constraint\ObjectEquals;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
@@ -27,10 +28,10 @@ class TestCase extends PHPUnitTestCase {
 	}
 
 	public static function valueObjectEquals(Value $expected): Constraint {
-		return new ObjectEquals($expected, 'objectEquals');
+		return new ValueObjectChecker($expected,);
 	}
 
 	public static function assertValueObjectEquals(Value $expected, ?object $actual): void {
-		self::assertObjectEquals($expected, $actual ?? new stdClass(), 'objectEquals');
+		self::assertThat($actual, self::valueObjectEquals($expected));
 	}
 }
