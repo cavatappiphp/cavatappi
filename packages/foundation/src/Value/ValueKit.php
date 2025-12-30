@@ -10,6 +10,7 @@ use Cavatappi\Foundation\Reflection\DisplayName;
 use Cavatappi\Foundation\Reflection\MapType;
 use Cavatappi\Foundation\Reflection\Target;
 use Cavatappi\Foundation\Reflection\ValueProperty;
+use Cavatappi\Foundation\Value;
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionNamedType;
@@ -32,19 +33,24 @@ trait ValueKit {
 		}
 
 		$thisValues = \get_object_vars(...)->__invoke($this);
-		foreach ($thisValues as $prop => $val) {
-			if (\is_a($val, Stringable::class)) {
-				if (\strval($val) != \strval($other->$prop)) {
-					return false;
-				}
-				continue;
-			}
+		$otherValues = \get_object_vars($other);
 
-			if ($val != $other->$prop) {
-				return false;
-			}
-		}
-		return true;
+		return array_all(
+			array_map(null, $thisValues, $otherValues),
+			fn($props) => $this->propEquals(...$props)
+		);
+	}
+
+	private function propEquals(mixed $prop, mixed $otherProp): bool {
+		return match(true) {
+			\is_a($prop, Stringable::class) => \strval($prop) == \strval($otherProp),
+			\is_a($prop, Value::class) => $prop->equals($otherProp),
+			\is_array($prop) && \is_array($otherProp) => array_all(
+				array_map(null, $prop, $otherProp),
+				fn($props) => $this->propEquals(...$props)
+			),
+			default => $prop == $otherProp,
+		};
 	}
 
 	/**
