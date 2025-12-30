@@ -49,8 +49,17 @@ class ValueObjectChecker extends Constraint {
 		parent::fail($other, $description, $comparisonFailure);
 	}
 
-	private function exportValue(Value $obj): array {
+	public static function exportValue(Value $obj): array {
 		$values = get_object_vars($obj);
-		return array_map(fn($val) => is_a($val, Stringable::class) ? strval($val) : $val, $values);
+		return array_map(self::exportValueProp(...), $values);
+	}
+
+	private static function exportValueProp(mixed $prop): mixed {
+		return match(true) {
+			is_a($prop, Stringable::class) => strval($prop),
+			is_a($prop, Value::class) => self::exportValue($prop),
+			is_array($prop) => array_map(self::exportValueProp(...), $prop),
+			default => $prop,
+		};
 	}
 }
