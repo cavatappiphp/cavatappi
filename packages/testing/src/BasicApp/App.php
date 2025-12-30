@@ -9,6 +9,7 @@ use Cavatappi\Foundation\Value;
 use Cavatappi\Infrastructure\AppKit;
 use Cavatappi\Infrastructure\Registries\ServiceRegistry;
 use Cavatappi\Infrastructure\Serialization\SerializationService;
+use Cavatappi\Test\TestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -82,8 +83,18 @@ class App {
 	 * @param T $object Object to process.
 	 * @return T
 	 */
-	public function roundTripSerialize(Value $object): Value {
+	public function roundTripSerialize(Value $object, bool $skipAssertion = false): Value {
 		$serde = $this->container->get(SerializationService::class);
-		return $serde->fromJson($serde->toJson($object), as: get_class($object));
+		$processed = $serde->fromJson($serde->toJson($object), as: get_class($object));
+
+		if (!$skipAssertion) {
+			TestCase::assertValueObjectEquals(
+				$object,
+				$processed,
+				'Object of type ' . get_class($object) . 'changed during serialization'
+			);
+		}
+
+		return $processed;
 	}
 }
