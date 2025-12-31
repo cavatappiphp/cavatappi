@@ -42,6 +42,7 @@ final class SerializationTest extends AppTest {
 					object: new SimpleValue(one: 'bob', two: 5),
 					list: ['this', 'is', 'a', 'list'],
 					map: ['this' => 'is', 'a' => 'map'],
+					misc: ['number' => 5, 'color' => 'red'],
 					field: new FieldValue(tags: ['builtDifferent', 'butNotReally']),
 				),
 				'array' => [
@@ -49,6 +50,7 @@ final class SerializationTest extends AppTest {
 					'object' => ['one' => 'bob', 'two' => 5],
 					'list' => ['this', 'is', 'a', 'list'],
 					'map' => ['this' => 'is', 'a' => 'map'],
+					'misc' => ['number' => 5, 'color' => 'red'],
 					'field' => 'builtDifferent, butNotReally',
 				],
 				'json' => <<<'JSON'
@@ -57,6 +59,7 @@ final class SerializationTest extends AppTest {
 					"object": {"one": "bob", "two": 5},
 					"list": ["this", "is", "a", "list"],
 					"map": {"this": "is", "a": "map"},
+					"misc": {"number": 5, "color": "red"},
 					"field": "builtDifferent, butNotReally"
 				}
 				JSON,
@@ -73,6 +76,9 @@ list:
 map:
     this: is
     a: map
+misc:
+    number: 5
+    color: red
 field: 'builtDifferent, butNotReally'
 
 YAML,

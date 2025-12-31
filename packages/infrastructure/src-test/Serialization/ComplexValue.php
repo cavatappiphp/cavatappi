@@ -15,6 +15,7 @@ final readonly class ComplexValue implements Value {
 		public SimpleValue $object,
 		#[ListType('string')] public array $list,
 		#[MapType('string')] public array $map,
+		#[MapType('mixed')] public array $misc,
 		public FieldValue $field,
 	)
 	{
