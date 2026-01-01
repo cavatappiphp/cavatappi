@@ -35,7 +35,7 @@ final class ArrayTypeUtils {
 	 */
 	public static function checkValueType(string|ValueType|null $type): ?string {
 		return match ($type) {
-			null => null,
+			null => 'mixed',
 			ValueType::String => 'string',
 			ValueType::Int => 'int',
 			ValueType::Float => 'float',
