@@ -13,6 +13,8 @@ use Cavatappi\Foundation\Reflection\ValueProperty;
 use Cavatappi\Foundation\Validation\Validated;
 use Cavatappi\Foundation\Value;
 use Cavatappi\Test\TestCase;
+use DateTimeImmutable;
+use DateTimeInterface;
 use PHPUnit\Framework\Attributes\TestDox;
 use Ramsey\Uuid\UuidInterface;
 
@@ -190,6 +192,18 @@ final class ValueKitTest extends TestCase {
 
 		$this->assertEquals($first->destination, $second->destination);
 		$this->assertFalse($first->equals($second));
+	}
+
+	#[TestDox('equals() will return true if two DateTimeInterface properties are equal to .001 second')]
+	public function testDateTimeRfc3339Extended() {
+		$first = new class(new DateTimeImmutable()) extends ValueKitTestDefault {
+			public function __construct(public DateTimeInterface $timestamp) {}
+		};
+		$second = $first->with(
+			timestamp: new DateTimeImmutable($first->timestamp->format(DateTimeInterface::RFC3339_EXTENDED))
+		);
+
+		$this->assertTrue($first->equals($second));
 	}
 
 	#[TestDox('Default getPropertyInfo() does not work with union types')]

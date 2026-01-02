@@ -11,6 +11,7 @@ use Cavatappi\Foundation\Reflection\MapType;
 use Cavatappi\Foundation\Reflection\Target;
 use Cavatappi\Foundation\Reflection\ValueProperty;
 use Cavatappi\Foundation\Value;
+use DateTimeInterface;
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionNamedType;
@@ -44,6 +45,7 @@ trait ValueKit {
 	private function propEquals(mixed $prop, mixed $otherProp): bool {
 		return match(true) {
 			\is_a($prop, Stringable::class) => \strval($prop) == \strval($otherProp),
+			\is_a($prop, DateTimeInterface::class) => $prop->format(DATE_RFC3339_EXTENDED) == $otherProp->format(DATE_RFC3339_EXTENDED),
 			\is_a($prop, Value::class) => $prop->equals($otherProp),
 			\is_array($prop) && \is_array($otherProp) => array_all(
 				array_map(null, $prop, $otherProp),

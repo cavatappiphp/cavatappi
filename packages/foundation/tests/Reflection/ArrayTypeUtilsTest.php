@@ -32,5 +32,6 @@ final class ArrayTypeUtilsTest extends TestCase {
 
 	public function testItReturnsMixedForNull() {
 		$this->assertEquals('mixed', ArrayTypeUtils::checkValueType(null));
+		$this->assertNull(ArrayTypeUtils::checkPrimitive('mixed'));
 	}
 }
