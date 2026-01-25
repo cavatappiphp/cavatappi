@@ -11,8 +11,7 @@ use Crell\Serde\SerdeCommon;
 class SerializationService implements Service {
 	private Serde $internal;
 
-	public function __construct(private TypeRegistryRegistry $typeRegistries)
-	{
+	public function __construct(private TypeRegistryRegistry $typeRegistries) {
 		$this->internal = new SerdeCommon(
 			handlers: [
 				new FieldHandler(),
@@ -37,11 +36,11 @@ class SerializationService implements Service {
 
 	/**
 	 * Deserialize
-	 * 
+	 *
 	 * @template T
 	 *
-	 * @param array $input Serialized object.
-	 * @param class-string<T> $as What the resulting object should be.
+	 * @param array           $input Serialized object.
+	 * @param class-string<T> $as    What the resulting object should be.
 	 * @return T
 	 */
 	public function fromArray(array $input, string $as): mixed {
@@ -50,11 +49,11 @@ class SerializationService implements Service {
 
 	/**
 	 * Deserialize
-	 * 
+	 *
 	 * @template T
 	 *
-	 * @param array $input Serialized object.
-	 * @param class-string<T> $as What the resulting object should be.
+	 * @param array           $input Serialized object.
+	 * @param class-string<T> $as    What the resulting object should be.
 	 * @return T
 	 */
 	public function fromJson(string $input, string $as): mixed {
@@ -63,11 +62,11 @@ class SerializationService implements Service {
 
 	/**
 	 * Deserialize
-	 * 
+	 *
 	 * @template T
 	 *
-	 * @param array $input Serialized object.
-	 * @param class-string<T> $as What the resulting object should be.
+	 * @param array           $input Serialized object.
+	 * @param class-string<T> $as    What the resulting object should be.
 	 * @return T
 	 */
 	public function fromYaml(string $input, string $as): mixed {
@@ -81,7 +80,7 @@ class SerializationService implements Service {
 	private function deserializeValue(string|array $input, string $from, string $to) {
 		$obj = $this->internal->deserialize($input, from: $from, to: $to);
 		// Would like to make this work with Serde itself, but it relies on an attribute on the object itself.
-		if (is_a($obj, Validated::class)) {
+		if (\is_a($obj, Validated::class)) {
 			$obj->validate();
 		}
 

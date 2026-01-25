@@ -63,7 +63,7 @@ class FieldHandler implements Exporter, Importer {
 		$string = $deserializer->deformatter->deserializeString($source, $field);
 
 		if ($string instanceof DeformatterResult || $string === null) {
-			return null;
+			return null; // @codeCoverageIgnore
 		}
 
 		/** @var class-string<Field> */

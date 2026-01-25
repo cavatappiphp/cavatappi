@@ -19,8 +19,7 @@ class TypeRegistryRegistry implements Registry, Service {
 		return TypeRegistry::class;
 	}
 
-	public function __construct(private ContainerInterface $container)
-	{
+	public function __construct(private ContainerInterface $container) {
 	}
 
 	public function configure(array $configuration): void {
