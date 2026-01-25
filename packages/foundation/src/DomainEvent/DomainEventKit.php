@@ -4,6 +4,7 @@ namespace Cavatappi\Foundation\DomainEvent;
 
 use Cavatappi\Foundation\Factories\UuidFactory;
 use Cavatappi\Foundation\Value\ValueKit;
+use Crell\Serde\Attributes\Field;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Ramsey\Uuid\UuidInterface;
@@ -16,6 +17,7 @@ trait DomainEventKit {
 	 *
 	 * @var string
 	 */
+	#[Field(exclude: true)]
 	public string $type { get => static::class; }
 
 	/**
