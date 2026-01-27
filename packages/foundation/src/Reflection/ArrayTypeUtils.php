@@ -15,12 +15,13 @@ final class ArrayTypeUtils {
 	 * @param string $type Type to convert.
 	 * @return string|ValueType
 	 */
-	public static function checkPrimitive(string $type): string|ValueType {
+	public static function checkPrimitive(string $type): string|ValueType|null {
 		return match ($type) {
 			'string' => ValueType::String,
 			'int' => ValueType::Int,
 			'float' => ValueType::Float,
 			'array' => ValueType::Array,
+			'mixed' => null,
 			default => $type,
 		};
 	}
@@ -34,7 +35,7 @@ final class ArrayTypeUtils {
 	 */
 	public static function checkValueType(string|ValueType|null $type): ?string {
 		return match ($type) {
-			null => null,
+			null => 'mixed',
 			ValueType::String => 'string',
 			ValueType::Int => 'int',
 			ValueType::Float => 'float',

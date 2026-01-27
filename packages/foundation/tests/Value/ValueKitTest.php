@@ -13,11 +13,21 @@ use Cavatappi\Foundation\Reflection\ValueProperty;
 use Cavatappi\Foundation\Validation\Validated;
 use Cavatappi\Foundation\Value;
 use Cavatappi\Test\TestCase;
+use DateTimeImmutable;
+use DateTimeInterface;
 use PHPUnit\Framework\Attributes\TestDox;
 use Ramsey\Uuid\UuidInterface;
 
 class ValueKitTestDefault implements Value {
 	use ValueKit;
+}
+
+class ValueKitTestBasic implements Value {
+	use ValueKit;
+	public function __construct(
+		public readonly UuidInterface $id
+	)	{
+	}
 }
 
 final class ValueKitTest extends TestCase {
@@ -113,11 +123,9 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('equals() will return true if values are stringable and string values match')]
 	public function testEqualsStringableMatch() {
-		$first = new class($this->randomId()) extends ValueKitTestDefault {
-			public function __construct(public UuidInterface $id) {}
-		};
-		$second = new (\get_class($first))(UuidFactory::fromString($first->id->__toString()));
-		$third = new (\get_class($first))($this->randomId());
+		$first = new ValueKitTestBasic($this->randomId());
+		$second = new ValueKitTestBasic(UuidFactory::fromString($first->id->__toString()));
+		$third = new ValueKitTestBasic($this->randomId());
 
 		$this->assertNotEquals($first->id, $second->id);
 		$this->assertTrue($first->equals($second));
@@ -135,6 +143,44 @@ final class ValueKitTest extends TestCase {
 		$this->assertFalse($first->equals($second));
 	}
 
+	#[TestDox('equals() will return true if nested objects match')]
+	public function testEqualsNestedValues() {
+		$first = new class(
+			single: new ValueKitTestBasic($this->randomId()),
+			multi: [
+				new ValueKitTestBasic($this->randomId()),
+				new ValueKitTestBasic($this->randomId()),
+				new ValueKitTestBasic($this->randomId()),
+			]) extends ValueKitTestDefault {
+			public function __construct(
+				public ValueKitTestBasic $single,
+				public array $multi,
+			) {}
+		};
+		$second = new (\get_class($first))(
+			single: new ValueKitTestBasic($this->randomId()),
+			multi: [
+				new ValueKitTestBasic($this->randomId()),
+				new ValueKitTestBasic($this->randomId()),
+				new ValueKitTestBasic($this->randomId()),
+			]
+		);
+		$firstParsed = new (\get_class($first))(
+			single: new ValueKitTestBasic(UuidFactory::fromString($first->single->id->__toString())),
+			multi: array_map(fn($val) => new ValueKitTestBasic(UuidFactory::fromString($val->id->__toString())), $first->multi),
+		);
+
+		$this->assertNotEquals($first->single->id, $firstParsed->single->id);
+		$this->assertFalse($first->equals($second));
+
+		$this->assertEquals(strval($first->single->id), strval($firstParsed->single->id));
+		$this->assertEquals(
+			array_map(fn($obj) => strval($obj->id), $first->multi),
+			array_map(fn($obj) => strval($obj->id), $firstParsed->multi),
+		);
+		$this->assertTrue($first->equals($firstParsed));
+	}
+
 	#[TestDox('equals() will return false if the objects\' classes do not match')]
 	public function testEqualsClassMismatch() {
 		$first = new class('camelot') extends ValueKitTestDefault {
@@ -146,6 +192,18 @@ final class ValueKitTest extends TestCase {
 
 		$this->assertEquals($first->destination, $second->destination);
 		$this->assertFalse($first->equals($second));
+	}
+
+	#[TestDox('equals() will return true if two DateTimeInterface properties are equal to .001 second')]
+	public function testDateTimeRfc3339Extended() {
+		$first = new class(new DateTimeImmutable()) extends ValueKitTestDefault {
+			public function __construct(public DateTimeInterface $timestamp) {}
+		};
+		$second = $first->with(
+			timestamp: new DateTimeImmutable($first->timestamp->format(DateTimeInterface::RFC3339_EXTENDED))
+		);
+
+		$this->assertTrue($first->equals($second));
 	}
 
 	#[TestDox('Default getPropertyInfo() does not work with union types')]

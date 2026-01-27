@@ -24,6 +24,7 @@
         "php": "^8.4",
         "psr/container": "^2.0",
         "psr/event-dispatcher": "^1.0",
+        "crell/serde": "^1.5",
         "crell/tukio": "^2.0",
         "psr/log": "^3.0",
         "cavatappi/foundation": "^0.2",

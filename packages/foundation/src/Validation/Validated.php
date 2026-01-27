@@ -3,6 +3,7 @@
 namespace Cavatappi\Foundation\Validation;
 
 use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
+use Crell\Serde\Attributes\PostLoad;
 
 interface Validated {
 	/**
@@ -15,5 +16,6 @@ interface Validated {
 	 *
 	 * @return void
 	 */
+	#[PostLoad]
 	public function validate(): void;
 }

@@ -3,6 +3,7 @@
 namespace Cavatappi\Foundation\Validation;
 
 use Cavatappi\Foundation\Exceptions\InvalidValueProperties;
+use Crell\Serde\Attributes\PostLoad;
 use ReflectionAttribute;
 use ReflectionClass;
 
@@ -10,7 +11,9 @@ use ReflectionClass;
  * Add some standard validation based on attributes.
  *
  * TODO: Make this extendable. This ties into a whole story of "how do we enable customization (and therefore
- * dependencies) in the largely static Value ecosystem?"
+ * dependencies) in the largely static Value ecosystem?" (idea 2025-12-27: put the validation in the attribute class
+ * directly? Have a standard interface (ValidationAttribute) with a ::validateObject method, then for each of those
+ * attributes pass the object or property.)
  */
 trait ValidatedKit {
 	/**

@@ -4,8 +4,7 @@
   bootstrap="vendor/autoload.php"
   colors="true"
   testdox="false"
-  displayDetailsOnTestsThatTriggerDeprecations="true"
-  displayDetailsOnTestsThatTriggerWarnings="true"
+  displayDetailsOnAllIssues="true"
   xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.2/phpunit.xsd"
 >
   <testsuites>

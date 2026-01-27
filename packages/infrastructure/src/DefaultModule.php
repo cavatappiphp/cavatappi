@@ -4,6 +4,7 @@ namespace Cavatappi\Infrastructure;
 
 use Cavatappi\Foundation\Command\CommandBus;
 use Cavatappi\Foundation\Module;
+use Cavatappi\Foundation\Module\FileDiscoveryKit;
 use Cavatappi\Foundation\Module\ModuleKit;
 use Cavatappi\Infrastructure\Registries\ServiceRegistry;
 use Crell\Tukio\Dispatcher;
@@ -18,16 +19,8 @@ use Psr\Log\NullLogger;
  * You may override a few of these or omit this model entirely and add the services to your application's model.
  */
 class DefaultModule implements Module {
+	use FileDiscoveryKit;
 	use ModuleKit;
-
-	private static function listClasses(): array {
-		// As this package gets bigger we can switch to using FileDiscoveryKit, but for now this is fine.
-		return [
-			Registries\CommandHandlerRegistry::class,
-			Registries\EventListenerRegistry::class,
-			Registries\ServiceRegistry::class,
-		];
-	}
 
 	private static function serviceMapOverrides(): array {
 		return [

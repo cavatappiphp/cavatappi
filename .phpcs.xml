@@ -51,6 +51,9 @@
 		<properties>
 			<property name="minimumVisibility" value="protected" />
 		</properties>
+		<!-- This rule is inconsistent (at best) with generics in docblocks. -->
+		<!-- https://github.com/PHPCSStandards/PHP_CodeSniffer/issues/746 -->
+		<exclude name="Squiz.Commenting.FunctionComment.IncorrectTypeHint" />
 	</rule>
 	<rule ref="Squiz.Commenting.ClassComment">
 		<exclude name="Squiz.Commenting.ClassComment.TagNotAllowed"/>
