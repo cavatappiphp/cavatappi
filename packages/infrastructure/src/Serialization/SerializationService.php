@@ -8,9 +8,24 @@ use Cavatappi\Foundation\Value;
 use Crell\Serde\Serde;
 use Crell\Serde\SerdeCommon;
 
+/**
+ * Handle serialization and deserialization of Value objects.
+ *
+ * A thin wrapper around Crell\Serde.
+ */
 class SerializationService implements Service {
+	/**
+	 * Internal Serde object.
+	 *
+	 * @var Serde
+	 */
 	private Serde $internal;
 
+	/**
+	 * Construct the service
+	 *
+	 * @param TypeRegistryRegistry $typeRegistries Available TypeRegistries to register with this service.
+	 */
 	public function __construct(private TypeRegistryRegistry $typeRegistries) {
 		$this->internal = new SerdeCommon(
 			handlers: [
@@ -22,52 +37,70 @@ class SerializationService implements Service {
 		);
 	}
 
+	/**
+	 * Convert a Value object to a serializable array.
+	 *
+	 * @param Value $object Object to serialize.
+	 * @return array
+	 */
 	public function toArray(Value $object): array {
 		return $this->serializeValue($object, format: 'array');
 	}
 
+	/**
+	 * Convert a Value object to a JSON string.
+	 *
+	 * @param Value $object Object to serialize.
+	 * @return string
+	 */
 	public function toJson(Value $object): string {
 		return $this->serializeValue($object, format: 'json');
 	}
 
+	/**
+	 * Convert a Value object to a YAML string.
+	 *
+	 * @param Value $object Object to serialize.
+	 * @return string
+	 */
 	public function toYaml(Value $object): string {
 		return $this->serializeValue($object, format: 'yaml');
 	}
 
 	/**
-	 * Deserialize
+	 * Deserialize an object from an array.
 	 *
-	 * @template T
+	 * @template OBJ
 	 *
-	 * @param array           $input Serialized object.
-	 * @param class-string<T> $as    What the resulting object should be.
-	 * @return T
+	 * @param array             $input Serialized object.
+	 * @param class-string<OBJ> $as    What the resulting object should be.
+	 * @return OBJ
 	 */
 	public function fromArray(array $input, string $as): mixed {
 		return $this->deserializeValue($input, from: 'array', to: $as);
 	}
 
 	/**
-	 * Deserialize
+	 * Deserialize an object from a JSON string.
 	 *
-	 * @template T
+	 * @template OBJ
 	 *
-	 * @param array           $input Serialized object.
-	 * @param class-string<T> $as    What the resulting object should be.
-	 * @return T
+	 * @param string            $input Serialized object.
+	 * @param class-string<OBJ> $as    What the resulting object should be.
+	 * @return OBJ
 	 */
 	public function fromJson(string $input, string $as): mixed {
 		return $this->deserializeValue($input, from: 'json', to: $as);
 	}
 
 	/**
-	 * Deserialize
+	 * Deserialize an object from a YAML string.
 	 *
-	 * @template T
+	 * @template OBJ
 	 *
-	 * @param array           $input Serialized object.
-	 * @param class-string<T> $as    What the resulting object should be.
-	 * @return T
+	 * @param string            $input Serialized object.
+	 * @param class-string<OBJ> $as    Identifier of the entry to look for.
+	 * @return OBJ
 	 */
 	public function fromYaml(string $input, string $as): mixed {
 		return $this->deserializeValue($input, from: 'yaml', to: $as);
