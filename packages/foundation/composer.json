@@ -13,7 +13,7 @@
         "nyholm/psr7": "^1.8"
     },
     "require-dev": {
-        "cavatappi/testing": "^0.2"
+        "cavatappi/testing": "^0.3"
     },
     "license": "Apache-2.0",
     "autoload": {

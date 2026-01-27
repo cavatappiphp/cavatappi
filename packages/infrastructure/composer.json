@@ -27,14 +27,14 @@
         "crell/serde": "dev-master",
         "crell/tukio": "^2.0",
         "psr/log": "^3.0",
-        "cavatappi/foundation": "^0.2",
+        "cavatappi/foundation": "^0.3",
         "phpseclib/phpseclib": "^3.0",
         "psr/http-server-handler": "^1.0",
         "psr/http-server-middleware": "^1.0",
         "symfony/yaml": "^8.0"
     },
     "require-dev": {
-        "cavatappi/testing": "^0.2"
+        "cavatappi/testing": "^0.3"
     },
     "provide": {
         "psr/container-implementation": "^2.0"
