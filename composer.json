@@ -2,14 +2,13 @@
     "name": "cavatappi/cavatappi",
     "description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
     "license": "Apache-2.0",
-    "type": "project",
-    "version": "0.1",
     "authors": [
         {
             "name": "Evan Hildreth",
             "email": "me@eph.me"
         }
     ],
+    "type": "project",
     "require": {
         "crell/tukio": "^2.0",
         "league/construct-finder": "^1.5",
@@ -32,14 +31,6 @@
         "squizlabs/php_codesniffer": "^4.0",
         "symplify/monorepo-builder": "^11.2"
     },
-    "replace": {
-        "cavatappi/foundation": "0.1.1",
-        "cavatappi/infrastructure": "0.1.1",
-        "cavatappi/testing": "0.1.1"
-    },
-    "provide": {
-        "psr/container-implementation": "^2.0"
-    },
     "autoload": {
         "psr-4": {
             "Cavatappi\\Cavatappi\\": "src/",
@@ -55,11 +46,6 @@
             "Cavatappi\\Serialization\\Test\\": "packages/serialization/src-test/"
         }
     },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
-    },
     "scripts": {
         "test": "phpunit --testsuite unit --no-coverage",
         "testdox": "phpunit --testsuite unit --no-coverage --testdox",
@@ -71,5 +57,19 @@
         "lint": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
         "lintfix": "./vendor/squizlabs/php_codesniffer/bin/phpcbf",
         "monorepo": "./vendor/bin/monorepo-builder"
-    }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "replace": {
+        "cavatappi/foundation": "0.2.0",
+        "cavatappi/infrastructure": "0.2.0",
+        "cavatappi/testing": "0.2.0"
+    },
+    "provide": {
+        "psr/container-implementation": "^2.0"
+    },
+    "version": "0.1"
 }
