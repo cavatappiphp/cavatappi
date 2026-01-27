@@ -3,7 +3,7 @@
     "description": "A PHP framework for domain-driven design, event sourcing, and SOLID architecture.",
     "type": "library",
     "require": {
-        "crell/serde": "^1.5",
+        "crell/serde": "dev-master",
         "crell/tukio": "^2.0",
         "psr/container": "^2.0",
         "psr/event-dispatcher": "^1.0",
@@ -36,5 +36,28 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../packages/infrastructure",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../../packages/foundation",
+            "options": {
+                "symlink": false
+            }
+        },
+        {
+            "type": "path",
+            "url": "../../packages/testing",
+            "options": {
+                "symlink": false
+            }
+        }
+    ]
 }
