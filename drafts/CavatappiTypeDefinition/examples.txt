@@ -1,0 +1,101 @@
+aspect Entity
+	id: Uuid
+
+type Content: Entity
+	body: ContentBody
+	siteId: Uuid
+	userId: Uuid
+	publish: DateTime?
+	links: list<ContentChannelEntry>
+	extensions: list<ContentExtension>
+
+type Reblog: ContentBody
+	url: Url
+	titleOverride: string?
+	caption: Markdown?
+	
+	@derived:
+		title: string
+			method: titleOverride ?? `Reblog from {url.host}`
+
+type Note: ContentBody
+	text: Markdown
+		max: 400
+		nonempty
+	
+	@derived:
+		title: string
+			method: text.truncate(100, fancy: true)
+			nonempty
+
+type Uuid: string
+	pattern: /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/
+
+type Markdown: string
+
+type Article: ContentBody
+	body: Markdown
+		nonempty
+
+aspect ContentBody
+	#typeField: type
+	title: string
+		nonempty
+
+type ContentChannelEntry
+	contentId: Uuid
+	channelId: Uuid
+	url: Url
+	details: dictionary
+
+aspect ContentExtension
+	#typeField: type
+
+type Tags: ContentExtension
+	tags: list<Tag>
+
+type Tag
+	input: string
+		nonempty
+
+	@derived:
+		normalized: UrlSlug
+			method: text.slugify
+
+type UrlSlug: string
+	pattern: /^[0-9a-z][0-9a-z\-_]*$/
+
+aspect Command: Authenticated
+
+aspect Authenticated
+	userId: Uuid
+
+aspect Endpoint
+	#route: string
+	#method: HttpMethod
+	#params: props?
+	#response: props?
+	#description: Markdown?
+
+enum HttpMethod: string
+	GET
+	HEAD
+	POST
+	PUT
+	DELETE
+	OPTIONS
+	TRACE
+	PATCH
+
+type CreateContent: Command, Endpoint
+	#description
+	#route: /{siteId}/content/create
+	#method: .POST
+	siteId: Uuid
+	contentId: Uuid?
+	body: ContentBody
+	publish: DateTime?
+	extensions: list<ContentExtension>?
+	#response:
+		contentId: Uuid
+	
