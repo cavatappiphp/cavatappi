@@ -26,8 +26,9 @@ would be in service of small formatting or validation functions that can't be ha
 
 `while (!$done) :`
 
-[ ] Get examples together
-[ ] Write a grammar, probably for [ANTLR](https://www.antlr.org/)
-[ ] Generate PHP code
+- [ ] Validate the approach (i.e. have a production-level Cavatappi app using Value objects)
+- [ ] Get examples together
+- [ ] Write a grammar, probably for [ANTLR](https://www.antlr.org/)
+- [ ] Generate PHP code
 
 `endwhile;`
