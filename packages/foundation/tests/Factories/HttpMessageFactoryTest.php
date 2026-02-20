@@ -25,6 +25,9 @@ final class HttpMessageFactoryTest extends TestCase {
 		$this->assertEquals(['smol.blog'], $request->getHeader('host'));
 		$this->assertTrue($request->hasHeader('Host'));
 		$this->assertEquals('smol.blog', $request->getHeaderLine('host'));
+		$this->assertEquals(['application/json'], $request->getHeader('accept'));
+		$this->assertTrue($request->hasHeader('Accept'));
+		$this->assertEquals('application/json', $request->getHeaderLine('accept'));
 		$this->assertInstanceOf(StreamInterface::class, $request->getBody());
 	}
 
@@ -67,6 +70,7 @@ final class HttpMessageFactoryTest extends TestCase {
 		$response = HttpMessageFactory::response(body: 'one=two');
 
 		$this->assertEquals('one=two', $response->getBody()->getContents());
+		$this->assertEquals(200, $response->getStatusCode());
 	}
 
 	public function testItFormatsAnArrayBodyIntoJson() {

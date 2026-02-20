@@ -1,16 +1,26 @@
 # Cavatappi PHP Framework
 
-Coming soon...
+A way to build applications and domain models with sane defaults instead of magic conventions.
 
-## [Make a to-do list](https://www.youtube.com/watch?v=AGxM9EShmeI)
+## Installation
 
-- [x] Get the name on the internet and on Github.
-- [x] Copy over the code from [Smolblog](https://github.com/smolblog/smolblog) (and find-replace the name)
-- [x] Update the test suite
-- [ ] Write the documentation
-- [x] Lay out the roadmap
-- [ ] Publish the website
-- [ ] Publish the packages to Packagist
+For objects and interfaces that can help form a domain model, use Foundation:
+
+```shell
+composer require cavatappi/foundation
+```
+
+For implementations and serialization tools for the application layer, use Infrastructure:
+
+```shell
+composer require cavatappi/infrastructure
+```
+
+And for utilities to make testing suck less, use Testing:
+
+```shell
+composer require --dev cavatappi/testing
+```
 
 ## License
 

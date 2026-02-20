@@ -9,3 +9,4 @@ html-coverage
 .DS_Store
 registration.json
 site/
+infection.html
