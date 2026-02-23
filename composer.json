@@ -35,14 +35,14 @@
             "Cavatappi\\Cavatappi\\": "src/",
             "Cavatappi\\Foundation\\": "packages/foundation/src/",
             "Cavatappi\\Infrastructure\\": "packages/infrastructure/src/",
-            "Cavatappi\\Test\\": "packages/testing/src/"
+            "Cavatappi\\Test\\": "packages/testing/src/",
+            "Cavatappi\\Website\\": "packages/website/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Cavatappi\\Foundation\\Test\\": "packages/foundation/src-test/",
-            "Cavatappi\\Infrastructure\\Test\\": "packages/infrastructure/src-test/",
-            "Cavatappi\\Serialization\\Test\\": "packages/serialization/src-test/"
+            "Cavatappi\\Infrastructure\\Test\\": "packages/infrastructure/src-test/"
         }
     },
     "scripts": {

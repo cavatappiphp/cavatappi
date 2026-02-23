@@ -1,0 +1,20 @@
+{
+    "name": "cavatappi/website",
+    "description": "Core components for a static site engine",
+    "type": "library",
+    "license": "Apache-2.0",
+    "autoload": {
+        "psr-4": {
+            "Cavatappi\\Website\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Evan Hildreth",
+            "email": "me@eph.me"
+        }
+    ],
+    "require": {
+        "cavatappi/foundation": "^0.3"
+    }
+}
