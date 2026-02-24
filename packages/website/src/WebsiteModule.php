@@ -12,6 +12,8 @@ class WebsiteModule implements Module {
 
 	public static function serviceMapOverrides(): array
 	{
-		return [];
+		return [
+			\Symfony\Component\Filesystem\Filesystem::class => [],
+		];
 	}
 }

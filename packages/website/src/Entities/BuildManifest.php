@@ -23,13 +23,13 @@ class BuildManifest implements Value, Entity {
 	 * Create the manifest.
 	 * 
 	 * @param WebsiteConfiguration $config General information about the website being built.
-	 * @param array<string, UuidInterface> $pages List of paths to pages and their associated UUID.
+	 * @param array<string, string> $pages List of paths to pages and their associated identifiers.
 	 * @param boolean $clean Whether any existing files should be removed before building. Default false.
 	 * @param UuidInterface $id Unique ID for this manifest. Default is a new randomly generated UUID.
 	 */
 	public function __construct(
 		public readonly WebsiteConfiguration $config,
-		#[MapType(UuidInterface::class)] public readonly array $pages,
+		#[MapType('string')] public readonly array $pages,
 		public readonly bool $clean = false,
 		?UuidInterface $id = null,
 	) {

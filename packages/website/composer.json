@@ -15,6 +15,7 @@
         }
     ],
     "require": {
-        "cavatappi/foundation": "^0.3"
+        "cavatappi/foundation": "^0.3",
+        "symfony/filesystem": "^8.0"
     }
 }

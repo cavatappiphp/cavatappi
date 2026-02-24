@@ -5,19 +5,22 @@ namespace Cavatappi\Website\Services;
 use Cavatappi\Foundation\Service;
 use Cavatappi\Website\Entities\BuildManifest;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Path;
 
 class SiteBuilder implements Service {
 	public function __construct(
 		private PageDataRepo $pageRepo,
 		private PageBuilder $pageBuilder,
 		private LoggerInterface $log,
+		private Filesystem $disk,
 	)
 	{
 	}
 
 	public function build(BuildManifest $manifest): void {
 		if ($manifest->clean) {
-			$this->cleanBuildDirectory($manifest->config->pathOnDisk);
+			$this->disk->remove($manifest->config->pathOnDisk);
 		}
 
 		foreach ($manifest->pages as $pagePath => $pageId) {
@@ -29,25 +32,16 @@ class SiteBuilder implements Service {
 
 			$html = $this->pageBuilder->htmlForPage(page: $pageData, config: $manifest->config);
 
-			$result = file_put_contents(
-				filename: $manifest->config->pathOnDisk . $pagePath,
-				data: $html,
+			if (str_ends_with($pagePath, '/')) {
+				$pagePath .= 'index.html';
+			}
+
+			$result = $this->disk->dumpFile(
+				filename: Path::join($manifest->config->pathOnDisk, $pagePath),
+				content: $html,
 			);
 			if ($result === false) {
 				$this->log->error("SiteBuilder: unable to write page at $pagePath");
-			}
-		}
-	}
-
-	private function cleanBuildDirectory(string $dir): void {
-		// Source - https://stackoverflow.com/a/4594262
-		// Posted by Floern, modified by community. See post 'Timeline' for change history
-		// Retrieved 2026-02-22, License - CC BY-SA 4.0
-
-		$files = glob($dir . '{,.}*', GLOB_BRACE) ?: [];
-		foreach($files as $file){ // iterate files
-			if(is_file($file)) {
-				unlink($file); // delete file
 			}
 		}
 	}
