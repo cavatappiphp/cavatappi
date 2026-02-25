@@ -5,6 +5,7 @@ namespace Cavatappi\Website\Entities;
 use Cavatappi\Foundation\Value;
 use Cavatappi\Foundation\Value\ValueKit;
 use Psr\Http\Message\UriInterface;
+use Symfony\Component\Filesystem\Path;
 
 class WebsiteConfiguration implements Value {
 	use ValueKit;
@@ -22,6 +23,6 @@ class WebsiteConfiguration implements Value {
 		public readonly UriInterface $baseUrl,
 	)
 	{
-		$this->pathOnDisk = rtrim($pathOnDisk, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+		$this->pathOnDisk = Path::canonicalize($pathOnDisk);
 	}
 }
