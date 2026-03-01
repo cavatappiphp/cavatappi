@@ -26,23 +26,30 @@ final class EventFour extends EventOne {}
 
 final class EventListenerOne implements EventListenerService {
 	#[EventListener]
-	public function doEventOne(EventOne $cmd) { $cmd->trace[] = self::class . '::doEventOne'; }
+	public function doEventOne(EventOne $cmd) {
+		$cmd->trace[] = self::class . '::doEventOne';
+	}
 	#[EventListener]
-	public function doEventTwo(EventTwo $cmd) { $cmd->trace[] = self::class . '::doEventTwo'; }
+	public function doEventTwo(EventTwo $cmd) {
+		$cmd->trace[] = self::class . '::doEventTwo';
+	}
 }
 
 final class EventListenerTwo implements EventListenerService {
 	#[EventListener(earlier: 1)]
-	public function doEventThree(EventThree $cmd) { $cmd->trace[] = self::class . '::doEventThree'; }
+	public function doEventThree(EventThree $cmd) {
+		$cmd->trace[] = self::class . '::doEventThree';
+	}
 	#[EventListener(later: 1)]
-	public function doEventFour(EventFour $cmd) { $cmd->trace[] = self::class . '::doEventFour'; }
+	public function doEventFour(EventFour $cmd) {
+		$cmd->trace[] = self::class . '::doEventFour';
+	}
 }
 
 final class EventListenerRegistryTest extends AppTest {
-	const INCLUDED_MODELS = [DefaultModule::class];
+	public const INCLUDED_MODELS = [DefaultModule::class];
 
-	protected function createMockServices(): array
-	{
+	protected function createMockServices(): array {
 		return [
 			EventListenerOne::class => [],
 			EventListenerTwo::class => [],

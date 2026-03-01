@@ -27,7 +27,7 @@ class ServiceNotRegistered extends Exception implements NotFoundExceptionInterfa
 		public readonly string $registry,
 		?string $message = null,
 		int $code = 0,
-		?Throwable $previous = null
+		?Throwable $previous = null,
 	) {
 		$message ??= "$this->service is not registered with $this->registry";
 		parent::__construct($message, $code, $previous);

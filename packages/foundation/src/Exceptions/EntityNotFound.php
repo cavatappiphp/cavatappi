@@ -24,7 +24,7 @@ class EntityNotFound extends Exception {
 		public readonly string $entityName,
 		?string $message = null,
 		int $code = 0,
-		?Throwable $previous = null
+		?Throwable $previous = null,
 	) {
 		$message ??= "No $entityName found with ID $entityId";
 		parent::__construct($message, $code, $previous);

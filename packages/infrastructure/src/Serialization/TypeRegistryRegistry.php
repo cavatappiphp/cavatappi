@@ -32,8 +32,7 @@ class TypeRegistryRegistry implements Registry, Service {
 	 *
 	 * @param ContainerInterface $container Dependency Injection container.
 	 */
-	public function __construct(private ContainerInterface $container) {
-	}
+	public function __construct(private ContainerInterface $container) {}
 
 	/**
 	 * Load the names of available TypeRegistry classes.

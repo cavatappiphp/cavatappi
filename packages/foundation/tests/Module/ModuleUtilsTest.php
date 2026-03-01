@@ -25,15 +25,25 @@ class ModuleUtilsTestClassThreeMarkTwo extends ModuleUtilsTestClassThree {}
 final class ModuleUtilsTestClassThreeMarkThree extends ModuleUtilsTestClassThreeMarkTwo implements ModuleUtilsTestInterfaceOneMarkThree {}
 
 final class ModuleUtilsTestNoConstructor {}
-final class ModuleUtilsTestNoDependencies { public function __construct() {} }
+final class ModuleUtilsTestNoDependencies {
+	public function __construct() {}
+}
 final class ModuleUtilsTestSomeDependencies {
 	public function __construct(private CommandBus $bus, private EventDispatcherInterface $event) {}
 }
 
-final class ModuleUtilsTestNoType { public function __construct(private $whatAmI) {} }
-final class ModuleUtilsTestUnionType { public function __construct(private CommandBus|Registry $thing) {} }
-final class ModuleUtilsTestIntersectionType { public function __construct(private CommandBus & Registry $also) {} }
-final class ModuleUtilsTestBuiltInType { public function __construct(private string $noGood) {} }
+final class ModuleUtilsTestNoType {
+	public function __construct(private $whatAmI) {}
+}
+final class ModuleUtilsTestUnionType {
+	public function __construct(private CommandBus|Registry $thing) {}
+}
+final class ModuleUtilsTestIntersectionType {
+	public function __construct(private CommandBus&Registry $also) {}
+}
+final class ModuleUtilsTestBuiltInType {
+	public function __construct(private string $noGood) {}
+}
 
 final class ModuleUtilsTest extends TestCase {
 	public function testItWillListInterfacesImplementedByTheGivenClasses() {

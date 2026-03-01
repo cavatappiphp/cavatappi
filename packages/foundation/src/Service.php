@@ -8,5 +8,4 @@ namespace Cavatappi\Foundation;
  *
  * Empty interface, mostly just as a signal so it can be discovered by a DomainModel.
  */
-interface Service {
-}
+interface Service {}

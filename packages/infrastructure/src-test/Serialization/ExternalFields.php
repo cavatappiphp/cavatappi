@@ -15,7 +15,5 @@ final readonly class ExternalFields implements Value {
 		public UriInterface $uri,
 		public UuidInterface $uuid,
 		public DateTimeInterface $date,
-	)
-	{
-	}
+	) {}
 }

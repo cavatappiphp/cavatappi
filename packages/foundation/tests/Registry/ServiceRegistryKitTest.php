@@ -16,10 +16,18 @@ interface TestServiceConfigurable extends ConfiguredRegisterable {}
 class TestServiceRegistry implements Registry {
 	use ServiceRegistryKit;
 	private static string $myInterface = TestServiceRegisterable::class;
-	public function __construct(ContainerInterface $container) { $this->container = $container; }
-	public static function getInterfaceToRegister(): string { return self::$myInterface; }
-	public static function _test_setInterface(string $int): void { self::$myInterface = $int; }
-	public function _test_getLibrary(): array { return $this->library; }
+	public function __construct(ContainerInterface $container) {
+		$this->container = $container;
+	}
+	public static function getInterfaceToRegister(): string {
+		return self::$myInterface;
+	}
+	public static function _test_setInterface(string $int): void {
+		self::$myInterface = $int;
+	}
+	public function _test_getLibrary(): array {
+		return $this->library;
+	}
 }
 
 #[AllowMockObjectsWithoutExpectations]
@@ -27,7 +35,7 @@ final class ServiceRegistryKitTest extends TestCase {
 	private array $basicServices;
 	private array $configuredServices;
 	private TestServiceRegistry $service;
-	private ContainerInterface & MockObject $container;
+	private ContainerInterface&MockObject $container;
 
 	protected function setUp(): void {
 		$this->container = $this->createMock(ContainerInterface::class);
@@ -36,8 +44,16 @@ final class ServiceRegistryKitTest extends TestCase {
 
 	protected function setUpBasic(): void {
 		$this->basicServices = [
-			new class() implements TestServiceRegisterable { public static function getKey(): string { return 'one'; } },
-			new class() implements TestServiceRegisterable { public static function getKey(): string { return 'two'; } },
+			new class implements TestServiceRegisterable {
+				public static function getKey(): string {
+					return 'one';
+				}
+			},
+			new class implements TestServiceRegisterable {
+				public static function getKey(): string {
+					return 'two';
+				}
+			},
 		];
 
 		TestServiceRegistry::_test_setInterface(TestServiceRegisterable::class);
@@ -46,17 +62,21 @@ final class ServiceRegistryKitTest extends TestCase {
 
 	protected function setUpConfigured(): void {
 		$this->configuredServices = [
-			new class() implements TestServiceConfigurable {
+			new class implements TestServiceConfigurable {
 				public static function getConfiguration(): RegisterableConfiguration {
-					return new class() implements RegisterableConfiguration {
-						public function getKey(): string { return 'one'; }
+					return new class implements RegisterableConfiguration {
+						public function getKey(): string {
+							return 'one';
+						}
 					};
 				}
 			},
-			new class() implements TestServiceConfigurable {
+			new class implements TestServiceConfigurable {
 				public static function getConfiguration(): RegisterableConfiguration {
-					return new class() implements RegisterableConfiguration {
-						public function getKey(): string { return 'two'; }
+					return new class implements RegisterableConfiguration {
+						public function getKey(): string {
+							return 'two';
+						}
 					};
 				}
 			},
@@ -67,7 +87,7 @@ final class ServiceRegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::has will return true if the given key is present and the class is in the container')]
-	function testHasWithKeyAndContainer() {
+	public function testHasWithKeyAndContainer() {
 		$this->setUpBasic();
 		$this->container->method('has')->willReturn(true);
 
@@ -76,7 +96,7 @@ final class ServiceRegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::has will return false if the given key is not present')]
-	function testHasWithNoKey() {
+	public function testHasWithNoKey() {
 		$this->setUpBasic();
 		$this->container->method('has')->willReturn(true);
 
@@ -84,7 +104,7 @@ final class ServiceRegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::has will return false if the given key is present but the class is not in the container')]
-	function testHasWithNoContainer() {
+	public function testHasWithNoContainer() {
 		$this->setUpBasic();
 		$this->container->method('has')->willReturn(false);
 
@@ -92,7 +112,7 @@ final class ServiceRegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::get will return an instance of the class if the given key is present and the class is in the container')]
-	function testGetWithContainerAndKey() {
+	public function testGetWithContainerAndKey() {
 		$this->setUpBasic();
 		$this->container->method('has')->willReturn(true);
 		$this->container->method('get')->willReturn('ServiceOne_class_instance');
@@ -101,7 +121,7 @@ final class ServiceRegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::get will throw exception if the given key is not present')]
-	function testGetWithNoKey() {
+	public function testGetWithNoKey() {
 		$this->setUpBasic();
 		$this->container->method('has')->willReturn(true);
 		$this->container->method('get')->willReturn('ServiceOne_class_instance');
@@ -111,7 +131,7 @@ final class ServiceRegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::get will throw exception if the given key is present but the class is not in the container')]
-	function testGetWithNoContainer() {
+	public function testGetWithNoContainer() {
 		$this->setUpBasic();
 		$this->container->method('has')->willReturn(false);
 		$this->container->expects($this->never())->method('get');
@@ -120,4 +140,3 @@ final class ServiceRegistryKitTest extends TestCase {
 		$this->service->getService('one');
 	}
 }
-

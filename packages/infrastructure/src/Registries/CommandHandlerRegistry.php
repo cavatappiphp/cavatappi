@@ -41,8 +41,7 @@ class CommandHandlerRegistry implements Registry, CommandBus {
 	 *
 	 * @param ContainerInterface $container DI Container with the services to be registered.
 	 */
-	public function __construct(private ContainerInterface $container) {
-	}
+	public function __construct(private ContainerInterface $container) {}
 
 	/**
 	 * Accept the configuration for the registry.
@@ -76,7 +75,7 @@ class CommandHandlerRegistry implements Registry, CommandBus {
 		$entry = $this->library[$commandName];
 		return \call_user_func(
 			[$this->container->get($entry['class']), $entry['method']],
-			$command
+			$command,
 		);
 	}
 
@@ -129,9 +128,9 @@ class CommandHandlerRegistry implements Registry, CommandBus {
 			);
 		}
 
-		$commands = $paramType instanceof ReflectionUnionType ?
-			\array_map(fn($refType) => $refType->getName(), $paramType->getTypes()) :
-			[$paramType->getName()];
+		$commands = $paramType instanceof ReflectionUnionType
+			? \array_map(fn($refType) => $refType->getName(), $paramType->getTypes())
+			: [$paramType->getName()];
 
 		foreach ($commands as $command) {
 			$this->setHandler(

@@ -14,6 +14,5 @@ class SupertypeTwo implements Supertype {
 	public function __construct(
 		public readonly string $twoValue,
 		public readonly string $superValue,
-	) {
-	}
+	) {}
 }

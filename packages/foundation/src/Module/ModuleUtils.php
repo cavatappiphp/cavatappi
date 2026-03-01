@@ -42,7 +42,7 @@ final class ModuleUtils {
 				}
 
 				return true;
-			}
+			},
 		));
 	}
 

@@ -17,7 +17,7 @@ final class Model implements Module {
 				'two' => SomeFolder\SomeAbstractServiceInterfaceClass::class,
 				'three' => SameDirectoryService::class,
 				'dsn' => 'sqlite:///db.sqlite',
-			]
+			],
 		];
 	}
 

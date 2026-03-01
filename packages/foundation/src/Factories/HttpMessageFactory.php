@@ -26,14 +26,14 @@ class HttpMessageFactory {
 	 *
 	 * @var RequestFactory & ResponseFactory & StreamFactory & UriFactory
 	 */
-	private static null | (RequestFactory & ResponseFactory & StreamFactory & UriFactory) $internalFactory;
+	private static (RequestFactory&ResponseFactory&StreamFactory&UriFactory)|null $internalFactory;
 
 	/**
 	 * Get the internal PSR-17 factory.
 	 *
 	 * @return RequestFactory&ResponseFactory&StreamFactory&UriFactory
 	 */
-	private static function factory(): RequestFactory & ResponseFactory & StreamFactory & UriFactory {
+	private static function factory(): RequestFactory&ResponseFactory&StreamFactory&UriFactory {
 		self::$internalFactory ??= new Psr17Factory();
 		return self::$internalFactory;
 	}
@@ -45,7 +45,7 @@ class HttpMessageFactory {
 	 * @return void
 	 */
 	public static function setSource(
-		null | (RequestFactory & ResponseFactory & StreamFactory & UriFactory) $newSource
+		(RequestFactory&ResponseFactory&StreamFactory&UriFactory)|null $newSource,
 	) {
 		self::$internalFactory = $newSource;
 	}
@@ -120,7 +120,7 @@ class HttpMessageFactory {
 	 */
 	private static function addBody(
 		MessageInterface $message,
-		mixed $body
+		mixed $body,
 	): MessageInterface {
 		if (empty($body)) {
 			return $message;

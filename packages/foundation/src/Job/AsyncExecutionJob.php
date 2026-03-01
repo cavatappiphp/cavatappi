@@ -31,8 +31,7 @@ class AsyncExecutionJob implements Job {
 	 *
 	 * @param Command $command Event to dispatch.
 	 */
-	public function __construct(public readonly Command $command) {
-	}
+	public function __construct(public readonly Command $command) {}
 
 	/**
 	 * Get the parameters to be passed to $service->$method.

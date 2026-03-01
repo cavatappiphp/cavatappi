@@ -16,6 +16,5 @@ class CommandHandler {
 	/**
 	 * Indicates the given method should execute the expected Command.
 	 */
-	public function __construct() {
-	}
+	public function __construct() {}
 }

@@ -39,7 +39,7 @@ trait ValidatedKit {
 			// Using strict comparision instead of isset() in case $prop is virtual.
 			if (\array_all($atLeastOne->properties, fn($prop) => $this->$prop === null)) {
 				throw new InvalidValueProperties(
-					'At least one of these properties must be set: ' . \implode(',', $atLeastOne->properties)
+					'At least one of these properties must be set: ' . \implode(',', $atLeastOne->properties),
 				);
 			}
 		}
@@ -51,7 +51,7 @@ trait ValidatedKit {
 			$present = \array_filter($exactlyOne->properties, fn($prop) => $this->$prop !== null);
 			if (\count($present) !== 1) {
 				throw new InvalidValueProperties(
-					'Exactly one of these properties must be set: ' . \implode(', ', $exactlyOne->properties)
+					'Exactly one of these properties must be set: ' . \implode(', ', $exactlyOne->properties),
 				);
 			}
 		}

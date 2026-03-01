@@ -29,8 +29,12 @@ interface TestConfigurableMock {
 
 final class TestConfigurableService {
 	public function __construct(private TestConfigurableMock $internal) {}
-	public function afterAction(string $results): void { $this->internal->afterAction($results); }
-	public function beforeDeploy(int $seed, string $default): void { $this->internal->beforeDeploy($seed, $default); }
+	public function afterAction(string $results): void {
+		$this->internal->afterAction($results);
+	}
+	public function beforeDeploy(int $seed, string $default): void {
+		$this->internal->beforeDeploy($seed, $default);
+	}
 }
 
 final class ServiceRegistryTest extends TestCase {
@@ -132,7 +136,7 @@ final class ServiceRegistryTest extends TestCase {
 				'helper' => TestBasicInterface::class,
 				'service' => TestBasicService::class,
 				'configuration' => fn() => ['camelot' => 'only a model'],
-			]
+			],
 		]);
 
 		$this->assertTrue($container->has(TestComplexService::class));
@@ -152,7 +156,7 @@ final class ServiceRegistryTest extends TestCase {
 				'configuration' => fn() => ['camelot' => 'only a model'],
 				'helper' => TestBasicInterface::class,
 				'service' => TestBasicService::class,
-			]
+			],
 		]);
 
 		$this->assertTrue($container->has(TestComplexService::class));
@@ -171,7 +175,7 @@ final class ServiceRegistryTest extends TestCase {
 				TestBasicInterface::class,
 				TestBasicService::class,
 				fn() => ['camelot' => 'only a model'],
-			]
+			],
 		]);
 
 		$this->assertTrue($container->has(TestComplexService::class));

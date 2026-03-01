@@ -54,27 +54,34 @@ final readonly class CommandFive implements Command {
 final class CommandHandlerOne implements CommandHandlerService {
 	public function __construct(private MockCommandHandler $mock) {}
 	#[CommandHandler]
-	public function doCommandOne(CommandOne $cmd) { return $this->mock->commandOneHandled($cmd); }
+	public function doCommandOne(CommandOne $cmd) {
+		return $this->mock->commandOneHandled($cmd);
+	}
 	#[CommandHandler]
-	public function doCommandTwo(CommandTwo $cmd) { return $this->mock->commandTwoHandled($cmd); }
+	public function doCommandTwo(CommandTwo $cmd) {
+		return $this->mock->commandTwoHandled($cmd);
+	}
 }
 
 final class CommandHandlerTwo implements CommandHandlerService {
 	public function __construct(private MockCommandHandler $mock) {}
 	#[CommandHandler]
-	public function doCommandThree(CommandThree $cmd) { return $this->mock->commandThreeHandled($cmd); }
+	public function doCommandThree(CommandThree $cmd) {
+		return $this->mock->commandThreeHandled($cmd);
+	}
 	#[CommandHandler]
-	public function doCommandsFourOrFive(CommandFour|CommandFive $cmd) { return $this->mock->commandFourOrFiveHandled($cmd); }
+	public function doCommandsFourOrFive(CommandFour|CommandFive $cmd) {
+		return $this->mock->commandFourOrFiveHandled($cmd);
+	}
 }
 
 #[AllowMockObjectsWithoutExpectations]
 final class CommandHandlerRegistryTest extends AppTest {
-	const INCLUDED_MODELS = [DefaultModule::class];
+	public const INCLUDED_MODELS = [DefaultModule::class];
 
-	private MockCommandHandler & MockObject $mockHandler;
+	private MockCommandHandler&MockObject $mockHandler;
 
-	protected function createMockServices(): array
-	{
+	protected function createMockServices(): array {
 		$this->mockHandler = $this->createMock(MockCommandHandler::class);
 
 		return [
@@ -109,13 +116,15 @@ final class CommandHandlerRegistryTest extends AppTest {
 	public function testItThrowsAnExceptionIfNoHandlerExists() {
 		$this->expectException(Exception::class);
 
-		$this->app->container->get(CommandBus::class)->execute(new class() implements Command { use ValueKit; });
+		$this->app->container->get(CommandBus::class)->execute(new class implements Command {
+			use ValueKit;
+		});
 	}
 
 	public function testAHandlerMustHaveARequiredParameter() {
 		$this->expectException(CodePathNotSupported::class);
 
-		$problemHandler = new class() implements CommandHandlerService {
+		$problemHandler = new class implements CommandHandlerService {
 			#[CommandHandler] public function incorrect(?CommandOne $cmd = null) {}
 		};
 		$this->app->container->get(CommandHandlerRegistry::class)->configure([get_class($problemHandler)]);
@@ -124,7 +133,7 @@ final class CommandHandlerRegistryTest extends AppTest {
 	public function testAHandlerMustNotHaveOtherRequiredParameters() {
 		$this->expectException(CodePathNotSupported::class);
 
-		$problemHandler = new class() implements CommandHandlerService {
+		$problemHandler = new class implements CommandHandlerService {
 			#[CommandHandler] public function incorrect(CommandOne $cmd, string $config) {}
 		};
 		$this->app->container->get(CommandHandlerRegistry::class)->configure([get_class($problemHandler)]);
@@ -133,7 +142,7 @@ final class CommandHandlerRegistryTest extends AppTest {
 	public function testAHandlerMustBeTypeHintedToACommand() {
 		$this->expectException(CodePathNotSupported::class);
 
-		$problemHandler = new class() implements CommandHandlerService {
+		$problemHandler = new class implements CommandHandlerService {
 			#[CommandHandler] public function incorrect($cmd) {}
 		};
 		$this->app->container->get(CommandHandlerRegistry::class)->configure([get_class($problemHandler)]);
@@ -142,8 +151,8 @@ final class CommandHandlerRegistryTest extends AppTest {
 	public function testAHandlerCannotRequireAnIntersectionType() {
 		$this->expectException(CodePathNotSupported::class);
 
-		$problemHandler = new class() implements CommandHandlerService {
-			#[CommandHandler] public function incorrect(CommandOne & CommandTwo $cmd) {}
+		$problemHandler = new class implements CommandHandlerService {
+			#[CommandHandler] public function incorrect(CommandOne&CommandTwo $cmd) {}
 		};
 		$this->app->container->get(CommandHandlerRegistry::class)->configure([get_class($problemHandler)]);
 	}

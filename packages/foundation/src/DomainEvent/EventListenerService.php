@@ -10,5 +10,4 @@ use Cavatappi\Foundation\Service;
  * This interface exists mostly to allow a listening service to be identified as such without having to declare it
  * somewhere else.
  */
-interface EventListenerService extends Service {
-}
+interface EventListenerService extends Service {}

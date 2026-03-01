@@ -22,7 +22,7 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\TestDox;
 
 final class SerializationTest extends AppTest {
-	const INCLUDED_MODELS = [DefaultModule::class, TestModule::class];
+	public const INCLUDED_MODELS = [DefaultModule::class, TestModule::class];
 
 	public static function objects() {
 		return [
@@ -106,7 +106,7 @@ YAML,
 				uuid: bb09f0b4-3fc8-4e76-8590-142df99460e2
 				date: '2025-12-25T12:34:56.789+00:00'
 
-				YAML
+				YAML,
 			],
 			'an object with an interface typehint (with SupertypeOne)' => [
 				'object' => new HasSupertype(

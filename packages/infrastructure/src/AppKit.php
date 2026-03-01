@@ -18,10 +18,10 @@ trait AppKit {
 		return \array_reduce(
 			\array_map(
 				fn($module) => $module::discoverableClasses(),
-				$modules
+				$modules,
 			),
 			fn($carry, $item) => \array_merge($carry, $item),
-			[]
+			[],
 		);
 	}
 
@@ -52,10 +52,10 @@ trait AppKit {
 		return \array_reduce(
 			\array_map(
 				fn($module) => $module::serviceDependencyMap(),
-				$modules
+				$modules,
 			),
 			fn($carry, $item) => \array_merge($carry, $item),
-			[]
+			[],
 		);
 	}
 

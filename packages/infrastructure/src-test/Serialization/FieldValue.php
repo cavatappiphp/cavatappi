@@ -10,17 +10,14 @@ final readonly class FieldValue implements Value, Field {
 	use ValueKit;
 
 	public function __construct(
-		public array $tags
-	) {
-	}
+		public array $tags,
+	) {}
 
-	public function __toString(): string
-	{
+	public function __toString(): string {
 		return implode(', ', $this->tags);
 	}
 
-	public static function fromString(string $serialized): static
-	{
+	public static function fromString(string $serialized): static {
 		return new self(array_map(fn($tag) => trim($tag), explode(',', $serialized)));
 	}
 }

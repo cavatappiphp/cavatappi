@@ -77,7 +77,7 @@ class App {
 
 	/**
 	 * Serialize and deserialize the object.
-	 * 
+	 *
 	 * @template T
 	 *
 	 * @param T $object Object to process.
@@ -91,7 +91,7 @@ class App {
 			TestCase::assertValueObjectEquals(
 				$object,
 				$processed,
-				'Object of type ' . get_class($object) . 'changed during serialization'
+				'Object of type ' . get_class($object) . 'changed during serialization',
 			);
 		}
 

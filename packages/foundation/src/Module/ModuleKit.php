@@ -69,8 +69,8 @@ trait ModuleKit {
 			\array_filter(
 				self::discoverableClasses(),
 				fn($implements, $class) => !\in_array($class, $overridden) && \in_array(Service::class, $implements),
-				ARRAY_FILTER_USE_BOTH
-			)
+				ARRAY_FILTER_USE_BOTH,
+			),
 		);
 
 		$automapResults = [];

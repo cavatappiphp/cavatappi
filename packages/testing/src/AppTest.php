@@ -5,7 +5,7 @@ namespace Cavatappi\Test;
 use Cavatappi\Test\BasicApp\App;
 
 class AppTest extends TestCase {
-	const INCLUDED_MODELS = [];
+	public const INCLUDED_MODELS = [];
 
 	protected App $app;
 

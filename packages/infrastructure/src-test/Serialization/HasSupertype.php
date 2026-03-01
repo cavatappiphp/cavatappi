@@ -11,6 +11,5 @@ class HasSupertype implements Value {
 	public function __construct(
 		public readonly string $name,
 		public readonly Supertype $super,
-	) {
-	}
+	) {}
 }

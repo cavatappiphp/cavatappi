@@ -15,7 +15,7 @@ final class HttpMessageFactoryTest extends TestCase {
 		$request = HttpMessageFactory::request(
 			verb: HttpVerb::GET,
 			url: 'https://smol.blog/hello',
-			headers: ['Accept' => 'application/json']
+			headers: ['Accept' => 'application/json'],
 		);
 
 		$this->assertEquals('/hello', $request->getRequestTarget());
@@ -47,7 +47,7 @@ final class HttpMessageFactoryTest extends TestCase {
 	}
 
 	public function testRequestFormatsAnObjectBodyIntoJson() {
-		$body = (object)['one' => 'two'];
+		$body = (object) ['one' => 'two'];
 		$bodyJson = '{"one":"two"}';
 
 		$request = HttpMessageFactory::request(verb: HttpVerb::GET, url: 'https://smol.blog/hello', body: $body);
@@ -83,7 +83,7 @@ final class HttpMessageFactoryTest extends TestCase {
 	}
 
 	public function testItFormatsAnObjectBodyIntoJson() {
-		$body = (object)['one' => 'two'];
+		$body = (object) ['one' => 'two'];
 		$bodyJson = '{"one":"two"}';
 
 		$response = HttpMessageFactory::response(body: $body);

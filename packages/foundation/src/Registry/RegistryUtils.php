@@ -19,7 +19,7 @@ class RegistryUtils {
 			\array_map(
 				fn($reg) => self::getImplementingClassesForRegistry($discoveredClasses, $reg),
 				$registryList,
-			)
+			),
 		);
 	}
 
@@ -34,7 +34,7 @@ class RegistryUtils {
 		$search = $registry::getInterfaceToRegister();
 		$filtered = \array_filter(
 			$map,
-			fn($imp) => \in_array($search, $imp, strict: true)
+			fn($imp) => \in_array($search, $imp, strict: true),
 		);
 
 		return \array_keys($filtered);

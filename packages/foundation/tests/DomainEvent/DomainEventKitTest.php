@@ -14,9 +14,8 @@ final class SimpleDomainEvent implements DomainEvent {
 	public function __construct(
 		public readonly UuidInterface $userId,
 		?UuidInterface $id = null,
-		?DateTimeInterface $timestamp = null
-	)
-	{
+		?DateTimeInterface $timestamp = null,
+	) {
 		$this->setIdAndTime($id, $timestamp);
 	}
 

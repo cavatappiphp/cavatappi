@@ -51,15 +51,17 @@ final class AppKitTest extends TestCase {
 	}
 
 	public function testDependencyMap() {
-		$testModel = new class() implements Module {
+		$testModel = new class implements Module {
 			use ModuleKit;
-			private static function listClasses(): array { return [
-				Registries\CommandHandlerRegistry::class,
-				Registries\EventListenerRegistry::class,
-				Registries\ServiceRegistry::class,
-				Serialization\FieldHandler::class,
-				Serialization\SerializationService::class,
-			]; }
+			private static function listClasses(): array {
+				return [
+					Registries\CommandHandlerRegistry::class,
+					Registries\EventListenerRegistry::class,
+					Registries\ServiceRegistry::class,
+					Serialization\FieldHandler::class,
+					Serialization\SerializationService::class,
+				];
+			}
 			private static function serviceMapOverrides(): array {
 				return [
 					OrderedListenerProvider::class => ['container' => ContainerInterface::class],
@@ -87,10 +89,14 @@ final class AppKitTest extends TestCase {
 	}
 
 	public function testContainerSetup() {
-		$testModel = new class() implements Module {
+		$testModel = new class implements Module {
 			use ModuleKit;
-			private static function listClasses(): array { return [AppKitTestExampleCommandHandler::class]; }
-			private static function serviceMapOverrides(): array { return []; }
+			private static function listClasses(): array {
+				return [AppKitTestExampleCommandHandler::class];
+			}
+			private static function serviceMapOverrides(): array {
+				return [];
+			}
 		};
 
 		$testMap = $this->testApp->buildDiscoveredClassList([

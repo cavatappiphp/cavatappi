@@ -38,19 +38,19 @@ trait ValueKit {
 
 		return \array_all(
 			\array_map(null, $thisValues, $otherValues),
-			fn($props) => $this->propEquals(...$props)
+			fn($props) => $this->propEquals(...$props),
 		);
 	}
 
 	private function propEquals(mixed $prop, mixed $otherProp): bool {
 		return match (true) {
 			\is_a($prop, Stringable::class) => \strval($prop) == \strval($otherProp),
-			\is_a($prop, DateTimeInterface::class) =>
-				$prop->format(DATE_RFC3339_EXTENDED) == $otherProp->format(DATE_RFC3339_EXTENDED),
+			\is_a($prop, DateTimeInterface::class)
+				=> $prop->format(DATE_RFC3339_EXTENDED) == $otherProp->format(DATE_RFC3339_EXTENDED),
 			\is_a($prop, Value::class) => $prop->equals($otherProp),
 			\is_array($prop) && \is_array($otherProp) => \array_all(
 				\array_map(null, $prop, $otherProp),
-				fn($props) => $this->propEquals(...$props)
+				fn($props) => $this->propEquals(...$props),
 			),
 			default => $prop == $otherProp,
 		};
@@ -131,8 +131,8 @@ trait ValueKit {
 		$type = $prop->getType();
 		if (!isset($type) || \get_class($type) !== ReflectionNamedType::class) {
 			throw new CodePathNotSupported(
-				message: 'Union/intersection types are not supported; ' .
-				'change the type or override the getPropertyInfo() method.',
+				message: 'Union/intersection types are not supported; '
+				. 'change the type or override the getPropertyInfo() method.',
 				location: 'ValueKit::getPropertyInfo via' . static::class,
 			);
 		}
@@ -147,8 +147,8 @@ trait ValueKit {
 			$arrayType = ($attributeReflections[0] ?? null)?->newInstance() ?? null;
 			if (!isset($arrayType)) {
 				throw new CodePathNotSupported(
-					message: 'Arrays must have either a ListType or MapType attribute; ' .
-					'add the attribute or override the getPropertyInfo() method.',
+					message: 'Arrays must have either a ListType or MapType attribute; '
+					. 'add the attribute or override the getPropertyInfo() method.',
 					location: 'Value::getPropertyInfo via' . static::class,
 				);
 			}
@@ -177,7 +177,7 @@ trait ValueKit {
 		} catch (InvalidValueProperties $e) {
 			throw new CodePathNotSupported(
 				message: "Error reflecting field {$prop->getName()}: {$e->getMessage()}",
-				previous: $e
+				previous: $e,
 			);
 		}
 		// @codeCoverageIgnoreEnd

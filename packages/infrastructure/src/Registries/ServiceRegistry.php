@@ -92,7 +92,7 @@ class ServiceRegistry implements ContainerInterface {
 			throw new CodePathNotSupported(
 				location: self::class,
 				message: "Configuration error for $id: " . $e->getMessage(),
-				previous: $e
+				previous: $e,
 			);
 		}
 
@@ -137,7 +137,7 @@ class ServiceRegistry implements ContainerInterface {
 		// Get the listed dependencies from the container.
 		$args = \array_map(
 			fn($dependency) => \is_callable($dependency) ? \call_user_func($dependency, $this) : $this->get($dependency),
-			$config
+			$config,
 		);
 
 		$instance = new $service(...$args);

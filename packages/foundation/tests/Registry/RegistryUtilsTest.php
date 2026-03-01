@@ -19,10 +19,14 @@ abstract class TestServiceNone implements Service {}
 interface ExtendedRegistry extends Registry {}
 
 abstract class TestCommandRegistry implements Registry {
-	public static function getInterfaceToRegister(): string { return CommandHandlerService::class; }
+	public static function getInterfaceToRegister(): string {
+		return CommandHandlerService::class;
+	}
 }
 abstract class TestEventRegistry implements ExtendedRegistry {
-	public static function getInterfaceToRegister(): string { return EventListenerService::class; }
+	public static function getInterfaceToRegister(): string {
+		return EventListenerService::class;
+	}
 }
 
 final class RegistryUtilsTest extends TestCase {
@@ -42,7 +46,9 @@ final class RegistryUtilsTest extends TestCase {
 		];
 	}
 
-	private static function serviceMapOverrides(): array { return []; }
+	private static function serviceMapOverrides(): array {
+		return [];
+	}
 
 	public function testItTakesAListOfClassesAndGivesRegistryConfigurations() {
 		$services = self::discoverableClasses();

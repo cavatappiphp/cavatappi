@@ -12,6 +12,5 @@ final class ServiceClassThatCannotBeAutoRegistered implements Service {
 		private SomeAbstractServiceInterfaceClass $two,
 		private SameDirectoryService $three,
 		private string $dsn,
-	) {
-	}
+	) {}
 }

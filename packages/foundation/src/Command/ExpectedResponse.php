@@ -31,6 +31,5 @@ class ExpectedResponse {
 		public readonly bool $optional = false,
 		public readonly ?string $name = null,
 		public readonly ?string $description = null,
-	) {
-	}
+	) {}
 }

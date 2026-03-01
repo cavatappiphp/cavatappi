@@ -12,9 +12,15 @@ interface TestConfigurable extends ConfiguredRegisterable {}
 class TestRegistry implements Registry {
 	use RegistryKit;
 	private static string $myInterface = TestRegisterable::class;
-	public static function getInterfaceToRegister(): string { return self::$myInterface; }
-	public static function _test_setInterface(string $int): void { self::$myInterface = $int; }
-	public function _test_getLibrary(): array { return $this->library; }
+	public static function getInterfaceToRegister(): string {
+		return self::$myInterface;
+	}
+	public static function _test_setInterface(string $int): void {
+		self::$myInterface = $int;
+	}
+	public function _test_getLibrary(): array {
+		return $this->library;
+	}
 }
 
 final class RegistryKitTest extends TestCase {
@@ -28,8 +34,16 @@ final class RegistryKitTest extends TestCase {
 
 	protected function setUpBasic(): void {
 		$this->basicServices = [
-			new class() implements TestRegisterable { public static function getKey(): string { return 'one'; } },
-			new class() implements TestRegisterable { public static function getKey(): string { return 'two'; } },
+			new class implements TestRegisterable {
+				public static function getKey(): string {
+					return 'one';
+				}
+			},
+			new class implements TestRegisterable {
+				public static function getKey(): string {
+					return 'two';
+				}
+			},
 		];
 
 		TestRegistry::_test_setInterface(TestRegisterable::class);
@@ -38,16 +52,16 @@ final class RegistryKitTest extends TestCase {
 
 	protected function setUpConfigured(): void {
 		$this->configuredServices = [
-			new class() implements TestConfigurable {
+			new class implements TestConfigurable {
 				public static function getConfiguration(): RegisterableConfiguration {
-					return new class() implements RegisterableConfiguration {
+					return new class implements RegisterableConfiguration {
 						public string $key { get => 'one'; }
 					};
 				}
 			},
-			new class() implements TestConfigurable {
+			new class implements TestConfigurable {
 				public static function getConfiguration(): RegisterableConfiguration {
-					return new class() implements RegisterableConfiguration {
+					return new class implements RegisterableConfiguration {
 						public string $key { get => 'two'; }
 					};
 				}
@@ -59,7 +73,7 @@ final class RegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::configure will configure the Registry for a Registerable interface')]
-	function testConfigure() {
+	public function testConfigure() {
 		$this->setUpBasic();
 
 		$this->assertEquals(
@@ -67,12 +81,12 @@ final class RegistryKitTest extends TestCase {
 				keys: ['one', 'two'],
 				values: array_map(fn($srv) => get_class($srv), $this->basicServices),
 			),
-			$this->service->_test_getLibrary()
+			$this->service->_test_getLibrary(),
 		);
 	}
 
 	#[TestDox('::configure will configure the Registry for a ConfiguredRegisterable interface')]
-	function testConfigureWithObjects() {
+	public function testConfigureWithObjects() {
 		$this->setUpConfigured();
 
 		$this->assertEquals(
@@ -80,12 +94,12 @@ final class RegistryKitTest extends TestCase {
 				keys: ['one', 'two'],
 				values: array_map(fn($srv) => get_class($srv), $this->configuredServices),
 			),
-			$this->service->_test_getLibrary()
+			$this->service->_test_getLibrary(),
 		);
 	}
 
 	#[TestDox('::configure will throw an exception if the interface is not Registerable')]
-	function testConfigureWithBadInterface() {
+	public function testConfigureWithBadInterface() {
 		$this->expectException(CodePathNotSupported::class);
 
 		TestRegistry::_test_setInterface(Registry::class);
@@ -93,7 +107,7 @@ final class RegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::getConfig will return the class config if the given key is present')]
-	function testGetConfigWithKey() {
+	public function testGetConfigWithKey() {
 		$this->setUpConfigured();
 
 		$config = $this->service->getConfig('one');
@@ -102,11 +116,10 @@ final class RegistryKitTest extends TestCase {
 	}
 
 	#[TestDox('::getConfig will return null if the given key is not present')]
-	function testGetConfigWithNoKey() {
+	public function testGetConfigWithNoKey() {
 		$this->setUpConfigured();
 
 		$actual = $this->service->getConfig('three');
 		$this->assertNull($actual);
 	}
 }
-

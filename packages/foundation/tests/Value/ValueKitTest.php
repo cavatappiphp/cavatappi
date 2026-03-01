@@ -25,9 +25,8 @@ class ValueKitTestDefault implements Value {
 class ValueKitTestBasic implements Value {
 	use ValueKit;
 	public function __construct(
-		public readonly UuidInterface $id
-	)	{
-	}
+		public readonly UuidInterface $id,
+	) {}
 }
 
 final class ValueKitTest extends TestCase {
@@ -38,7 +37,7 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('with() creates a new object')]
 	public function testWithCreatesNew() {
-		$first = new class('world') extends ValueKitTestDefault {
+		$first = new class ('world') extends ValueKitTestDefault {
 			public function __construct(public string $hello) {}
 		};
 		$second = $first->with();
@@ -50,7 +49,7 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('with() will replace the given fields')]
 	public function testWithReplacesGiven() {
-		$first = new class('one', 'five') extends ValueKitTestDefault {
+		$first = new class ('one', 'five') extends ValueKitTestDefault {
 			public function __construct(public string $one, public string $three) {}
 		};
 		$second = $first->with(three: 'three');
@@ -63,9 +62,11 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('with() will ignore private values')]
 	public function testWithIgnoresPrivate() {
-		$first = new class('given', 'given') extends ValueKitTestDefault {
+		$first = new class ('given', 'given') extends ValueKitTestDefault {
 			public function __construct(public string $public = 'default', private string $private = 'default') {}
-			public function getPrivate() { return $this->private; }
+			public function getPrivate() {
+				return $this->private;
+			}
 		};
 		$second = $first->with();
 
@@ -77,7 +78,7 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('with() will ignore virtual properties')]
 	public function testWithIgnoresVirtual() {
-		$first = new class('given') extends ValueKitTestDefault {
+		$first = new class ('given') extends ValueKitTestDefault {
 			public function __construct(public string $public = 'default') {}
 			public string $publicInCaps { get => strtoupper($this->public); }
 		};
@@ -91,7 +92,7 @@ final class ValueKitTest extends TestCase {
 	public function testWithThrowsException() {
 		$this->expectException(InvalidValueProperties::class);
 
-		$first = new class('camelot') extends ValueKitTestDefault {
+		$first = new class ('camelot') extends ValueKitTestDefault {
 			public function __construct(public string $camelot) {}
 		};
 		$first->with(itIsOnly: 'a model');
@@ -101,10 +102,14 @@ final class ValueKitTest extends TestCase {
 	public function testWithValidates() {
 		$this->expectException(InvalidValueProperties::class);
 
-		$first = new class('camelot') extends ValueKitTestDefault implements Validated {
-			public function __construct(public string $camelot) { $this->validate(); }
+		$first = new class ('camelot') extends ValueKitTestDefault implements Validated {
+			public function __construct(public string $camelot) {
+				$this->validate();
+			}
 			public function validate(): void {
-				if ($this->camelot !== 'camelot') { throw new InvalidValueProperties(); }
+				if ($this->camelot !== 'camelot') {
+					throw new InvalidValueProperties();
+				}
 			}
 		};
 		$first->with(camelot: 'a model');
@@ -112,7 +117,7 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('equals() will return true if the objects\' class and values match')]
 	public function testEqualsClassAndValuesMatch() {
-		$first = new class('camelot') extends ValueKitTestDefault {
+		$first = new class ('camelot') extends ValueKitTestDefault {
 			public function __construct(public string $destination) {}
 		};
 		$second = new (\get_class($first))('camelot');
@@ -134,7 +139,7 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('equals() will return false if the objects\' values do not match')]
 	public function testEqualsValueMismatch() {
-		$first = new class('camelot') extends ValueKitTestDefault {
+		$first = new class ('camelot') extends ValueKitTestDefault {
 			public function __construct(public string $destination) {}
 		};
 		$second = new (\get_class($first))('a model');
@@ -145,13 +150,14 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('equals() will return true if nested objects match')]
 	public function testEqualsNestedValues() {
-		$first = new class(
+		$first = new class (
 			single: new ValueKitTestBasic($this->randomId()),
 			multi: [
 				new ValueKitTestBasic($this->randomId()),
 				new ValueKitTestBasic($this->randomId()),
 				new ValueKitTestBasic($this->randomId()),
-			]) extends ValueKitTestDefault {
+			],
+		) extends ValueKitTestDefault {
 			public function __construct(
 				public ValueKitTestBasic $single,
 				public array $multi,
@@ -183,10 +189,10 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('equals() will return false if the objects\' classes do not match')]
 	public function testEqualsClassMismatch() {
-		$first = new class('camelot') extends ValueKitTestDefault {
+		$first = new class ('camelot') extends ValueKitTestDefault {
 			public function __construct(public string $destination) {}
 		};
-		$second = new class('camelot') extends ValueKitTestDefault {
+		$second = new class ('camelot') extends ValueKitTestDefault {
 			public function __construct(public string $destination) {}
 		};
 
@@ -196,11 +202,11 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('equals() will return true if two DateTimeInterface properties are equal to .001 second')]
 	public function testDateTimeRfc3339Extended() {
-		$first = new class(new DateTimeImmutable()) extends ValueKitTestDefault {
+		$first = new class (new DateTimeImmutable()) extends ValueKitTestDefault {
 			public function __construct(public DateTimeInterface $timestamp) {}
 		};
 		$second = $first->with(
-			timestamp: new DateTimeImmutable($first->timestamp->format(DateTimeInterface::RFC3339_EXTENDED))
+			timestamp: new DateTimeImmutable($first->timestamp->format(DateTimeInterface::RFC3339_EXTENDED)),
 		);
 
 		$this->assertTrue($first->equals($second));
@@ -210,7 +216,7 @@ final class ValueKitTest extends TestCase {
 	public function testPropertyUnionType() {
 		$this->expectException(CodePathNotSupported::class);
 
-		$class = new class(543) extends ValueKitTestDefault {
+		$class = new class (543) extends ValueKitTestDefault {
 			public function __construct(public string|int $thing) {}
 		};
 
@@ -221,7 +227,7 @@ final class ValueKitTest extends TestCase {
 	public function testPropertyNoArrayType() {
 		$this->expectException(CodePathNotSupported::class);
 
-		$class = new class([543]) extends ValueKitTestDefault {
+		$class = new class ([543]) extends ValueKitTestDefault {
 			public function __construct(public array $thing) {}
 		};
 
@@ -230,7 +236,7 @@ final class ValueKitTest extends TestCase {
 
 	#[TestDox('reflect() will generate an appropriate array of ValueProperty objects.')]
 	public function testReflection() {
-		$class = new class(
+		$class = new class (
 			stringVal: 'one',
 			intVal: 2,
 			id: $this->randomId(),
@@ -304,7 +310,7 @@ final class ValueKitTest extends TestCase {
 	}
 
 	public function testReflectionIgnoresVirtualProperties() {
-		$object = new class('given') extends ValueKitTestDefault {
+		$object = new class ('given') extends ValueKitTestDefault {
 			public function __construct(public string $public = 'default') {}
 			public string $publicInCaps { get => strtoupper($this->public); }
 		};

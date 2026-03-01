@@ -21,8 +21,7 @@ readonly class Markdown implements Value, Field {
 	 *
 	 * @param string $text Markdown-formatted text.
 	 */
-	public function __construct(public string $text) {
-	}
+	public function __construct(public string $text) {}
 
 	/**
 	 * Convert the field to a string.

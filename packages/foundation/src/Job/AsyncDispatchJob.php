@@ -31,8 +31,7 @@ class AsyncDispatchJob implements Job {
 	 *
 	 * @param DomainEvent $event Event to dispatch.
 	 */
-	public function __construct(public readonly DomainEvent $event) {
-	}
+	public function __construct(public readonly DomainEvent $event) {}
 
 	/**
 	 * Get the parameters to be passed to $service->$method.

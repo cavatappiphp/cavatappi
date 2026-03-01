@@ -35,7 +35,7 @@ class DefaultModule implements Module {
 			Dispatcher::class => [
 				ListenerProviderInterface::class,
 				LoggerInterface::class,
-			]
+			],
 		];
 	}
 }

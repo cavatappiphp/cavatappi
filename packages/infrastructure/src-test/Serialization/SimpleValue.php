@@ -11,7 +11,5 @@ final readonly class SimpleValue implements Value {
 	public function __construct(
 		public string $one,
 		public int $two,
-	)
-	{
-	}
+	) {}
 }

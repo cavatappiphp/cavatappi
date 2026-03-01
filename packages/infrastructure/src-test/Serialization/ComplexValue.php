@@ -17,7 +17,5 @@ final readonly class ComplexValue implements Value {
 		#[MapType('string')] public array $map,
 		#[MapType('mixed')] public array $misc,
 		public FieldValue $field,
-	)
-	{
-	}
+	) {}
 }
