@@ -10,3 +10,5 @@ html-coverage
 registration.json
 site/
 infection.html
+.php-cs-fixer.php
+.php-cs-fixer.cache

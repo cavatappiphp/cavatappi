@@ -27,9 +27,8 @@
         "symfony/yaml": "^8.0"
     },
     "require-dev": {
-        "slevomat/coding-standard": "^8.22",
-        "squizlabs/php_codesniffer": "^4.0",
-        "symplify/monorepo-builder": "^11.2"
+        "symplify/monorepo-builder": "^11.2",
+        "friendsofphp/php-cs-fixer": "^3.94"
     },
     "autoload": {
         "psr-4": {
@@ -54,8 +53,9 @@
             "phpunit --testsuite unit",
             "Cavatappi\\Test\\CoverageReport::report"
         ],
-        "lint": "./vendor/squizlabs/php_codesniffer/bin/phpcs",
-        "lintfix": "./vendor/squizlabs/php_codesniffer/bin/phpcbf",
+        "lint": "./vendor/bin/php-cs-fixer check",
+        "lintfix": "./vendor/bin/php-cs-fixer fix",
+        "linter": "./vendor/bin/php-cs-fixer",
         "monorepo": "./vendor/bin/monorepo-builder"
     },
     "config": {
