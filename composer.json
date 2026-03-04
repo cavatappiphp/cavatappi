@@ -24,7 +24,8 @@
         "psr/log": "^3.0",
         "ramsey/uuid": "^4.9",
         "crell/serde": "dev-master",
-        "symfony/yaml": "^8.0"
+        "symfony/yaml": "^8.0",
+        "crell/envmapper": "^1.1"
     },
     "require-dev": {
         "symplify/monorepo-builder": "^11.2",
