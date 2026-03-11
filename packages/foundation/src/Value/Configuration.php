@@ -1,6 +1,8 @@
 <?php
 
-namespace Cavatappi\Infrastructure\Configuration;
+namespace Cavatappi\Foundation\Value;
+
+use Cavatappi\Foundation\Value;
 
 /**
  * An object that provides a strongly-typed configuration for a Service (or really any other object).
@@ -8,4 +10,4 @@ namespace Cavatappi\Infrastructure\Configuration;
  * Using this interface will allow the configuration to be picked up by the ConfigurationRegistry so it can be
  * given to a service at runtime.
  */
-interface Configuration {}
+interface Configuration extends Value {}
