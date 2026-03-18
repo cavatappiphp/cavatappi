@@ -115,12 +115,13 @@ class App {
 		}
 
 		$prelim = array_filter(
-			array_map(fn($deps) =>
-				!is_array($deps) ? null : array_filter(
+			array_map(
+				fn($deps)
+				=> !is_array($deps) ? null : array_filter(
 					$deps,
-					fn($dep) => is_string($dep) && !in_array($dep, $availableServices)
+					fn($dep) => is_string($dep) && !in_array($dep, $availableServices),
 				),
-				$this->dependencyMap
+				$this->dependencyMap,
 			),
 			fn($map) => !empty($map),
 		);
@@ -134,7 +135,7 @@ class App {
 			if (!is_array($needs)) {
 				continue;
 			}
-			foreach($needs as $missing) {
+			foreach ($needs as $missing) {
 				$results[$missing] ??= [];
 				$results[$missing][] = $reqBy;
 			}
