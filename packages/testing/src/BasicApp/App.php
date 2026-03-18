@@ -10,6 +10,7 @@ use Cavatappi\Infrastructure\AppKit;
 use Cavatappi\Infrastructure\Registries\ServiceRegistry;
 use Cavatappi\Infrastructure\Serialization\SerializationService;
 use Cavatappi\Test\TestCase;
+use Psr\Container\ContainerInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -17,6 +18,8 @@ use Psr\EventDispatcher\EventDispatcherInterface;
  */
 class App {
 	use AppKit;
+
+	private array $dependencyMap;
 
 	/**
 	 * Dependency injection container.
@@ -34,13 +37,13 @@ class App {
 			...$this->buildDiscoveredClassList([Model::class, ...$models]),
 			...ModuleUtils::analyzeClasses(\array_keys($services)),
 		];
-		$map = [
+		$this->dependencyMap = [
 			...$this->buildDependencyMap([Model::class, ...$models]),
 			...$services,
 		];
 
 		$this->container = new ServiceRegistry(
-			configuration: $map,
+			configuration: $this->dependencyMap,
 			supplements: $this->buildSupplementsForRegistries($classes),
 		);
 	}
@@ -96,5 +99,47 @@ class App {
 		}
 
 		return $processed;
+	}
+
+	/**
+	 * Get any dependencies missing from the ServiceRegistry and the services requiring them.
+	 *
+	 * @param boolean $skipContainers True to not assume ServiceRegistry and ContainerInterface are provided.
+	 * @return array<class-string, class-string[]>
+	 */
+	public function getUnmetDependencies($skipContainers = false): array {
+		$availableServices = array_keys($this->dependencyMap);
+		if (!$skipContainers) {
+			$availableServices[] = ServiceRegistry::class;
+			$availableServices[] = ContainerInterface::class;
+		}
+
+		$prelim = array_filter(
+			array_map(fn($deps) =>
+				!is_array($deps) ? null : array_filter(
+					$deps,
+					fn($dep) => is_string($dep) && !in_array($dep, $availableServices)
+				),
+				$this->dependencyMap
+			),
+			fn($map) => !empty($map),
+		);
+
+		if (empty($prelim)) {
+			return [];
+		}
+
+		$results = [];
+		foreach ($prelim as $reqBy => $needs) {
+			if (!is_array($needs)) {
+				continue;
+			}
+			foreach($needs as $missing) {
+				$results[$missing] ??= [];
+				$results[$missing][] = $reqBy;
+			}
+		}
+
+		return $results;
 	}
 }
