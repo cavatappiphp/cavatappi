@@ -54,10 +54,14 @@ class App {
 	 * @param Command $command Command to execute.
 	 * @return mixed
 	 */
-	public function execute(Command $command): mixed {
-		// TODO: Serialize and deserialize the Command to ensure that it will successfully translate.
+	public function execute(Command $command, bool $skipSerialization = false): mixed {
+		// Serialize and deserialize the Command to ensure that it will successfully translate.
 		// Future systems may send Commands to other services.
-		$retval = $this->container->get(CommandBus::class)->execute($this->roundTripSerialize($command));
+		if (!$skipSerialization) {
+			$command = $this->roundTripSerialize($command);
+		}
+
+		$retval = $this->container->get(CommandBus::class)->execute($command);
 		$this->container->get(TestJobManager::class)->run();
 		return $retval;
 	}
@@ -69,11 +73,14 @@ class App {
 	 * @param mixed $event Event to dispatch.
 	 * @return mixed
 	 */
-	public function dispatch(mixed $event): mixed {
-		// TODO: Serialize and deserialize the DomainEvent to ensure that it will successfully translate.
+	public function dispatch(mixed $event, bool $skipSerialization = false): mixed {
+		// Serialize and deserialize the DomainEvent to ensure that it will successfully translate.
 		// Future systems may send DomainEvents to other services.
+		if (!$skipSerialization) {
+			$event = $this->roundTripSerialize($event);
+		}
 
-		$retval = $this->container->get(EventDispatcherInterface::class)->dispatch($this->roundTripSerialize($event));
+		$retval = $this->container->get(EventDispatcherInterface::class)->dispatch($event);
 		$this->container->get(TestJobManager::class)->run();
 		return $retval;
 	}
