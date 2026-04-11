@@ -26,11 +26,19 @@ class TestCase extends PHPUnitTestCase {
 		self::assertThat($actual, self::uuidEquals($expected), $message);
 	}
 
+	public static function assertUuidNotEquals(UuidInterface $expected, UuidInterface $actual, string $message = ''): void {
+		self::assertThat($actual, self::logicalNot(self::uuidEquals($expected)), $message);
+	}
+
 	public static function valueObjectEquals(Value $expected): Constraint {
 		return new ValueObjectChecker($expected, );
 	}
 
 	public static function assertValueObjectEquals(Value $expected, ?object $actual, string $message = ''): void {
 		self::assertThat($actual, self::valueObjectEquals($expected), $message);
+	}
+
+	public static function assertValueObjectNotEquals(Value $expected, ?object $actual, string $message = ''): void {
+		self::assertThat($actual, self::logicalNot(self::valueObjectEquals($expected)), $message);
 	}
 }
