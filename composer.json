@@ -32,7 +32,6 @@
     },
     "autoload": {
         "psr-4": {
-            "Cavatappi\\Cavatappi\\": "src/",
             "Cavatappi\\Foundation\\": "packages/foundation/src/",
             "Cavatappi\\Infrastructure\\": "packages/infrastructure/src/",
             "Cavatappi\\Test\\": "packages/testing/src/"
@@ -59,9 +58,6 @@
         "monorepo": "./vendor/bin/monorepo-builder"
     },
     "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
     },
     "replace": {
         "cavatappi/foundation": "0.2.2",
